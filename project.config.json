@@ -13,7 +13,7 @@
 	"compileType": "miniprogram",
 	"libVersion": "2.3.2",
 	"appid": "wxa954c9edf8a55134",
-	"projectname": "images",
+	"projectname": "imagesupload",
 	"debugOptions": {
 		"hidedInDevtools": []
 	},

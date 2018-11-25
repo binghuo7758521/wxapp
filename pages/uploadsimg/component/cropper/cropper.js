@@ -370,7 +370,7 @@ var touchMove = function (_this, e) {
       stv: stv
     });
 
-  } else if (e.touches.length === 2) {
+  } else if (e.touches.length === 2003) {
     //计算旋转
     let preTwoPoint = JSON.parse(JSON.stringify(twoPoint))
     twoPoint.x1 = e.touches[0].pageX * 2
