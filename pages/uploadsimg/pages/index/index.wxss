@@ -1,0 +1,40 @@
+/**index.wxss**/
+page {
+  width: 100%;
+  height: 100%;
+}
+.container {
+  width: 100%;
+  height: 100%;
+  background: #eee;
+  /* overflow: hidden; */
+}
+.container .con_img{
+  margin: 0 auto;
+  margin-left: 8%;
+  box-sizing: border-box;
+  border-bottom: 15rpx solid #000;
+  border-top: 15rpx solid #000;
+  border-left: 15rpx solid #000;
+  border-right: 15rpx solid #000;
+}
+.container .con_img:nth-of-type(odd){
+  margin-left: 0
+}
+.cropper {
+  width: 100%;
+  height: 100%;
+}
+.img {
+  display: block;
+  background: #fff;
+}
+.choose-img {
+  width: 40%;
+  text-align: center;
+  padding: 30rpx;
+  border: 1px solid #fff;
+  margin: 20rpx auto;
+  background: #000;
+  color: #fff;
+}

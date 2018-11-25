@@ -1,0 +1,10 @@
+<view class="page">
+    <view class="inner">
+        <view class="image">
+            <image src="/static/images/accredit.png"></image>
+        </view>
+        <view class="text" wx:if="{{!close}}">您的授权已失效，请重新授权</view>
+        <button bindtap="bind" class="btn" openType="getUserInfo" wx:if="{{!close}}">点击授权</button>
+        <view class="text" wx:if="{{close}}">{{text}}</view>
+    </view>
+</view>
