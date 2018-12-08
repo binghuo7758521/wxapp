@@ -1,27 +1,20 @@
-//var app = getApp(), s = app.requirejs("core");
-//index.js
 //获取应用实例
 const app = getApp(), s = app.requirejs("core");
 
 Page({
   data: {
     ratio: 102/152,
-
     originUrl: '',
     idx: '',
-
-
     cropperResult: '',
     showImgList: [],
     nowwidth:"",
     nowheight:""
   },
-
   onLoad: function ( opt ) {
     let t = this
     let { src, idx, num } = opt;
- 
-    this.setData({ originUrl: src, idx, num })
+    this.setData({ originUrl: src, idx, num });
   },
   uploadTap() {
     let _this = this
@@ -40,13 +33,11 @@ Page({
   
   //六 获取图片
   getCropperImg(e) {
-    
-   
     let { idx } = this.data;
     let pages = getCurrentPages();
     let prevPage = pages[pages.length - 2];
-
     let img = prevPage.data.imgList[idx];
+    img.src = e.detail.origin;
     img.clipImg = e.detail.url;
     img.num = e.detail.num;
      console.log(img.num);
@@ -54,18 +45,11 @@ Page({
     console.log(5555222225);
     prevPage.setData({ [`imgList[${idx}]`]: img });
     wx.navigateBack({ delta: 1 })
-    // this.setData({
-    //   originUrl: '',
-    //   cropperResult: e.detail.url
-    // })
   },
   clickImg: function (e) {
-    console.log(77777777777777);
     this.setData({
       originUrl: 'originUrl',
       cropperResult: '',
     })
   },
-  
-
 })

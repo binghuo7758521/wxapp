@@ -109,9 +109,6 @@ Page({
       a.get("order/isupload", {
         goodsid: i.options.id
       }, function (e) {
-        
-
-    
           i.setData({
             isupload: e.isupload.isupload
           });
@@ -287,27 +284,7 @@ Page({
             
         }, !0);
     
-        // console.log(e)
-        // wx.chooseImage({
-        
-        //   count: 9,
-        //   sizeType: ['original'],
-        //   sourceType: ['album', 'camera'],
-        //   success(res) {
-        //     console.log(5454545454)
-        //     let tempFiles = res.tempFiles;
-        //     //var tempFilePaths = res.tempFilePaths;
-        //     e.setData({
-        //       waitUploadNum: tempFiles.length
-        //     });
-        //     console.log(565656566)
-        //     for (let index in tempFiles) {
-        //       // that.upload_file(config.upLoadFile, tempFiles[index].path);
-
-        //       e.upload_file('', tempFiles[index].path);
-        //     }
-        //   }
-        // })
+      
       }
     },
     num: function (t) {
@@ -706,7 +683,6 @@ Page({
         });
     },
   onPullDownRefresh: function () {
-    console.log(123);
     wx.stopPullDownRefresh();
   },
 });

@@ -1,6 +1,4 @@
 var app = getApp(), s = app.requirejs("core");
-//import Util from '../../utils/util';
-// component/cropper/cropper.js
 const device = wx.getSystemInfoSync();
 var twoPoint = {
   x1: 0,
@@ -20,68 +18,63 @@ Component({
       
       type: Number,
       observer: function (newVal, oldVal) {
-        console.log(this)
+        console.log(wx.getStorageSync('Width'))
+        console.log(9999999)
         let t = this
-        s.get("order/orderdata", "", function (e) {
-          console.log(e)
-          let size = e.size.size;
-          let width = e.wh.width;
-          let height = e.wh.height;
-          console.log(width)
-          
-          if (width == 3.5 && height == 5.2){
+        t.setData({
+          width: wx.getStorageSync('Width'),                //剪裁框的宽度
+          height: wx.getStorageSync('Height'), //剪裁框的长度
+          size: wx.getStorageSync('Size'),
 
-            let imgwidth = width * 28 * 2 ;
-            let imgheight = height * 28 * 2 ;
-            console.log(55555111111)
-            t.setData({
-              width: imgwidth,
-              height: imgheight,
-              size: size
-            })
-            
-          } else if (width == 10.2 && height == 15.2) {
-            let imgwidth = width * 28 / 1.13;
-            let imgheight = height * 28 / 1.13;
-            t.setData({
-              width: imgwidth,
-              height: imgheight,
-              size: size
-            })
+        })
+        
+        // s.get("order/orderdata", "", function (e) {
+        //   let size = e.size.size;
+        //   let width = e.wh.width;
+        //   let height = e.wh.height;
+        //   wx.getSystemInfo({
+        //     success(res) {
+        //       var winWidth = res.windowWidth;
+        //       var winHeight = res.windowHeight;
+              
+              
+             
+        //       let imgwidth = 100 * width;
+        //       let imgheight = 100 * height;
+        //       if (imgwidth >= winWidth * 0.85 || imgheight >= winHeight * 0.7 ){
+        //         console.log(121212121212)
+        //         let imgwidth = 60 * width;
+        //         let imgheight = 60 * height;
+        //         console.log(imgwidth)
+        //         console.log(imgheight)
+        //         console.log(size)
+        //         t.setData({
+        //           width: imgwidth,
+        //           height: imgheight,
+        //           size: size
+        //         })
+        //       }else{
+        //         console.log(23232323)
+               
+        //         console.log(imgwidth)
+        //         console.log(imgheight)
+        //         t.setData({
+        //           width: imgwidth,
+        //           height: imgheight,
+        //           size: size,
+                  
 
-          } else if (width == 12.7 && height == 17.8){
-            let imgwidth = width * 28 / 1.4;
-            let imgheight = height * 28 / 1.4;
-            t.setData({
-              width: imgwidth,
-              height: imgheight,
-              size: size
-            })
+        //         })
+        //       }
+              
 
-          } else if (width == 15.24 && height == 20.5) {
-            let imgwidth = width * 28 / 1.5;
-            let imgheight = height * 28 / 1.5;
-            t.setData({
-              width: imgwidth,
-              height: imgheight,
-              size: size
-            })
-
-          }else{
-            t.setData({
-              width: width * 28,
-              height: height * 28,
-              size: size
-            })
-            //console.log(width)
-          }
-          
-  
-        });
-        // t.setData({
-        //   width: device.windowWidth * 0.5,
-        //   height: device.windowWidth * 0.5 / newVal
-        // })
+              
+        //     }
+        //   })
+         
+      
+        // });
+        
       }
     },
     url: {
@@ -100,8 +93,8 @@ Component({
    * 组件的初始数据
    */
   data: {
-    width: device.windowWidth * 0.5,                //剪裁框的宽度
-    height: device.windowWidth * 0.5 / (102 / 152), //剪裁框的长度
+    width: wx.getStorageSync('Width'),                //剪裁框的宽度
+    height: wx.getStorageSync('Height'), //剪裁框的长度
     originImg: null,                                //存放原图信息
     stv: {
       offsetX: 0,                                   //剪裁图片左上角坐标x
@@ -112,6 +105,8 @@ Component({
       rotate: 0                                     //旋转角度
     },
     num: 1,
+    boolean:true,
+    size: wx.getStorageSync('Size'),
     // imageWidth: 0,
     // imageHeight: 0
   },
@@ -144,19 +139,16 @@ Component({
     },
     bind_num: function (e) {
       console.log(e)
-      console.log(2222222222)
+  
       var val = e.detail.value;
       this.setData({
         num: val
       });
-    },
-    
+    }, 
     btn_add() {
       let that = this;
       var imglength = wx.getStorageSync('imglength');
-      console.log(imglength);
-      console.log(that);
-      console.log(3213);
+   
       let num = that.data.num;
       s.get("order/ordertotal", "", function (e) {
         console.log(e)
@@ -164,14 +156,40 @@ Component({
         if (total == num) {
           return
         } else {
-
           that.setData({
             num: num + 1
           })
           //wx.setStorageSync("num","2")
         }
       });
-
+    },
+    Liwhite(){
+      let innerAspectRadio = this.data.originImg.width / this.data.originImg.height;
+      if (this.data.originImg.height <= this.data.originImg.width) {
+        this.setData({
+          boolean: false,
+          stv: {
+            offsetX: 0 - Math.abs((this.data.width - this.data.height * innerAspectRadio) / 2),
+            offsetY: 0,
+            zoom: false, //是否缩放状态
+            distance: 0,  //两指距离
+            scale: this.data.width / this.data.originImg.width,  //缩放倍数
+            rotate: 0
+          }
+        })
+      } else {
+        this.setData({
+          boolean: false,
+          stv: {
+            offsetX: 0,
+            offsetY: 0 - Math.abs((this.data.height - this.data.width / innerAspectRadio) / 2),
+            zoom: false, //是否缩放状态
+            distance: 0,  //两指距离
+            scale: this.data.height / this.data.originImg.height,  //缩放倍数
+            rotate: 0
+          }
+        })
+      }
     },
     rotate() {
       let _this = this;
@@ -186,7 +204,7 @@ Component({
         mask: true
       })
       let _this = this;
-      console.log(888888888888888);
+
       wx.getImageInfo({
         src: _this.data.url,
         success: function (res) {
@@ -195,7 +213,6 @@ Component({
           _this.setData({
             imgwidth: res.width,
             imgheight: res.height,
-            
           })
         }
       })
@@ -203,6 +220,8 @@ Component({
       let ctx = wx.createCanvasContext('imgcrop',this);
       let cropData = _this.data.stv;
       ctx.save();
+      ctx.setFillStyle('#fff')
+      ctx.fillRect(0, 0, _this.data.width * 2, _this.data.height * 2)
       // 缩放偏移值
       let x = (_this.data.originImg.width - _this.data.originImg.width * cropData.scale) / 2;
       let y = (_this.data.originImg.height - _this.data.originImg.height * cropData.scale) / 2;
@@ -219,9 +238,10 @@ Component({
       ctx.draw(false, ()=> {
         wx.canvasToTempFilePath({
           canvasId: 'imgcrop',
+          // fileType: 'jpg',
           success(response) {
             console.log(response.tempFilePath);
-            _this.triggerEvent("getCropperImg", { url: response.tempFilePath, num: _this.data.num })
+            _this.triggerEvent("getCropperImg", { url: response.tempFilePath, num: _this.data.num ,origin: _this.data.originImg.url})
             wx.hideLoading();
           },
           fail( e ) {
@@ -239,7 +259,7 @@ Component({
     //四
     initImg(url) {
       let _this = this;
-      console.log(999999999999);
+
       wx.getImageInfo({
         src: url,
         success(resopne) {
@@ -270,8 +290,7 @@ Component({
                 width: _this.data.height * innerAspectRadio
               },
               stv: {
-                // offsetX: 0 - Math.abs((_this.data.width - _this.data.height * innerAspectRadio) / 2),
-                offsetX: 0,
+                offsetX: 0 - Math.abs((_this.data.width - _this.data.height * innerAspectRadio) / 2),
                 offsetY: 0,
                 zoom: false, //是否缩放状态
                 distance: 0,  //两指距离
@@ -370,7 +389,7 @@ var touchMove = function (_this, e) {
       stv: stv
     });
 
-  } else if (e.touches.length === 2003) {
+  } else if (e.touches.length === 2) {
     //计算旋转
     let preTwoPoint = JSON.parse(JSON.stringify(twoPoint))
     twoPoint.x1 = e.touches[0].pageX * 2
@@ -400,7 +419,6 @@ var touchMove = function (_this, e) {
     let direction = calculateVC(vector1, vector2);
     let _allDeg = direction * angle;
 
-
     // 双指缩放
     let xMove = e.touches[1].clientX - e.touches[0].clientX;
     let yMove = e.touches[1].clientY - e.touches[0].clientY;
@@ -418,7 +436,6 @@ var touchMove = function (_this, e) {
       let xMove = e.touches[1].clientX - e.touches[0].clientX;
       let yMove = e.touches[1].clientY - e.touches[0].clientY;
       let distance = Math.sqrt(xMove * xMove + yMove * yMove);
-
       let distanceDiff = distance - _this.data.stv.distance;
       let newScale = _this.data.stv.scale + 0.005 * distanceDiff;
       if (newScale < 0.2 || newScale > 2.5) {

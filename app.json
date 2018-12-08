@@ -106,7 +106,6 @@
         "pages/groups/express/index",
         "pages/groups/express/number",
         "pages/uploadsimg/pages/index/index",
-        "pages/uploadsimg/pages/logs/logs",
         "pages/uploadsimg/pages/zhanshi/zhanshi",
         "pages/uploadsimg/component/cropper/cropper"
     ],

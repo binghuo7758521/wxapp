@@ -3,9 +3,9 @@
   <!--  剪裁框与初始图片，剪裁框监听用户手势，获取移动缩放旋转值，images通过css样式显示变化  -->
   <view style="">
       <view class='n_size'>当前尺寸:{{size}}英寸</view>
-      <view class="img" style="width:{{ width }}px; height:{{height}}px;box-sizing: border-box;" catchtouchstart="touchstartCallback"  catchtouchmove="touchmoveCallback" catchtouchend="touchendCallback"  >
-      <image style="transform: translate({{stv.offsetX}}px, {{stv.offsetY}}px) scale({{stv.scale}}) rotate({{ stv.rotate }}deg);width:{{ originImg.width}}px; height:100%" src="{{ originImg.url }}" bindload="imageLoad" mode='aspectFit'></image>
-     
+      <view class="img" style="width:{{ width }}px; height:{{height}}px;" catchtouchstart="touchstartCallback"  catchtouchmove="touchmoveCallback" catchtouchend="touchendCallback"  >
+      <image style="transform: translate({{stv.offsetX}}px, {{stv.offsetY}}px) scale({{stv.scale}}) rotate({{ stv.rotate }}deg);width:{{originImg.width}}px; height: {{originImg.height}}px" src="{{ originImg.url }}" wx:if="{{boolean==true}}"></image>
+      <image style="transform: translate({{stv.offsetX}}px, {{stv.offsetY}}px) scale({{stv.scale}}) rotate({{ stv.rotate }}deg);width:{{originImg.width}}px; height: {{originImg.height}}px" src="{{ originImg.url }}" mode='aspectFit' wx:elif="{{boolean==false}}"></image>
     </view>
   </view>
   <view class='cropper_num'>
@@ -15,11 +15,12 @@
     <view bindtap='btn_add'>+</view>
   </view>
   <view class='footer'>
-      <view bindtap='uploadTap'>选择图片</view> 
+      <view bindtap='uploadTap'>选择图片</view>
+      <view bindtap='Liwhite'>留白</view>
       <view bindtap='rotate'>旋转</view>
       <view bindtap='cropperImg'>确定</view>
   </view>
 
   <!--  canvas长宽设为初始图片设置的长款的两倍，使剪裁得到的图片更清晰，也不至于过大  -->
-  <canvas class='imgcrop' style="width:{{ width * 2 }}px;height:{{ height * 2}}px;" canvas-id='imgcrop'></canvas>
+  <canvas class='imgcrop' style="width:{{ width * 2 }}px;height:{{ height * 2 }}px;margin-bottom:200px;border:1px solid red;background: #fff;" canvas-id='imgcrop'></canvas>
 </view>

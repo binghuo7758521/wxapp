@@ -1,4 +1,3 @@
-<loading wx:if="{{!show}}">加载中...</loading>
 <view class="page {{successData.seckill_color}}" wx:if="{{!success&&show}}">
     <view class="fui-cell-group">
         <view class="fui-cell">

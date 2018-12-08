@@ -1,13 +1,9 @@
 const Crypto = {};
 
 (function () {
-
   var base64map = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
-
-
   // Crypto utilities
   var util = Crypto.util = {
-
     // Bit-wise rotate left
     rotl: function (n, b) {
       return (n << b) | (n >>> (32 - b));

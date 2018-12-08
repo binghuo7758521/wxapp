@@ -3,7 +3,6 @@
   width: 100%;
   height: 100%;
   background: #eee;
-  
 }
 .c_text{
   text-align: center;
@@ -21,12 +20,9 @@
    margin: 0 auto;
    /* transform: translateX(-50%); */
    overflow: hidden;
-   background: #eee;
-   border: 10px solid #fff;
+   background: #fff;
+   border: 10px solid rgb(95, 58, 2);
 }
-/* .img image{
-  width: 100%
-} */
 .cropper_num{
   width: 50%;
   margin: 30rpx auto 105rpx;
@@ -47,11 +43,11 @@
   text-align: center;
   background: #fff
 }
-
 .imgcrop {
-   position: absolute;
+  position: absolute;
   left: -50000rpx;
   top: -500000rpx; 
+  margin-bottom: 100px
 }
 .footer {
   position: fixed;
@@ -75,7 +71,7 @@
   text-align: center;
   font-size: 32rpx;
 }
-.footer view:nth-of-type(3){
+.footer view:nth-of-type(4){
   border-right: 0;
 }
 .background {

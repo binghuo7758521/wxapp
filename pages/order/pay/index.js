@@ -67,11 +67,41 @@ Page({
         var t = this;
         e.get("order/pay", t.data.options, function(o) {
             50018 != o.error ? (!o.wechat.success && "0.00" != o.order.price && o.wechat.payinfo && e.alert(o.wechat.payinfo.message + "\n不能使用微信支付!"), 
+            
             t.setData({
                 list: o,
-                show: !0
+                show: !0,
+           
             })) : wx.navigateTo({
-                url: "/pages/order/details/index?id=" + t.data.options.id
+                
+                url: "/pages/order/details/index?id=" + t.data.options.id,
+                success(res){
+                },
+                fail(res){
+                  wx.showModal({
+                    title: '提示',
+                    content: '您已经支付过该订单了,再去首页看看吧',
+                    success(res) {
+                      if (res.confirm) {
+                        console.log('用户点击确定')
+                        wx.switchTab({
+                          
+                          url: "/pages/index/index",
+                          success(res){
+                            console.log(res)
+                          },
+                          fail(res){
+                            console.log(res)
+                          }
+                        })
+
+                      } else if (res.cancel) {
+                        console.log('用户点击取消')
+                      }
+                    }
+                  })
+                }
+                
             });
         });
     },
@@ -93,8 +123,6 @@ Page({
             type: t
         }, function(t) {
             if (0 != t.error) o.toast(a, t.message); else {
-              console.log(a)
-              
                 var e = Array.isArray(t.ordervirtual);
                 a.setData({
                     success: !0,
@@ -105,6 +133,7 @@ Page({
                 });
             }
         }, !0, !0);
+
       var imgList = wx.getStorageSync("imgList");
       var imagenum = a.data.imagenum;
       var imglength = wx.getStorageSync("imglength");
@@ -113,13 +142,9 @@ Page({
       var ordernums = wx.getStorageSync("ordernums");
       var titles = wx.getStorageSync("titles");
 
-      console.log(imagenum)
-      console.log(36363636)
       if (imgList[imagenum].clipImg == undefined) {
-        console.log("biubiubiu")
         var imgsrc = imgList[imagenum].src;
       } else {
-        console.log("sarsarsar")
         var imgsrc = imgList[imagenum].clipImg;
       }
       var imgnum = imgList[imagenum].num;
@@ -129,15 +154,17 @@ Page({
 
         title: "支付成功"
       });
-      console.log("支付成功")
-      uploadImage(imgsrc, 'abb/' + datas + titles + ordernums + name + '/' + '打印 ' + imgnum + ' 张的图片' + '/',
+      
+      uploadImage(imgsrc, 'sbb/' + datas + titles + ordernums + name + '/' + '打印 ' + imgnum + ' 张的图片' + '/',
         function (result) {
+         
           console.log("======上传成功图片地址为：", result);
+          // wx.showLoading({
+          //   title: '正在上传第' + imagenum + '张',
+          // })
 
           if (true) {
-            // console.log(imagenum);
-            // console.log(imgList.length);
-            // console.log(789789789);
+            
             if (imagenum == imgList.length) {
               console.log("全部上传");
 
@@ -146,13 +173,9 @@ Page({
               a.setData({
                 imagenum: imagenum
               })
-              console.log(imagenum);
-              console.log(imglength);
               if (imglength == imagenum) {
                 console.log('停止上传')
               } else {
-                console.log(212121212121);
-                console.log(a);
                 a.complete();
               }
             }
