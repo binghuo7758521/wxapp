@@ -177,7 +177,7 @@ Page({
       console.log(canupload);
 
       if ( canupload ==1 ){
-        uploadImage(imgsrc, 'sbb/' + datas + titles + ordernums + name + '/' + '打印 ' + imgnum + ' 张的图片' + '/',
+        uploadImage(imgsrc, 'secaipic/' + datas.replace(/:/g,'-') + titles + ordernums + name + '/' + '打印 ' + imgnum + ' 张的图片' + '/',
           function (result) {
 
             console.log("======上传成功图片地址为：", result);
