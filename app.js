@@ -165,9 +165,9 @@ App({
         flag: !1
     },
     globalData: {
-      appid: "wx176d614a68387fbb",
-      api: "https://secai.ahjcg.com/app/ewei_shopv2_api.php?i=2",
-      approot: "https://secai.ahjcg.com/addons/ewei_shopv2/",
+    appid: "wx176d614a68387fbb",
+    api: "https://secai.ahjcg.com/app/ewei_shopv2_api.php?i=2",
+       approot: "https://secai.ahjcg.com/addons/ewei_shopv2/",
         userInfo: null
     }
-}); 
+});

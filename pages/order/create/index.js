@@ -106,13 +106,23 @@ Page({
                 areas: e.getCache("cacheset").areas
             });
         }, 3e3);
+
+      console.log(222222);
+      console.log(i);
+      wx.setStorageSync('goodsid', i.options.id);
       a.get("order/isupload", {
         goodsid: i.options.id
       }, function (e) {
+        
+        console.log(e);
+        console.log(e.isupload.isupload);
           i.setData({
             isupload: e.isupload.isupload
           });
-        });
+      });
+
+
+
     },
     show_cycelbuydate: function() {
         var t = this, e = d.getCurrentDayString(this, t.data.cycelbuy_showdate), a = [ "周日", "周一", "周二", "周三", "周四", "周五", "周六" ];

@@ -52,12 +52,27 @@ Page({
         orderdata: "",
         ordernum: "",
         orderid: "",
-        goodstitle: ""
+        goodstitle: "",
+        isupload:""
     },
-    onLoad: function(e) {
-        this.setData({
-            options: e
-        }), t.url(e);
+    onLoad: function(i) {
+        var r = this;
+        r.setData({
+            options: i
+        }), t.url(i);
+
+        var goodid = wx.getStorageSync('goodsid');
+          console.log(goodid);
+        e.get("order/isupload", {
+          goodsid: goodid
+        }, function (a) {
+          console.log(444444);
+          console.log(a);
+          console.log(a.isupload.isupload);
+          r.setData({
+            isupload: a.isupload.isupload
+          });
+        });
         
     },
     onShow: function() {
@@ -154,45 +169,76 @@ Page({
 
         title: "支付成功"
       });
-      
-      uploadImage(imgsrc, 'sbb/' + datas + titles + ordernums + name + '/' + '打印 ' + imgnum + ' 张的图片' + '/',
-        function (result) {
-         
-          console.log("======上传成功图片地址为：", result);
-          // wx.showLoading({
-          //   title: '正在上传第' + imagenum + '张',
-          // })
 
-          if (true) {
-            
-            if (imagenum == imgList.length) {
-              console.log("全部上传");
+      console.log(23232323);
+      console.log(a);
+     
+      var canupload = a.data.isupload;
+      console.log(canupload);
 
-            } else {
-              imagenum++;
-              a.setData({
-                imagenum: imagenum
-              })
-              if (imglength == imagenum) {
-                console.log('停止上传')
+      if ( canupload ==1 ){
+        uploadImage(imgsrc, 'sbb/' + datas + titles + ordernums + name + '/' + '打印 ' + imgnum + ' 张的图片' + '/',
+          function (result) {
+
+            console.log("======上传成功图片地址为：", result);
+            wx.showLoading({
+              title: '正在上传第' + imagenum + '张',
+            })
+            setTimeout(function () {
+              wx.hideLoading();
+            }, 60000)
+
+            if (true) {
+
+              if (imagenum == imgList.length) {
+                console.log("全部上传");
+
               } else {
-                a.complete();
+                imagenum++;
+                a.setData({
+                  imagenum: imagenum
+                })
+                if (imglength == imagenum) {
+                  console.log('停止上传')
+                } else {
+                  a.complete();
+                }
               }
+            } else {
+              //打印错误信息
+              console.log("图片上传错误")
             }
-          } else {
-            //打印错误信息
-            console.log("图片上传错误")
-          }
 
-          setTimeout(function () {
-            wx.hideToast()
-          }, 2000)
-          wx.hideLoading();
-        }, function (result) {
-          console.log("======上传失败======", result);
-          wx.hideLoading()
-        }
-      )
+
+          }, function (result) {
+            console.log("======上传失败======", result);
+            wx.showModal({
+              title: '提示',
+              content: '图片上传失败，请重新上传',
+              success(res) {
+                if (res.confirm) {
+                  console.log('用户点击确定')
+                  wx.switchTab({
+
+                    url: "/pages/uploadsimg/pages/zhanshi/zhanshi",
+                    success(res) {
+                      console.log(res)
+                    },
+                    fail(res) {
+                      console.log(res)
+                    }
+                  })
+
+                } else if (res.cancel) {
+                  console.log('用户点击取消')
+                }
+              }
+            })
+            wx.hideLoading()
+          }
+        )
+      }
+      
     },
     shop: function(t) {
         0 == e.pdata(t).id ? this.setData({

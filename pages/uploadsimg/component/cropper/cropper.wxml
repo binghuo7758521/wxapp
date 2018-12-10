@@ -17,6 +17,7 @@
   <view class='footer'>
       <view bindtap='uploadTap'>选择图片</view>
       <view bindtap='Liwhite'>留白</view>
+      <view bindtap='clip_img'>剪裁</view>
       <view bindtap='rotate'>旋转</view>
       <view bindtap='cropperImg'>确定</view>
   </view>

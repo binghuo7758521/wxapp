@@ -157,11 +157,40 @@ Component({
           return
         } else {
           that.setData({
+
             num: num + 1
           })
           //wx.setStorageSync("num","2")
         }
       });
+    },
+    clip_img(){
+      let innerAspectRadio = this.data.originImg.width / this.data.originImg.height;
+      if (this.data.originImg.height <= this.data.originImg.width) {
+        this.setData({
+          boolean: false,
+          stv: {
+            offsetX: 0 - Math.abs((this.data.width - this.data.height * innerAspectRadio) / 2),
+            offsetY: 0,
+            zoom: false, //是否缩放状态
+            distance: 0,  //两指距离
+            scale: 1,  //缩放倍数
+            rotate: 0
+          }
+        })
+      } else {
+        this.setData({
+          boolean: false,
+          stv: {
+            offsetX: 0,
+            offsetY: 0 - Math.abs((this.data.height - this.data.width / innerAspectRadio) / 2),
+            zoom: false, //是否缩放状态
+            distance: 0,  //两指距离
+            scale: 1,  //缩放倍数
+            rotate: 0
+          }
+        })
+      }
     },
     Liwhite(){
       let innerAspectRadio = this.data.originImg.width / this.data.originImg.height;

@@ -1,4 +1,4 @@
-<loading wx:if="{{!show}}">加载中...</loading>
+<loading wx:if="{{!show}}">加载中11111...</loading>
 <view class="page navbar order" wx:if="{{show}}">
     <scroll-view class="fui-tab-scroll fixed" scrollX="true" style="overflow-x:scroll">
         <view bindtap="selected" class="item {{status==''?'active':''}}" data-type="">全部</view>

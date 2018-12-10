@@ -128,14 +128,14 @@
                 "selectedIconPath": "static/images/tabbar/icon-1-active.png"
             },
             {
-                "pagePath": "pages/shop/caregory/index",
-                "text": "全部分类",
+                "pagePath": "pages/order/index",
+                "text": "我的订单",
                 "iconPath": "static/images/tabbar/icon-2.png",
                 "selectedIconPath": "static/images/tabbar/icon-2-active.png"
             },
             {
-                "pagePath": "pages/member/cart/index",
-                "text": "购物车",
+                "pagePath": "pages/commission/index",
+                "text": "分销中心",
                 "iconPath": "static/images/tabbar/icon-4.png",
                 "selectedIconPath": "static/images/tabbar/icon-4-active.png"
             },
