@@ -20,7 +20,7 @@ const getPolicyBase64 = function () {
   const policyText = {
     "expiration": srcT, //设置该Policy的失效时间，超过这个失效时间之后，就没有办法通过这个policy上传文件了 
     "conditions": [
-      ["content-length-range", 0, 5 * 1024 * 1024] // 设置上传文件的大小限制,5mb
+      ["content-length-range", 0, 30 * 1024 * 1024] // 设置上传文件的大小限制,30mb
     ]
   };
 
@@ -53,7 +53,8 @@ Page({
         ordernum: "",
         orderid: "",
         goodstitle: "",
-        isupload:""
+        isupload:"",
+        imagelen:""
     },
     onLoad: function(i) {
         var r = this;
@@ -62,17 +63,20 @@ Page({
         }), t.url(i);
 
         var goodid = wx.getStorageSync('goodsid');
-          console.log(goodid);
         e.get("order/isupload", {
           goodsid: goodid
         }, function (a) {
-          console.log(444444);
-          console.log(a);
-          console.log(a.isupload.isupload);
           r.setData({
             isupload: a.isupload.isupload
           });
         });
+
+        var imgList = wx.getStorageSync("imgList");
+        r.setData({
+          imglist: imgList,
+          imagelen: imgList.length
+
+        })
         
     },
     onShow: function() {
@@ -100,14 +104,7 @@ Page({
                       if (res.confirm) {
                         console.log('用户点击确定')
                         wx.switchTab({
-                          
-                          url: "/pages/index/index",
-                          success(res){
-                            console.log(res)
-                          },
-                          fail(res){
-                            console.log(res)
-                          }
+                          url: "/pages/index/index"
                         })
 
                       } else if (res.cancel) {
@@ -125,7 +122,6 @@ Page({
         "wechat" == o ? e.pay(i.payinfo, function(t) {
             "requestPayment:ok" == t.errMsg && a.complete(o);
         }) : "credit" == o ? e.confirm("确认要支付吗?", function() {
-          console.log(555555555555555)
             a.complete(o);
         }, function() {}) : "cash" == o ? e.confirm("确认要使用货到付款吗?", function() {
             a.complete(o);
@@ -139,6 +135,7 @@ Page({
         }, function(t) {
             if (0 != t.error) o.toast(a, t.message); else {
                 var e = Array.isArray(t.ordervirtual);
+
                 a.setData({
                     success: !0,
                     successData: t,
@@ -146,99 +143,102 @@ Page({
                     ordervirtual: t.ordervirtual,
                     ordervirtualtype: e
                 });
+                a.imgupload();
+
             }
         }, !0, !0);
 
-      var imgList = wx.getStorageSync("imgList");
+      
+      
+    },
+    imgupload: function(){
+      var a=this;
+      var imgList = a.data.imglist;
+      console.log(a);
+      console.log(imgList);
+      console.log(11111111);
       var imagenum = a.data.imagenum;
-      var imglength = wx.getStorageSync("imglength");
+      var imglength = wx.getStorageSync("imglengths");
       var name = wx.getStorageSync("name");
       var datas = wx.getStorageSync("datas");
       var ordernums = wx.getStorageSync("ordernums");
       var titles = wx.getStorageSync("titles");
-
       if (imgList[imagenum].clipImg == undefined) {
         var imgsrc = imgList[imagenum].src;
       } else {
         var imgsrc = imgList[imagenum].clipImg;
       }
       var imgnum = imgList[imagenum].num;
-
-
       wx.setNavigationBarTitle({
-
         title: "支付成功"
       });
 
-      console.log(23232323);
-      console.log(a);
-     
+
       var canupload = a.data.isupload;
-      console.log(canupload);
 
-      if ( canupload ==1 ){
-        uploadImage(imgsrc, 'secaipic/' + datas.replace(/:/g,'-') + titles + ordernums + name + '/' + '打印 ' + imgnum + ' 张的图片' + '/',
-          function (result) {
-
-            console.log("======上传成功图片地址为：", result);
-            wx.showLoading({
-              title: '正在上传第' + imagenum + '张',
-            })
-            setTimeout(function () {
-              wx.hideLoading();
-            }, 60000)
-
-            if (true) {
-
-              if (imagenum == imgList.length) {
-                console.log("全部上传");
-
-              } else {
-                imagenum++;
-                a.setData({
-                  imagenum: imagenum
-                })
-                if (imglength == imagenum) {
-                  console.log('停止上传')
+      if (canupload == 1) {
+          uploadImage(imgsrc, 'sbb/' + datas + titles + ordernums + name + '/' + '打印 ' + imgnum + ' 张的图片' + '/',
+            function (result) {
+              console.log("======上传成功图片地址为：", result);
+              if (true) {
+                if (imagenum == imgList.length) {
+                  console.log("全部上传");
                 } else {
-                  a.complete();
-                }
-              }
-            } else {
-              //打印错误信息
-              console.log("图片上传错误")
-            }
-
-
-          }, function (result) {
-            console.log("======上传失败======", result);
-            wx.showModal({
-              title: '提示',
-              content: '图片上传失败，请重新上传',
-              success(res) {
-                if (res.confirm) {
-                  console.log('用户点击确定')
-                  wx.switchTab({
-
-                    url: "/pages/uploadsimg/pages/zhanshi/zhanshi",
-                    success(res) {
-                      console.log(res)
-                    },
-                    fail(res) {
-                      console.log(res)
-                    }
+                  imagenum++;
+                  a.setData({
+                    imagenum: imagenum,
+            
                   })
+                  wx.showLoading({
+                    title: '已经上传' + imagenum + '/' + imgList.length,
+                  })
+                  setTimeout(function () {
+                    wx.hideLoading();
+                  }, 20000)
+                  if (imagenum == imgList.length) {
 
-                } else if (res.cancel) {
-                  console.log('用户点击取消')
+                    wx.showToast({
+                      title: '上传成功',
+                      icon: 'success',
+                      duration: 3000
+                    })
+                  }
+
+                  if (imglength == imagenum) {
+                    console.log('停止上传')
+                  } else {
+                    a.imgupload();
+
+                  }
                 }
+              } else {
+                //打印错误信息
+                console.log("图片上传错误")
               }
-            })
-            wx.hideLoading()
-          }
-        )
+
+
+            }, function (result) {
+              console.log("======上传失败======", result);
+              wx.showModal({
+                title: '上传失败',
+                content: '您已付款，可以前往首页联系客服重新购买',
+                success(res) {
+                  if (res.confirm) {
+                    wx.switchTab({
+                      url: "/pages/index/index",
+                    })
+
+                  }
+                }
+              })
+              wx.hideLoading()
+            }
+          )
+          
+        
+        
       }
-      
+
     },
     shop: function(t) {
         0 == e.pdata(t).id ? this.setData({

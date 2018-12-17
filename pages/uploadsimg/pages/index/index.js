@@ -1,6 +1,5 @@
 //获取应用实例
 const app = getApp(), s = app.requirejs("core");
-
 Page({
   data: {
     ratio: 102/152,
@@ -40,9 +39,6 @@ Page({
     img.src = e.detail.origin;
     img.clipImg = e.detail.url;
     img.num = e.detail.num;
-     console.log(img.num);
-     console.log(this);
-    console.log(5555222225);
     prevPage.setData({ [`imgList[${idx}]`]: img });
     wx.navigateBack({ delta: 1 })
   },

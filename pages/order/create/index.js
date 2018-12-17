@@ -1,4 +1,3 @@
-
 var t = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(t) {
     return typeof t;
 } : function(t) {
@@ -106,16 +105,10 @@ Page({
                 areas: e.getCache("cacheset").areas
             });
         }, 3e3);
-
-      console.log(222222);
-      console.log(i);
       wx.setStorageSync('goodsid', i.options.id);
       a.get("order/isupload", {
         goodsid: i.options.id
       }, function (e) {
-        
-        console.log(e);
-        console.log(e.isupload.isupload);
           i.setData({
             isupload: e.isupload.isupload
           });
@@ -284,42 +277,42 @@ Page({
           if ("" == s.trim(t.list.member.mobile)) return void a.alert("请填写联系方式!");
           if (t.list.isforceverifystore && !t.list.storeInfo) return void a.alert("请选择门店!");
           o.addressid = 0;
-        } else if (!o.addressid && !t.list.isonlyverifygoods) return void a.alert("地址没有选择!");
+        } else if (!o.addressid && !t.list.isonlyverifygoods) return void a.alert("地址没有选择!");  
         e.setData({
           submit: !0
         }), a.post("order/create/submit", o, function (t) {
           e.setData({
             submit: !1
           })
-            
+         
         }, !0);
-    
+        
       
       }
     },
     num: function (t) {
       let that = this;
-      wx.chooseImage({
-        count: 9,
-        sizeType: ['original'],
-        sourceType: ['album', 'camera'],
-        success(res) {
-          let tempFiles = res.tempFiles;
-          let imgUrl = [];
-          for (let index in tempFiles) {
-            imgUrl.push({
-              src: tempFiles[index].path,
-              num : 1
+      if( that.data.list.address != false){
+        wx.chooseImage({
+          count: 9,
+          sizeType: ['original'],
+          sourceType: ['album', 'camera'],
+          success(res) {
+            let tempFiles = res.tempFiles;
+            let imgUrl = [];
+            for (let index in tempFiles) {
+              imgUrl.push({
+                src: tempFiles[index].path,
+                num: 1
+              })
+            };
+            wx.setStorageSync("imgUrl", imgUrl)
+            wx.navigateTo({
+              url: '../../uploadsimg/pages/zhanshi/zhanshi?num=' + that.options.total,
             })
-          };
-          wx.setStorageSync("imgUrl", imgUrl)
-          wx.navigateTo({
-            url: '../../uploadsimg/pages/zhanshi/zhanshi?num=' + that.options.total,
-          })
-
-
-        }
-      })
+          }
+        })
+      }
       
     },
     

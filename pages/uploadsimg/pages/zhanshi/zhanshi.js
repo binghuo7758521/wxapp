@@ -25,14 +25,14 @@ Page({
     });
     
     s.get("order/ordertotal", "", function (e) {
-      console.log(e)
-      console.log(e.order_goods.total)
+
       t.setData({
         total: e.order_goods.total
       });
     });
 
     s.get("order/orderdata", "", function (e) {
+      console.log(45454545)
       console.log(e)
       t.setData({
         username: e.nickname.nickname,
@@ -42,11 +42,10 @@ Page({
         orderid:e.orderid
       });
 
-      let size = e.size.size;
-      let width = e.wh.width;
-      let height = e.wh.height;
-      console.log(e)
-      console.log(11111111)
+      let size = e.size;
+      let width = e.width;
+      let height = e.hight;
+
       wx.getSystemInfo({
         success(res) {
           var winWidth = res.windowWidth;
@@ -55,10 +54,9 @@ Page({
           let imgwidth = 100 * width;
           let imgheight = 100 * height;
           if (imgwidth >= winWidth * 0.85 || imgheight >= winHeight * 0.7) {
-            console.log(121212121212)
-            console.log(size)
             let imgwidth = 60 * width;
             let imgheight = 60 * height;
+
             t.setData({
               Width: imgwidth,
               Height: imgheight,
@@ -68,14 +66,10 @@ Page({
             wx.setStorageSync('Height', imgheight)
             wx.setStorageSync('Size', size)
           } else {
-            console.log(23232323)
-            console.log(size)
             t.setData({
               Width: imgwidth,
               Height: imgheight,
               size: size,
-
-
             })
             wx.setStorageSync('Width', imgwidth)
             wx.setStorageSync('Height', imgheight)
@@ -88,63 +82,6 @@ Page({
 
 
     });
-
-    // s.get("order/orderdata", "", function (e) {
-    //   let size = e.size.size;
-    //   let width = e.wh.width;
-    //   let height = e.wh.height;
-    //   console.log(e)
-    //   console.log(11111111)
-    //   wx.getSystemInfo({
-    //     success(res) {
-    //       var winWidth = res.windowWidth;
-    //       var winHeight = res.windowHeight;
-
-
-
-    //       let imgwidth = 100 * width;
-    //       let imgheight = 100 * height;
-    //       if (imgwidth >= winWidth * 0.85 || imgheight >= winHeight * 0.7) {
-    //         console.log(121212121212)
-    //         let imgwidth = 60 * width;
-    //         let imgheight = 60 * height;
-    //         console.log(imgwidth)
-    //         console.log(imgheight)
-    //         console.log(size)
-    //         t.setData({
-    //           Width: imgwidth,
-    //           Height: imgheight,
-    //           size: size
-    //         })
-    //         wx.setStorageSync('Width', imgwidth)
-    //         wx.setStorageSync('Height', imgheight)
-    //         wx.setStorageSync('Size', size)
-    //       } else {
-    //         console.log(23232323)
-
-    //         console.log(imgwidth)
-    //         console.log(imgheight)
-    //         console.log(size)
-    //         t.setData({
-    //           Width: imgwidth,
-    //           Height: imgheight,
-    //           size: size,
-
-
-    //         })
-    //         wx.setStorageSync('Width', imgwidth)
-    //         wx.setStorageSync('Height', imgheight)
-    //         wx.setStorageSync('Size', size)
-    //       }
-
-
-
-    //     }
-    //   })
-
-
-    // });
-
 
   },
   onShow: function () {
@@ -201,8 +138,9 @@ Page({
     var that = this
     var imgList = that.data.imgList;
     var imagenum = that.data.imagenum;
-    var imglength = parseInt(that.data.imgList.length) + 1;
+    var imglengths = parseInt(that.data.imgList.length) + 1;
     var total = that.data.total;
+
     that.setData({
       imgList: imgList
     })
@@ -225,7 +163,7 @@ Page({
     if (allnum <= total) {
       wx.setStorageSync("imgList", imgList);
       wx.setStorageSync("imagenum", imagenum);
-      wx.setStorageSync("imglength", imglength);
+      wx.setStorageSync("imglengths", imglengths);
       wx.setStorageSync("name", name);
       wx.setStorageSync("datas", datas);
       wx.setStorageSync("ordernums", ordernums);
@@ -236,14 +174,7 @@ Page({
     } else {
       wx.showModal({
         title: '提示',
-        content: '您上传的照片数超过购买的图片张数，去删几张吧',
-        success(res) {
-          if (res.confirm) {
-            console.log('用户点击确定')
-          } else if (res.cancel) {
-            console.log('用户点击取消')
-          }
-        }
+        content: '您上传的照片数超过购买的图片张数，去删几张吧'
       })
     }
   },

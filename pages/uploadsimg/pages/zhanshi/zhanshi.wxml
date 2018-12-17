@@ -1,5 +1,3 @@
-<!-- <view class="num">还有{{ waitUploadNum }}待上传</view> -->
-
 <view class="container">
   <view class='con_top'>#一共可以选择{{total}}张图片#</view>
   <view class='con_top' wx:if="{{allimgnum != null}}">#您已经选择{{allimgnum}}张图片#</view>

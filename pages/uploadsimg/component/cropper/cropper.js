@@ -18,8 +18,6 @@ Component({
       
       type: Number,
       observer: function (newVal, oldVal) {
-        console.log(wx.getStorageSync('Width'))
-        console.log(9999999)
         let t = this
         t.setData({
           width: wx.getStorageSync('Width'),                //剪裁框的宽度
@@ -27,54 +25,7 @@ Component({
           size: wx.getStorageSync('Size'),
 
         })
-        
-        // s.get("order/orderdata", "", function (e) {
-        //   let size = e.size.size;
-        //   let width = e.wh.width;
-        //   let height = e.wh.height;
-        //   wx.getSystemInfo({
-        //     success(res) {
-        //       var winWidth = res.windowWidth;
-        //       var winHeight = res.windowHeight;
-              
-              
-             
-        //       let imgwidth = 100 * width;
-        //       let imgheight = 100 * height;
-        //       if (imgwidth >= winWidth * 0.85 || imgheight >= winHeight * 0.7 ){
-        //         console.log(121212121212)
-        //         let imgwidth = 60 * width;
-        //         let imgheight = 60 * height;
-        //         console.log(imgwidth)
-        //         console.log(imgheight)
-        //         console.log(size)
-        //         t.setData({
-        //           width: imgwidth,
-        //           height: imgheight,
-        //           size: size
-        //         })
-        //       }else{
-        //         console.log(23232323)
-               
-        //         console.log(imgwidth)
-        //         console.log(imgheight)
-        //         t.setData({
-        //           width: imgwidth,
-        //           height: imgheight,
-        //           size: size,
-                  
-
-        //         })
-        //       }
-              
-
-              
-        //     }
-        //   })
          
-      
-        // });
-        
       }
     },
     url: {
@@ -138,8 +89,6 @@ Component({
       num:num
     },
     bind_num: function (e) {
-      console.log(e)
-  
       var val = e.detail.value;
       this.setData({
         num: val
@@ -237,8 +186,6 @@ Component({
       wx.getImageInfo({
         src: _this.data.url,
         success: function (res) {
-          console.log(res)
-          console.log(res.width)
           _this.setData({
             imgwidth: res.width,
             imgheight: res.height,
@@ -269,12 +216,10 @@ Component({
           canvasId: 'imgcrop',
           // fileType: 'jpg',
           success(response) {
-            console.log(response.tempFilePath);
             _this.triggerEvent("getCropperImg", { url: response.tempFilePath, num: _this.data.num ,origin: _this.data.originImg.url})
             wx.hideLoading();
           },
           fail( e ) {
-            console.log( e );
             wx.hideLoading();
             wx.showToast({
               title: '生成图片失败',
@@ -292,7 +237,6 @@ Component({
       wx.getImageInfo({
         src: url,
         success(resopne) {
-          console.log(resopne);
           let innerAspectRadio = resopne.width / resopne.height;
 
           if (innerAspectRadio < _this.data.width / _this.data.height) {

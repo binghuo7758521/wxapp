@@ -190,7 +190,7 @@
             </view>
         </view>
     </view>
-    <view class="operate">
+    <view class="operate"  wx:if="{{imagenum == imagelen||isupload==0 }}">
         <navigator class="btn btn-default" openType="redirect" url="/pages/order/detail/index?id={{successData.order.id}}">订单详情</navigator>
         <navigator class="btn btn-default" openType="switchTab" url="/pages/index/index">返回首页</navigator>
     </view>
