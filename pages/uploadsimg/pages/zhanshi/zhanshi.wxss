@@ -44,6 +44,27 @@ page {
   line-height: 50rpx;
   
 }
+.manum{
+  width: 100%;
+  margin: 20rpx auto;
+  display: flex;
+  flex-direction: row;
+}
+.manum text{
+  width: 32%;
+  display: block;
+  background: #fff;
+  height: 75rpx;
+  font-size: 36rpx;
+  text-align: center;
+  line-height: 75rpx;
+}
+.manum .endnum{
+  height: 75rpx;
+  text-align: center;
+  background: #fff
+}
+
 .delete-btn{
   width: 50rpx;
   height: 50rpx;

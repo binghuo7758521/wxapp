@@ -1,3 +1,4 @@
+<view><official-account></official-account></view>
 <template name="tpl_list">
     <view class="fui-goods-item" data-goodsid="{{item.id}}" data-type="{{item.type}}">
         <navigator openType="navigate" url="{{item.bargain>0?'/pages/bargain/detail/detail?id='+item.bargain:'/pages/goods/detail/index?id='+item.id}}">

@@ -378,13 +378,19 @@ Page((a = {
     },
     selectPicker: function(t) {
         var e = this, a = t.currentTarget.dataset.time, o = t.currentTarget.dataset.timeout;
+        console.log(e);
+      
         if (e.data.limits) {
+          console.log(111111);
             if (console.log(o), "timeout" == a || "access_time" == a) {
+              console.log(2222222);
                 if ("false" == o) return void e.setData({
                     goods_hint_show: !0
                 });
                 if ("true" == o) {
+                  console.log(33333333);
                     if ("access_time" == a) {
+                      console.log(44444444);
                         e.setData({
                             goods_hint_show: !1
                         });

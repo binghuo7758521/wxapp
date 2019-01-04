@@ -2783,7 +2783,7 @@ image {
     background: #ff5555;
     position: fixed;
     right: 20rpx;
-    top: 20rpx;
+    top: -200rpx;
     border-radius: 50%;
     text-align: center;
     padding: 0;
@@ -2791,8 +2791,8 @@ image {
 }
 
 .phone {
-    top: 20rpx;
-    left: 20rpx;
+    top: -200rpx;
+    left: -200rpx;
 }
 
 .suspended-service .icox,.phone .icox {

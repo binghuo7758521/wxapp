@@ -12,7 +12,8 @@ Page({
         data: {
             dispatchtype: 0,
             remark: "",
-            isupload: ""
+            isupload: "",
+            numbers: ""
         },
         areaDetail: {
             detail: {
@@ -114,7 +115,11 @@ Page({
           });
       });
 
-
+      a.get("order/orderdata", "", function (e) {
+        i.setData({
+          numbers: e.number,
+        });
+      });
 
     },
     show_cycelbuydate: function() {
@@ -293,25 +298,41 @@ Page({
     num: function (t) {
       let that = this;
       if( that.data.list.address != false){
-        wx.chooseImage({
-          count: 9,
-          sizeType: ['original'],
-          sourceType: ['album', 'camera'],
-          success(res) {
-            let tempFiles = res.tempFiles;
-            let imgUrl = [];
-            for (let index in tempFiles) {
-              imgUrl.push({
-                src: tempFiles[index].path,
-                num: 1
+        var historyimglist = wx.getStorageSync("historyimglist");
+        var gid = wx.getStorageSync("gid");
+        var taonum = that.data.numbers;
+        console.log(that);
+
+        if (typeof (historyimglist) == "object" && gid == that.options.id && taonum == 1) {
+          wx.setStorageSync("imgUrl", historyimglist);
+          wx.removeStorageSync("historyimglist");
+          wx.navigateTo({
+            url: '../../uploadsimg/pages/zhanshi/zhanshi?num=' + that.options.total,
+          })
+        }else{
+          console.log(123123);
+          wx.chooseImage({
+            count: 9,
+            sizeType: ['original'],
+            sourceType: ['album', 'camera'],
+            success(res) {
+              let tempFiles = res.tempFiles;
+              let imgUrl = [];
+              for (let index in tempFiles) {
+                imgUrl.push({
+                  src: tempFiles[index].path,
+                  num: 1
+                })
+              };
+              wx.setStorageSync("imgUrl", imgUrl)
+              wx.navigateTo({
+                url: '../../uploadsimg/pages/zhanshi/zhanshi?num=' + that.options.total,
               })
-            };
-            wx.setStorageSync("imgUrl", imgUrl)
-            wx.navigateTo({
-              url: '../../uploadsimg/pages/zhanshi/zhanshi?num=' + that.options.total,
-            })
-          }
-        })
+            }
+          })
+        }
+        
+        
       }
       
     },

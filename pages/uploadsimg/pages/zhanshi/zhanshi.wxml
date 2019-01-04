@@ -1,13 +1,22 @@
 <view class="container">
   <view class='con_top'>#一共可以选择{{total}}张图片#</view>
-  <view class='con_top' wx:if="{{allimgnum != null}}">#您已经选择{{allimgnum}}张图片#</view>
+  <!-- <view class='con_top' wx:if="{{allnum != null}}">#您已经选择{{allnum}}张图片#</view> -->
   <view class="img-box">
     <block wx:for="{{ imgList }}" wx:key="{{ index }}">
       <view class='img_box' wx-if="{{isShow}}">
         <view class='img_Box'>
           <image class="img" src="{{ item.clipImg || item.src }}" bind:tap="goCropperImg" data-idx="{{ index }}" data-num="{{item.num}}" style='width:{{ width }}px; height:{{height}}px;' mode='aspectFill'></image>
-          <view class='img_num'>{{item.num}}</view>
+          <!-- <view class='img_num'>{{item.num}}</view> -->
         </view>
+
+         <!-- 增加减少数量按钮 -->
+        <view class='manum'>
+            <text bindtap="minusCount" data-index="{{index}}" class='minus'>-</text>
+            <!-- <text class='endnum'>{{item.num}}</text> -->
+            <input type="text" value="{{item.num}}" class='endnum' data-index="{{index}}" bindinput='bind_num'></input>
+            <text bindtap="addCount" data-index="{{index}}" class='add'>+</text>
+        </view>
+        
         <view class="delete-btn" data-index="{{index}}" catchtap="deleteImg">
           <image src='../image/del.png'></image>
         </view>
@@ -20,8 +29,8 @@
   </view>
   <view class='Ch_box'>
     <view class='Choose'>
-      <view class="choose-img ch_x" bind:tap="onChooseImg">选择图片</view>
-      <button class='ch_x' type='primary' bindtap='choose'>上传照片</button>
+      <view class="choose-img ch_x" bind:tap="onChooseImg">继续选择</view>
+      <button class='ch_x' type='primary' bindtap='choose'  disabled='{{btndisabled}}'>上传照片</button>
     </view>
   </view>
   

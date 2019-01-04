@@ -155,20 +155,23 @@ Page({
       var a=this;
       var imgList = a.data.imglist;
       console.log(a);
-      console.log(imgList);
-      console.log(11111111);
+
       var imagenum = a.data.imagenum;
       var imglength = wx.getStorageSync("imglengths");
+      var optionname = wx.getStorageSync("optionname");
       var name = wx.getStorageSync("name");
       var datas = wx.getStorageSync("datas");
       var ordernums = wx.getStorageSync("ordernums");
       var titles = wx.getStorageSync("titles");
-      if (imgList[imagenum].clipImg == undefined) {
-        var imgsrc = imgList[imagenum].src;
-      } else {
-        var imgsrc = imgList[imagenum].clipImg;
+
+      if (imagenum < imgList.length) {
+        if (imgList[imagenum].clipImg == undefined) {
+          var imgsrc = imgList[imagenum].src;
+        } else {
+          var imgsrc = imgList[imagenum].clipImg;
+        }
+        var imgnum = imgList[imagenum].num;
       }
-      var imgnum = imgList[imagenum].num;
       wx.setNavigationBarTitle({
         title: "支付成功"
       });
@@ -177,7 +180,8 @@ Page({
       var canupload = a.data.isupload;
 
       if (canupload == 1) {
-          uploadImage(imgsrc, 'sbb/' + datas + titles + ordernums + name + '/' + '打印 ' + imgnum + ' 张的图片' + '/',
+        if (imagenum < imgList.length) {
+          uploadImage(imgsrc, 'order/' + datas + ordernums + optionname + titles + name + '/' + '打印 ' + imgnum + ' 张的图片' + '/',
             function (result) {
               console.log("======上传成功图片地址为：", result);
               if (true) {
@@ -234,7 +238,7 @@ Page({
               wx.hideLoading()
             }
           )
-          
+        } 
         
         
       }

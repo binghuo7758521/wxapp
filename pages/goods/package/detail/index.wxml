@@ -45,7 +45,7 @@
                     </view>
                 </view>
             </view>
-            <view bindtap="confirm" class="btn btn-danger block">确定</view>
+            <view bindtap="confirm" class="btn btn-danger block">确定66666</view>
         </view>
     </view>
     <include src="/pages/common/menu.wxml"></include>

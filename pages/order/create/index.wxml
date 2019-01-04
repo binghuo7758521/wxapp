@@ -132,11 +132,15 @@
                 <view class="fui-list-angle">
                     <view class="fui-cell text-danger" wx:if="{{list.isdiscountprice>0}}">￥{{val.promotionprice}}</view>
                     <text class="price" style="text-decoration:{{list.isdiscountprice>0?'line-through':''}}">¥{{val.price}}</text>
-                    <view bindtap="number" class="fui-number small" data-id="{{val.id}}" data-index="{{index}}" data-key="{{key}}" data-max="{{val.totalmaxbuy}}" data-min="{{val.minbuy}}" data-value="{{val.total}}" wx:if="{{list.changenum&&list.iscycelbuy!=true&&bargainid<=0}}">
+                 
+                     <view><text  class="price">   数量：{{val.total}}</text></view>
+                    
+                       <view hidden='true' bindtap="number" class="fui-number small" data-id="{{val.id}}" data-index="{{index}}" data-key="{{key}}" data-max="{{val.totalmaxbuy}}" data-min="{{val.minbuy}}" data-value="{{val.total}}" wx:if="{{list.changenum&&list.iscycelbuy!=true&&bargainid<=0}}">
                         <view class="minus {{val.total<=1?'disabled':''}}" data-action="minus">-</view>
-                        <input bindblur="inputNumber" class="num shownum" name="" type="tel" value="{{val.total}}"></input>
-                        <view class="plus {{val.total>=val.totalmaxbuy?'disabled':''}}" data-action="plus">+</view>
-                    </view>
+                       <input bindblur="inputNumber" class="num shownum" name="" type="tel" value="{{val.total}}"></input>
+                      <view class="plus {{val.total>=val.totalmaxbuy?'disabled':''}}" data-action="plus">+</view>                        
+                    </view>   
+
                     <view class="text-right" wx:elif="{{!list.changenum||list.iscycelbuy==true||bargainid>0}}">
             x{{val.total}}
           </view>

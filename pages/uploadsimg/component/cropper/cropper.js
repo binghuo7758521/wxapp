@@ -25,7 +25,7 @@ Component({
           size: wx.getStorageSync('Size'),
 
         })
-         
+        
       }
     },
     url: {
@@ -78,41 +78,41 @@ Component({
         }
       })
     },
-    btn_default () {
-      let num=this.data.num;
-      if( num==1){
-        return
-      }
-      this.setData({
-        num: num-1
-      })
-      num:num
-    },
-    bind_num: function (e) {
-      var val = e.detail.value;
-      this.setData({
-        num: val
-      });
-    }, 
-    btn_add() {
-      let that = this;
-      var imglength = wx.getStorageSync('imglength');
+    // btn_default () {
+    //   let num=this.data.num;
+    //   if( num==1){
+    //     return
+    //   }
+    //   this.setData({
+    //     num: num-1
+    //   })
+    //   num:num
+    // },
+    // bind_num: function (e) {
+    //   var val = e.detail.value;
+    //   this.setData({
+    //     num: val
+    //   });
+    // }, 
+    // btn_add() {
+    //   let that = this;
+    //   var imglength = wx.getStorageSync('imglength');
    
-      let num = that.data.num;
-      s.get("order/ordertotal", "", function (e) {
-        console.log(e)
-        var total = e.order_goods.total;
-        if (total == num) {
-          return
-        } else {
-          that.setData({
+    //   let num = that.data.num;
+    //   s.get("order/ordertotal", "", function (e) {
+    //     console.log(e)
+    //     var total = e.total;
+    //     if (total == num) {
+    //       return
+    //     } else {
+    //       that.setData({
 
-            num: num + 1
-          })
-          //wx.setStorageSync("num","2")
-        }
-      });
-    },
+    //         num: num + 1
+    //       })
+    //       //wx.setStorageSync("num","2")
+    //     }
+    //   });
+    // },
     clip_img(){
       let innerAspectRadio = this.data.originImg.width / this.data.originImg.height;
       if (this.data.originImg.height <= this.data.originImg.width) {
@@ -144,6 +144,8 @@ Component({
     Liwhite(){
       let innerAspectRadio = this.data.originImg.width / this.data.originImg.height;
       if (this.data.originImg.height <= this.data.originImg.width) {
+        console.log(this);
+        console.log(789456);
         this.setData({
           boolean: false,
           stv: {
@@ -156,6 +158,8 @@ Component({
           }
         })
       } else {
+        console.log();
+        console.log(9999999999);
         this.setData({
           boolean: false,
           stv: {
@@ -169,11 +173,89 @@ Component({
         })
       }
     },
+    Liwhite_x() {
+      
+    },
     rotate() {
-      let _this = this;
-      _this.setData({
-        'stv.rotate': _this.data.stv.rotate % 90 == 0 ? _this.data.stv.rotate = _this.data.stv.rotate + 90 : _this.data.stv.rotate = 0
+      
+      this.setData({
+        'stv.rotate': this.data.stv.rotate % 90 == 0 ? this.data.stv.rotate = this.data.stv.rotate + 90 : this.data.stv.rotate = 0
       })
+
+      console.log(this.data.stv.rotate)
+      let nb = this.data.stv.rotate/90;
+      console.log(nb)
+
+      if (nb%2 == 0){
+        console.log('nishi')
+        let innerAspectRadio = this.data.originImg.width / this.data.originImg.height;
+        if (this.data.originImg.height <= this.data.originImg.width) {
+          console.log(this);
+          console.log(789456);
+          this.setData({
+            boolean: false,
+            stv: {
+              offsetX: 0 - Math.abs((this.data.width - this.data.height * innerAspectRadio) / 2),
+              offsetY: 0,
+              zoom: false, //是否缩放状态
+              distance: 0,  //两指距离
+              scale: this.data.width / this.data.originImg.width,  //缩放倍数
+              rotate: nb * 90
+            }
+          })
+        } else {
+          console.log();
+          console.log(9999999999);
+          this.setData({
+            boolean: false,
+            stv: {
+              offsetX: 0,
+              offsetY: 0 - Math.abs((this.data.height - this.data.width / innerAspectRadio) / 2),
+              zoom: false, //是否缩放状态
+              distance: 0,  //两指距离
+              scale: this.data.height / this.data.originImg.height,  //缩放倍数
+              rotate: nb * 90
+            }
+          })
+        }
+
+      }else{
+        console.log('nishi111')
+        let innerAspectRadio = this.data.originImg.height / this.data.originImg.width;
+        if (this.data.originImg.height <= this.data.originImg.width) {
+          console.log(this);
+          console.log(789456);
+          console.log(this.data.height / this.data.originImg.height)
+          this.setData({
+            boolean: false,
+            stv: {
+              offsetX: 0 - Math.abs((this.data.width - this.data.height / innerAspectRadio) / 2),
+              offsetY: 0 ,
+              zoom: false, //是否缩放状态
+              distance: 0,  //两指距离
+              scale: this.data.height / this.data.originImg.width,  //缩放倍数
+              rotate: nb*90
+            }
+          })
+        } else {
+          console.log();
+          console.log(9999999999);
+          console.log(this.data.width / this.data.originImg.width);
+          console.log(9999999999);
+          this.setData({
+            boolean: false,
+            stv: {
+              offsetX: 0,
+              offsetY: 0 - Math.abs((this.data.height - this.data.width * innerAspectRadio) / 2),
+              zoom: false, //是否缩放状态
+              distance: 0,  //两指距离
+              scale: this.data.width / this.data.originImg.height,  //缩放倍数
+              rotate: nb * 90
+            }
+          })
+        }
+
+      }
     },
     //五
     cropperImg() {
