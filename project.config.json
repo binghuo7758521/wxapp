@@ -36,13 +36,20 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 0,
+			"current": 1,
 			"list": [
 				{
 					"id": -1,
 					"name": "测试关注公众号",
 					"pathName": "pages/index/index",
+					"query": "",
 					"scene": "1011"
+				},
+				{
+					"id": 1,
+					"name": "测试更新",
+					"pathName": "pages/index/index",
+					"query": ""
 				}
 			]
 		}

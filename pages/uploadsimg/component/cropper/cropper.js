@@ -423,6 +423,7 @@ var throttle = function (fn, delay, mustRun) {
 }
 
 var touchMove = function (_this, e) {
+  console.log('touchMove');
   //触摸移动中
   if (e.touches.length === 1) {
     //单指移动
@@ -433,6 +434,8 @@ var touchMove = function (_this, e) {
     let { clientX, clientY } = e.touches[0];
     let offsetX = clientX - _this.startX;
     let offsetY = clientY - _this.startY;
+ 
+
     _this.startX = clientX;
     _this.startY = clientY;
     let { stv } = _this.data;
@@ -440,11 +443,13 @@ var touchMove = function (_this, e) {
     stv.offsetY += offsetY;
     stv.offsetLeftX = -stv.offsetX;
     stv.offsetLeftY = -stv.offsetLeftY;
+
     _this.setData({
       stv: stv
     });
 
   } else if (e.touches.length === 2) {
+    return;
     //计算旋转
     let preTwoPoint = JSON.parse(JSON.stringify(twoPoint))
     twoPoint.x1 = e.touches[0].pageX * 2

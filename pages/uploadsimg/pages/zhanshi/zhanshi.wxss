@@ -60,6 +60,7 @@ page {
   line-height: 75rpx;
 }
 .manum .endnum{
+  width: 36%;
   height: 75rpx;
   text-align: center;
   background: #fff

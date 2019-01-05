@@ -5,6 +5,32 @@ App({
         this.onLaunch();
     },
     onLaunch: function() {
+
+
+      const updateManager = wx.getUpdateManager()
+      updateManager.onCheckForUpdate(function (res) {
+        // 请求完新版本信息的回调
+        console.log(res.hasUpdate)
+      });
+      updateManager.onUpdateReady(function () {
+        wx.showModal({
+          title: '更新提示',
+          content: '检测到有更新的版本，请更新小程序',
+          confirmText:'更新',
+          showCancel:false,
+          success(res) {
+            if (res.confirm) {
+              // 新的版本已经下载好，调用 applyUpdate 应用新版本并重启
+              updateManager.applyUpdate()
+            }
+          }
+        })
+      });
+
+
+
+
+
         var e = this;
         wx.getSystemInfo({
             success: function(t) {

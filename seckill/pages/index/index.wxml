@@ -115,7 +115,7 @@
         </view>
         <view bindtap="navigate" class="fui-nav" data-url="/pages/member/cart/index">
             <view>
-                <text class="icox icox-gouwuche1"></text>购物车
+                <text class="icox icox-gouwuche1"></text>购物车5
             </view>
         </view>
         <view bindtap="navigate" class="fui-nav" data-url="/pages/order/index">

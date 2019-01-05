@@ -206,6 +206,8 @@ Page({
                       icon: 'success',
                       duration: 3000
                     })
+
+                    wx.removeStorageSync("historyimglist");
                   }
 
                   if (imglength == imagenum) {

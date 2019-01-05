@@ -568,12 +568,7 @@
                 <view class="icox icox-shop1"></view>
                 <view class="label">店铺</view>
             </navigator>
-            <navigator class="nav-item cart-item" id="menucart" openType="switchTab" url="/pages/member/cart/index">
-                <view class="badge {{goods.cartount<=0?'out':'in'}}" wx:if="{{goods.cartcount&&limits}}">{{goods.cartcount}}</view>
-                <view class="icox icox-cart1"></view>
-                <view class="label">购物车</view>
-            </navigator>
-            <view bindtap="selectPicker" class="nav-item btn cartbtn" data-buytype="cart" data-id="{{goods.id}}" data-tap="{{active}}" wx:if="{{goods.canAddCart&&goods.type!=9}}">加入购物车</view>
+       
             <view bindtap="selectPicker" class="nav-item btn buybtn" data-buytype="buy" data-id="{{goods.id}}" data-tap="{{active}}" wx:if="{{!goods.access_time&&!goods.timeout}}">立刻购买</view>
             <view bindtap="selectPicker" class="nav-item btn buybtn" data-buytype="buy" data-id="{{goods.id}}" data-tap="{{active}}" data-time="access_time" data-timeout="false" wx:if="{{goods.access_time}}">立刻购买</view>
             <view bindtap="selectPicker" class="nav-item btn buybtn" data-buytype="buy" data-id="{{goods.id}}" data-tap="{{active}}" data-time="timeout" data-timeout="false" wx:if="{{goods.timeout}}">立刻购买</view>
@@ -614,7 +609,7 @@
             <view class="subtitle">您需要先开启【用户信息】，才能使用此功能哦~</view>
             <view class="model-btns">
                 <view bindtap="cancelclick" class="cancel">取消</view>
-                <view bindtap="confirmclick" class="confirm">去设置</view>
+                <view bindtap="confirmclick" class="confirm">去设置2</view>
             </view>
         </view>
     </view>

@@ -350,7 +350,7 @@
                 <view class="fui-cell-info"></view>
                 <view class="fui-cell-remark noremark">-￥{{carddiscountprice}}</view>
             </view>
-            <view class="fui-cell" wx:if="{{list.discountprice>0}}">
+            <view class="fui-cell" hidden="true" wx:if="{{list.discountprice>0}}">
                 <view class="fui-cell-label">会员优惠</view>
                 <view class="fui-cell-info"></view>
                 <view class="fui-cell-remark noremark">-¥<text>{{list.discountprice}}</text>

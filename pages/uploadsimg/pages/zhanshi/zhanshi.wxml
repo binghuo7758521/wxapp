@@ -1,6 +1,6 @@
 <view class="container">
   <view class='con_top'>#一共可以选择{{total}}张图片#</view>
-  <!-- <view class='con_top' wx:if="{{allnum != null}}">#您已经选择{{allnum}}张图片#</view> -->
+  <view class='con_top' wx:if="{{allimgnum != null}}">#您已经选择{{allimgnum}}张图片#</view>
   <view class="img-box">
     <block wx:for="{{ imgList }}" wx:key="{{ index }}">
       <view class='img_box' wx-if="{{isShow}}">
