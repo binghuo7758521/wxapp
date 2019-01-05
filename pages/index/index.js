@@ -10,6 +10,8 @@ function t(t, a, e) {
 var a, e, i = getApp(), s = i.requirejs("core"), n = i.requirejs("wxParse/wxParse"), o = i.requirejs("biz/diypage"), r = i.requirejs("biz/diyform"), d = i.requirejs("biz/goodspicker"), c = (i.requirejs("foxui"), 
 i.requirejs("jquery"));
 
+
+
 Page((e = {
     onPullDownRefresh: function() {
         var t = this;
@@ -97,6 +99,31 @@ Page((e = {
     onLoad: function(t) {
         t = t || {};
         var a = this;
+      console.log(t);
+      i.url(s), wx.getSystemInfo({
+        success: function (i) {
+          var s = i.windowWidth / 1.7;
+          a.setData({
+            windowWidth: i.windowWidth,
+            windowHeight: i.windowHeight,
+            swiperheight: s
+          });
+        }
+      }), o.get(this, "member", function (i) { }), "" == i.getCache("userinfo") && wx.redirectTo({
+        url: "/pages/message/auth/index"
+      });
+
+      // if( t.id == undefined ){
+      //   wx.redirectTo({
+      //     url: "/pages/message/auth/index"
+      //   });
+      //   // wx.getSetting({
+      //   //   success: function (t) {
+      //   //     t.authSetting["scope.userInfo"] && a.get_nopayorder();
+      //   //   }
+      //   // });
+      // }
+      console.log(555555);
         s.get("black", {}, function(t) {
             t.isblack && wx.showModal({
                 title: "无法访问",
@@ -104,6 +131,7 @@ Page((e = {
                 success: function(t) {
                     t.confirm && a.close(), t.cancel && a.close();
                 }
+
             });
         });
         var e = decodeURIComponent(t.scene);
@@ -164,6 +192,10 @@ Page((e = {
         });
     },
     onShow: function() {
+      wx.removeStorageSync("historyimglist");
+      wx.removeStorageSync("allhistoryimglist");
+      wx.removeStorageSync("imgUrl");
+      wx.removeStorageSync("imgList");
         console.log(1235);
         var t = this, a = wx.getSystemInfoSync(), e = i.getCache("sysset");
         t.getShop(), t.getRecommand(), t.get_hasnewcoupon(), t.get_cpinfos(), wx.getSetting({

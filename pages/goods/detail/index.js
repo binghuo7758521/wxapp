@@ -681,8 +681,13 @@ Page((a = {
     confirmclick: function() {
         this.setData({
             modelShow: !1
-        }), wx.openSetting({
-            success: function(t) {}
+        }) 
+        wx.openSetting({
+         
+          success: function(t) {
+            console.log(232323232)
+            console.log(t)
+          }
         });
     },
     sendclick: function() {

@@ -208,6 +208,7 @@ Page({
                     })
 
                     wx.removeStorageSync("historyimglist");
+                    wx.removeStorageSync("allhistoryimglist");
                   }
 
                   if (imglength == imagenum) {

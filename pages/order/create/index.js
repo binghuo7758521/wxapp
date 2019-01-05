@@ -299,16 +299,27 @@ Page({
       let that = this;
       if( that.data.list.address != false){
         var historyimglist = wx.getStorageSync("historyimglist");
+        var allhistoryimglist = wx.getStorageSync("allhistoryimglist");
         var gid = wx.getStorageSync("gid");
+        var other = wx.getStorageSync("other");
         var taonum = that.data.numbers;
         console.log(that);
-
-        if (typeof (historyimglist) == "object" && gid == that.options.id && taonum == 1) {
+        console.log(taonum);
+        if (typeof (historyimglist) == "object" && gid == that.options.id && taonum == 1 && other==333) {
+          console.log(789789);
           wx.setStorageSync("imgUrl", historyimglist);
           wx.removeStorageSync("historyimglist");
           wx.navigateTo({
             url: '../../uploadsimg/pages/zhanshi/zhanshi?num=' + that.options.total,
           })
+        } else if(typeof (allhistoryimglist) == "object" && gid == that.options.id && taonum == 1){
+          console.log(456456);
+          wx.setStorageSync("imgUrl", allhistoryimglist);
+          wx.removeStorageSync("allhistoryimglist");
+          wx.navigateTo({
+            url: '../../uploadsimg/pages/zhanshi/zhanshi?num=' + that.options.total,
+          })
+
         }else{
           console.log(123123);
           wx.chooseImage({

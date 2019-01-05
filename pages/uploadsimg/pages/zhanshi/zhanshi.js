@@ -31,6 +31,8 @@ Page({
     let t = this;
     var goodid = wx.getStorageSync('goodsid');
     let pages = wx.getStorageSync('imgUrl');
+    wx.removeStorageSync("imgUrl");
+    wx.removeStorageSync("imgList");
     t.setData({
       imgList: pages,
       btndisabled: false
@@ -173,24 +175,30 @@ Page({
   onUnload:function(){
     let mm = this;
     var goodid = wx.getStorageSync('goodsid');
-    var historyimglist = mm.data.imgList;
-    console.log('重买')
-    console.log(historyimglist)
-    wx.setStorageSync("historyimglist", historyimglist);
-    wx.setStorageSync("gid", goodid);
+    var number = mm.data.number;
+    var allhistoryimglist = mm.data.imgList;
+    console.log(mm)
+    console.log(number)
+    if (number == 1 ){
+      console.log('重买')
+      console.log(allhistoryimglist)
+      wx.setStorageSync("allhistoryimglist", allhistoryimglist);
+      wx.setStorageSync("gid", goodid);
 
+    }
+    
   },
 
   // 三 进入所点图片
   goCropperImg: function (e) {
-    /*let {
+    let {
       idx,
       num
     } = e.currentTarget.dataset;
     let goCropperImg = this.data.imgList[idx];
     wx.navigateTo({
       url: '../index/index?idx=' + idx + '&src=' + goCropperImg.src + '&num=' + num
-    });*/
+    });
   },
 
 
@@ -295,10 +303,14 @@ Page({
             cancelText: '继续选图',
             confirmText: '去付款',
             success(res) {
+              
               if (res.confirm) {
-              wx.navigateTo({
-                url: "/pages/order/pay/index?id=" + orderid
-              })
+
+                wx.navigateTo({
+                  url: "/pages/order/pay/index?id=" + orderid
+                })
+                wx.removeStorageSync("historyimglist");
+                wx.removeStorageSync("allhistoryimglist");
               }
             }
           })
@@ -308,6 +320,8 @@ Page({
           wx.navigateTo({
             url: "/pages/order/pay/index?id=" + orderid
           })
+          wx.removeStorageSync("historyimglist");
+          wx.removeStorageSync("allhistoryimglist");
         }
         
       
@@ -319,11 +333,12 @@ Page({
         console.log(historyimglist)
         wx.setStorageSync("historyimglist", historyimglist);
         wx.setStorageSync("gid", goodid);
+        wx.setStorageSync("other", 333);
         wx.showModal({
           title: '提示',
-          content: '您选择的照片数量：' + allnum + ';您选择购买的照片数量：' + total + '请返回修改数量',   
-          showCancel:false,       
-          confirmText: '知道了',
+          content: '您选择的照片数量：' + allnum + ';您选择购买的照片数量：' + total + '是否重新购买？',
+          cancelText: '去删图',
+          confirmText: '重新购买',
           success(res) {
             if (res.confirm) {
               wx.navigateTo({
