@@ -336,16 +336,11 @@ Page({
         wx.setStorageSync("other", 333);
         wx.showModal({
           title: '提示',
-          content: '您选择的照片数量：' + allnum + ';您选择购买的照片数量：' + total + '是否重新购买？',
-          cancelText: '去删图',
-          confirmText: '重新购买',
+          content: '您选择的照片数量：' + allnum + ';您选择购买的照片数量：' + total + '是否重新购买',
+          showCancel:false,         
+          confirmText: '知道了',
           success(res) {
-            if (res.confirm) {
-              wx.navigateTo({
-                url: "/pages/goods/detail/index?id=" + goodid,
-              })
-
-            }
+           
           }
         })
       } else {
