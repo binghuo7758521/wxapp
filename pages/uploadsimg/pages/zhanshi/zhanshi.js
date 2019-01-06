@@ -299,11 +299,12 @@ Page({
           console.log('张数少了')
           wx.showModal({
             title: '提示',
-            content: '您选择的照片数量：' + allnum + ',您选择购买的照片数量：' + total + ';确认付款？',
-            cancelText: '继续选图',
-            confirmText: '去付款',
+            content: '您选择了' + allnum + '张照片,\r\n购买了' + total + '件商品，\r\n亲重新选择。',
+             showCancel:false,
+            //confirmText: '去付款',
+            confirmText: '好的',
             success(res) {
-              
+             /* 
               if (res.confirm) {
 
                 wx.navigateTo({
@@ -312,6 +313,7 @@ Page({
                 wx.removeStorageSync("historyimglist");
                 wx.removeStorageSync("allhistoryimglist");
               }
+              */
             }
           })
         }else{
@@ -336,7 +338,7 @@ Page({
         wx.setStorageSync("other", 333);
         wx.showModal({
           title: '提示',
-          content: '您选择的照片数量：' + allnum + ';您选择购买的照片数量：' + total + '是否重新购买',
+          content: '您选择了：' + allnum + '张照片;\r\n您购买的数量是：' + total + ';\r\n请修改数量。',
           showCancel:false,         
           confirmText: '知道了',
           success(res) {
@@ -347,6 +349,7 @@ Page({
         console.log('张数过多')
       wx.showModal({
         title: '提示',
+        showCancel:false,
         content: '您上传的照片数超过购买的图片张数，去删几张吧'
       })
       }
