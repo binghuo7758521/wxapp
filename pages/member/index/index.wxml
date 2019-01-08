@@ -64,7 +64,7 @@
       </navigator>
       <view class="fui-cell-tip">{{member.bindtext}}</view>
     </view>
-    <view class="fui-cell-group fui-cell-click">
+    <view class="fui-cell-group fui-cell-click" hidden='true'>
       <navigator class="fui-cell" hoverClass="none" openType="navigate" url="/pages/order/index">
         <view class="fui-cell-icon">
           <text class="icox icox-order"></text>

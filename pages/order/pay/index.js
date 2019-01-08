@@ -83,6 +83,7 @@ Page({
         this.get_list();
     },
     get_list: function() {
+      console.log('get_list:');
         var t = this;
         e.get("order/pay", t.data.options, function(o) {
             50018 != o.error ? (!o.wechat.success && "0.00" != o.order.price && o.wechat.payinfo && e.alert(o.wechat.payinfo.message + "\n不能使用微信支付!"), 
@@ -91,18 +92,17 @@ Page({
                 list: o,
                 show: !0,
            
-            })) : wx.navigateTo({
-                
+            })) : wx.navigateTo({                
                 url: "/pages/order/details/index?id=" + t.data.options.id,
-                success(res){
+                success(res){                  
                 },
-                fail(res){
+                fail(res){                  
                   wx.showModal({
                     title: '提示',
-                    content: '您已经支付过该订单了,再去首页看看吧',
+                    content: '该订单已过期,再去首页看看吧',
+                    showCancel:false,
                     success(res) {
-                      if (res.confirm) {
-                        console.log('用户点击确定')
+                      if (res.confirm) {                        
                         wx.switchTab({
                           url: "/pages/index/index"
                         })
@@ -176,7 +176,7 @@ Page({
         title: "支付成功"
       });
 
-
+       console.log("支付成功了111");
       var canupload = a.data.isupload;
 
       if (canupload == 1) {

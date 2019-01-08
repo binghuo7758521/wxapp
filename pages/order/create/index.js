@@ -332,7 +332,8 @@ Page({
               for (let index in tempFiles) {
                 imgUrl.push({
                   src: tempFiles[index].path,
-                  num: 1
+                  num: 1,
+                  filesize: tempFiles[index].size
                 })
               };
               wx.setStorageSync("imgUrl", imgUrl)

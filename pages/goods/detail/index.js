@@ -682,13 +682,10 @@ Page((a = {
         this.setData({
             modelShow: !1
         }) 
-        wx.openSetting({
-         
-          success: function(t) {
-            console.log(232323232)
-            console.log(t)
-          }
-        });
+
+      wx.redirectTo({
+        url: "/pages/message/auth/index"});
+        
     },
     sendclick: function() {
         wx.navigateTo({

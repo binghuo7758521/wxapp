@@ -354,7 +354,7 @@
                 </view>
             </view>
             <view class="fui-cell-group fui-shop-group">
-                <navigator class="fui-list" openType="switchTab" url="/pages/index/index">
+                <navigator class="fui-list" openType="switchTab" url="/pages/index/index" hidden='true'>
                     <view class="fui-list-media">
                         <image src="{{goods.shopdetail.logo}}"></image>
                     </view>
@@ -602,14 +602,14 @@
     </view>
     <view class="model" wx:if="{{modelShow}}">
         <view class="inner1">
-            <view class="title">用户未授权</view>
+            <view class="title">用户信息失效</view>
             <view class="image">
                 <image src="/static/images/shouquan.png"></image>
             </view>
-            <view class="subtitle">您需要先开启【用户信息】，才能使用此功能哦~</view>
+            <view class="subtitle">请允许读取您的用户信息；~</view>
             <view class="model-btns">
-                <view bindtap="cancelclick" class="cancel">取消</view>
-                <view bindtap="confirmclick" class="confirm">去设置2</view>
+              <!--  <view bindtap="cancelclick" class="cancel">取消</view>  -->
+                <view bindtap="confirmclick" class="confirm">去设置</view>
             </view>
         </view>
     </view>

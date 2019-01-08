@@ -6,7 +6,7 @@
       <view class='img_box' wx-if="{{isShow}}">
         <view class='img_Box'>
           <image class="img" src="{{ item.clipImg || item.src }}" bind:tap="goCropperImg" data-idx="{{ index }}" data-num="{{item.num}}" style='width:{{ width }}px; height:{{height}}px;' mode='aspectFill'></image>
-          <!-- <view class='img_num'>{{item.num}}</view> -->
+           <view class='img_num' wx:if="{{item.filesize<px*1024}}">低</view>
         </view>
 
          <!-- 增加减少数量按钮 -->

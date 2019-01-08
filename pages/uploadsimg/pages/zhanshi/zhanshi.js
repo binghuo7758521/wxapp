@@ -1,4 +1,5 @@
-var app = getApp(), s = app.requirejs("core");
+var app = getApp(),
+  s = app.requirejs("core");
 var util = require('../../utils/util.js');
 
 
@@ -27,7 +28,7 @@ Page({
 
   },
 
-  onLoad: function (opt) {
+  onLoad: function(opt) {
     let t = this;
     var goodid = wx.getStorageSync('goodsid');
     let pages = wx.getStorageSync('imgUrl');
@@ -37,10 +38,10 @@ Page({
       imgList: pages,
       btndisabled: false
     });
-   
 
 
-    s.get("order/orderdata", "", function (e) {
+
+    s.get("order/orderdata", "", function(e) {
 
       console.log(e)
       t.setData({
@@ -103,18 +104,18 @@ Page({
 
     });
 
-    s.get("order/ordertotal", "", function (e) {
+    s.get("order/ordertotal", "", function(e) {
 
       t.setData({
         total: e.total
       });
     });
 
-   
+
 
     s.get("order/isupload", {
       goodsid: goodid
-    }, function (a) {
+    }, function(a) {
       t.setData({
         isupload: a.isupload.isupload,
         ednum: a.isupload.ednum,
@@ -136,7 +137,7 @@ Page({
     });
 
   },
-  bind_num: function (e) {
+  bind_num: function(e) {
     var val = parseInt(e.detail.value);
     const index = e.currentTarget.dataset.index;
     let carts = this.data.imgList;
@@ -145,7 +146,7 @@ Page({
     this.setData({
       imgList: carts
     });
-  }, 
+  },
   // 减少数量
   minusCount(e) {
     const index = e.currentTarget.dataset.index;
@@ -161,36 +162,36 @@ Page({
     });
 
   },
-  
-  onShow: function () {
+
+  onShow: function() {
     let mm = this;
     var goodid = wx.getStorageSync('goodsid');
     let cropperImg = app.globalData.cropperImg;
-    if (cropperImg) { } else { }
+    if (cropperImg) {} else {}
     console.log(mm);
     console.log(55555);
-    
-    
+
+
   },
-  onUnload:function(){
+  onUnload: function() {
     let mm = this;
     var goodid = wx.getStorageSync('goodsid');
     var number = mm.data.number;
     var allhistoryimglist = mm.data.imgList;
     console.log(mm)
     console.log(number)
-    if (number == 1 ){
+    if (number == 1) {
       console.log('重买')
       console.log(allhistoryimglist)
       wx.setStorageSync("allhistoryimglist", allhistoryimglist);
       wx.setStorageSync("gid", goodid);
 
     }
-    
+
   },
 
   // 三 进入所点图片
-  goCropperImg: function (e) {
+  goCropperImg: function(e) {
     let {
       idx,
       num
@@ -202,7 +203,7 @@ Page({
   },
 
 
-  deleteImg: function (e) {
+  deleteImg: function(e) {
     var imgs = this.data.imgList;
     var index = e.currentTarget.dataset.index;
     imgs.splice(index, 1);
@@ -214,9 +215,10 @@ Page({
 
 
   // 一 弹出选择图片
-  onChooseImg: function () {
+  onChooseImg: function() {
     let that = this;
     var imgpx = that.data.px;
+    var isizeok = true;
     wx.chooseImage({
       count: 9,
       sizeType: ['original'],
@@ -228,22 +230,35 @@ Page({
         });
 
         for (let index in tempFiles) {
-          that.upload_file('', tempFiles[index].path);
-          wx.getImageInfo({
-            src: tempFiles[index].path,
-            success(res) {
-              var onewidth = res.width;
-              var oneheight = res.height;
-              var onesize = onewidth * oneheight;
-              if (onesize < imgpx) {
-                console.log("照片像素太低")
-              }
+      
+          that.upload_file('', tempFiles[index].path, tempFiles[index].size);       
 
-            }
-          })
         }
       }
-    })
+    });
+    console.log(that.data.imgList);
+    /*for (let iii in that.data.imgList) {
+      console.log("that.data.imgList：" + that.data.imgList[iii].src);
+      wx.getImageInfo({
+        src: that.data.imgList[iii].src,
+        success(res) {
+          var onewidth = res.width;
+          var oneheight = res.height;
+          var onesize = onewidth * oneheight;
+          console.log("照片像素" + onesize);
+          if (onesize < imgpx * 1024) {
+            console.log("照片像素低");
+            //this.data.imgList[ii].sizeok=false;
+          } else {
+            console.log("照片像素可以");
+            //this.data.imgList[ii].sizeok = true;
+          }
+        }
+      });
+    }*/
+
+
+
     // let allnum = that.data.total;
 
 
@@ -252,7 +267,7 @@ Page({
 
 
   // 上传
-  choose: function () {
+  choose: function() {
     var that = this;
     var imgList = that.data.imgList;
     var imagenum = that.data.imagenum;
@@ -273,7 +288,7 @@ Page({
     that.setData({
       allimgnum: allnum
     })
-   
+
     var nowTime = util.formatTime(new Date());
     var name = that.data.username;
     var optionname = that.data.optionname;
@@ -294,40 +309,40 @@ Page({
       wx.setStorageSync("datas", datas);
       wx.setStorageSync("ordernums", ordernums);
       wx.setStorageSync("titles", titles);
-      
-        if (allnum < total) {
-          console.log('张数少了')
-          wx.showModal({
-            title: '提示',
-            content: '您选择了' + allnum + '张照片,\r\n购买了' + total + '件商品，\r\n亲重新选择。',
-             showCancel:false,
-            //confirmText: '去付款',
-            confirmText: '好的',
-            success(res) {
-             /* 
-              if (res.confirm) {
 
-                wx.navigateTo({
-                  url: "/pages/order/pay/index?id=" + orderid
-                })
-                wx.removeStorageSync("historyimglist");
-                wx.removeStorageSync("allhistoryimglist");
-              }
-              */
-            }
-          })
-        }else{
-          console.log(orderid)
-          console.log('orderid')
-          wx.navigateTo({
-            url: "/pages/order/pay/index?id=" + orderid
-          })
-          wx.removeStorageSync("historyimglist");
-          wx.removeStorageSync("allhistoryimglist");
-        }
-        
-      
-      
+      if (allnum < total) {
+        console.log('张数少了')
+        wx.showModal({
+          title: '提示',
+          content: '您选择了' + allnum + '张照片,\r\n购买了' + total + '件商品，\r\n亲重新选择。',
+          showCancel: false,
+          //confirmText: '去付款',
+          confirmText: '好的',
+          success(res) {
+            /* 
+             if (res.confirm) {
+
+               wx.navigateTo({
+                 url: "/pages/order/pay/index?id=" + orderid
+               })
+               wx.removeStorageSync("historyimglist");
+               wx.removeStorageSync("allhistoryimglist");
+             }
+             */
+          }
+        })
+      } else {
+        console.log(orderid)
+        console.log('orderid')
+        wx.navigateTo({
+          url: "/pages/order/pay/index?id=" + orderid
+        })
+        wx.removeStorageSync("historyimglist");
+        wx.removeStorageSync("allhistoryimglist");
+      }
+
+
+
     } else {
       if (number == 1) {
         var historyimglist = that.data.imgList;
@@ -339,37 +354,40 @@ Page({
         wx.showModal({
           title: '提示',
           content: '您选择了：' + allnum + '张照片;\r\n您购买的数量是：' + total + ';\r\n请修改数量。',
-          showCancel:false,         
+          showCancel: false,
           confirmText: '知道了',
           success(res) {
-           
+
           }
         })
       } else {
         console.log('张数过多')
-      wx.showModal({
-        title: '提示',
-        showCancel:false,
-        content: '您上传的照片数超过购买的图片张数，去删几张吧'
-      })
+        wx.showModal({
+          title: '提示',
+          showCancel: false,
+          content: '您上传的照片数超过购买的图片张数，去删几张吧'
+        })
       }
     }
 
   },
 
   // 二  将所选图片遍历出来
-  upload_file: function (url, filePath, res) {
+  upload_file: function(url, filePath, ifilesize) {
     let that = this;
     let {
       imgList,
       waitUploadNum
     } = this.data;
-    var imglength = 0;
+    var imglength = 0;  
+
+
     setTimeout(() => {
       // 模拟网络请求
       imgList.push({
         src: filePath,
-        num: 1
+        num: 1,
+        filesize: ifilesize
       });
 
       wx.setStorageSync(imglength, imgList.length);
@@ -377,11 +395,11 @@ Page({
       this.setData({
         imgList: imgList
       });
-     
+
       this.setData({
         waitUploadNum: --that.data.waitUploadNum
       });
     }, 500)
-   
+
   },
 })

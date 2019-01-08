@@ -69,8 +69,11 @@ App({
         var n = +new Date() / 1e3, o = "";
         n = parseInt(n);
         try {
+          console.log("getcache");
+          console.log(e);
             (o = wx.getStorageSync(e + this.globalData.appid)).expire > n || 0 == o.expire ? o = o.value : (o = "", 
             this.removeCache(e));
+
         } catch (e) {
             o = void 0 === t ? "" : t;
         }
@@ -118,7 +121,10 @@ App({
                                         e.confirm && o.close(), e.cancel && o.close();
                                     }
                                 }), n.userInfo.openid = e.openId, n.userInfo.id = e.id, n.userInfo.uniacid = e.uniacid, 
-                                n.needauth = 0, o.setCache("userinfo", n.userInfo, 7200), o.setCache("userinfo_openid", n.userInfo.openid), 
+                                n.needauth = 0, 
+                                //o.setCache("userinfo", n.userInfo, 7200), 
+                                  o.setCache("userinfo", n.userInfo), 
+                                o.setCache("userinfo_openid", n.userInfo.openid), 
                                 o.setCache("userinfo_id", e.id), o.getSet(), t && "function" == typeof t && t(i);
                             });
                         },
@@ -132,7 +138,10 @@ App({
                                     success: function(e) {
                                         e.confirm && o.close(), e.cancel && o.close();
                                     }
-                                }), e.needauth = 1, o.setCache("userinfo", e, 7200), o.setCache("userinfo_openid", a.openid), 
+                                }), e.needauth = 1,
+                                 //o.setCache("userinfo", e, 7200),
+                                  o.setCache("userinfo", e),
+                                 o.setCache("userinfo_openid", a.openid), 
                                 o.setCache("userinfo_id", a.id), o.getSet(), t && "function" == typeof t && t(i);
                             });
                         }
@@ -165,7 +174,8 @@ App({
         var t = {}, n = "", o = "", i = this.getCache("usermid");
         n = e.mid || "", o = e.merchid || "", "" != i ? ("" != i.mid && void 0 !== i.mid || (t.mid = n), 
         "" != i.merchid && void 0 !== i.merchid || (t.merchid = o)) : (t.mid = n, t.merchid = o), 
-        this.setCache("usermid", t, 7200);
+        //this.setCache("usermid", t, 7200);
+        this.setCache("usermid", t);
     },
     impower: function(e, t, n) {
         wx.getSetting({
