@@ -67,12 +67,14 @@ Page({
         });
     },
     cancel: function(t) {
-        var s = a.data(t).orderid;
-        e.cancel(s, t.detail.value, "/pages/order/index?status=" + this.data.status);
+    var s = a.data(t).orderid;
+     e.cancel(s, t.detail.value, "/pages/order/index?status=" + this.data.status,this);  
+    
     },
     delete: function(t) {
         var s = a.data(t).type, i = a.data(t).orderid;
         e.delete(i, s, "/pages/order/index", this);
+ 
     },
     finish: function(t) {
         a.data(t).type;

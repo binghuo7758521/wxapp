@@ -171,7 +171,7 @@
                             <text wx:if="{{goods.showtotal==1}}">库存:{{goods.total}}</text>
                             <text wx:if="{{goods.showsales==1}}">销量:{{goods.sales}}{{goods.unit}}</text>
                         </block>
-                        <text wx:if="{{goods.province!='请选择省份'&&goods.city!='请选择城市'}}">{{goods.province}}{{goods.city}}</text>
+                        <text hidden='true' wx:if="{{goods.province!='请选择省份'&&goods.city!='请选择城市'}}">{{goods.province}}{{goods.city}}</text>
                     </view>
                 </view>
             </view>
