@@ -181,7 +181,9 @@ Page({
 
       if (canupload == 1) {
         if (imagenum < imgList.length) {
-          uploadImage(imgsrc, 'order/' + datas + ordernums + optionname + titles + name + '/' + '打印 ' + imgnum + ' 张的图片' + '/',
+          //文件路径不包含微信名，容易有乱码；
+          //uploadImage(imgsrc, 'order/' + datas + ordernums + optionname + titles + name + '/' + '打印 ' + imgnum + ' 张的图片' + '/',
+            uploadImage(imgsrc, 'order/' + datas + ordernums + optionname + titles  + '/' + '打印 ' + imgnum + ' 张的图片' + '/',
             function (result) {
               console.log("======上传成功图片地址为：", result);
               if (true) {

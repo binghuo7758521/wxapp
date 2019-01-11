@@ -26,11 +26,7 @@ App({
           }
         })
       });
-
-
-
-
-
+     
         var e = this;
         wx.getSystemInfo({
             success: function(t) {
@@ -68,9 +64,7 @@ App({
     getCache: function(e, t) {
         var n = +new Date() / 1e3, o = "";
         n = parseInt(n);
-        try {
-          console.log("getcache");
-          console.log(e);
+        try {           
             (o = wx.getStorageSync(e + this.globalData.appid)).expire > n || 0 == o.expire ? o = o.value : (o = "", 
             this.removeCache(e));
 
