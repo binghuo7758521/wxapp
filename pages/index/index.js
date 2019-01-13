@@ -118,10 +118,12 @@ Page((e = {
     }), 
       console.log("o:");
       console.log(o);
-    o.get(this, "member", function(i) {}),
+    //o.get(this, "member", function(i) {}),
      "" == i.getCache("userinfo") && wx.redirectTo({
       url: "/pages/message/auth/index"
     });
+
+   
 
     // if( t.id == undefined ){
     //   wx.redirectTo({

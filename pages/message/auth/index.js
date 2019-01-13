@@ -18,15 +18,16 @@ Page({
         });
     },
     bind: function() {
-        var t = this, e = setInterval(function() {
+        var that = this,c=t.getCache("usermid").mid, e = setInterval(function() {
             wx.getSetting({
-                success: function(n) {
-                    var a = n.authSetting["scope.userInfo"];
+                success: function(n) {                  
+                    var a = n.authSetting["scope.userInfo"];                    
                     a && (wx.reLaunch({
-                        url: "/pages/index/index"
-                    }), clearInterval(e), t.setData({
+                        url: "/pages/index/index"+"?mid="+c
+                    }), clearInterval(e), that.setData({
                         userInfo: a
                     }));
+                  t.getUserInfo(function(e){},function(aa,bb){});
                 }
             });
         }, 1e3);

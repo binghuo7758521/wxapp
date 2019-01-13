@@ -163,6 +163,8 @@ module.exports = {
       a = n.getCache("userinfo_id"),
       s = o.shopname || "",
       r = o.description || "";
+      console.log("sharemessage id:");
+      console.log(a);
     return i.title && (s = i.title), e && (s = e), i.desc && (r = i.desc), t = t || "/pages/index/index",
       t = -1 != t.indexOf("?") ? t + "&" : t + "?", {
         title: s,

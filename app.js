@@ -98,6 +98,8 @@ App({
         var o = this, i = {};
         !(i = o.getCache("userinfo")) || i.needauth ? wx.login({
             success: function(a) {
+                console.log("wx.login:success:a");
+                console.log(a);
                 a.code ? e.post("wxapp/login", {
                     code: a.code
                 }, function(a) {
@@ -122,8 +124,8 @@ App({
                                 o.setCache("userinfo_id", e.id), o.getSet(), t && "function" == typeof t && t(i);
                             });
                         },
-                        fail: function() {
-                            console.log(a), e.get("wxapp/check", {
+                        fail: function(ree) {
+                            console.log(ree), e.get("wxapp/check", {
                                 openid: a.openid
                             }, function(e) {
                                 console.log(e), 1 == e.isblack && wx.showModal({
