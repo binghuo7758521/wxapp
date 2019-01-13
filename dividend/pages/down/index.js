@@ -22,6 +22,7 @@ Page({
             if (console.error(e), 0 == e.error) {
                 if (e.list.length > 0) {
                     var i = a.data.list.concat(e.list);
+                    
                     t.page = t.page + 1;
                 }
                 a.setData({
@@ -34,5 +35,31 @@ Page({
                 });
             }
         });
-    }
+    },
+   toAgentHeads:function(event){
+
+     var a = this;
+
+     var memberId=event.currentTarget.dataset.memberId;
+
+     e.get("dividend/down/check", {member_id: memberId},function (e) {
+
+       console.log(e);
+
+       if (e.code==1) {
+         wx.showToast({
+           title: '已指定，需管理员后台审核' ,
+            success: res => {
+              a.setData({
+                page: 1,
+                loading: !1,
+                list: []
+              });
+              a.onLoad();
+           }
+         })
+       }
+     });
+
+   }
 });

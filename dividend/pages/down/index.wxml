@@ -5,9 +5,25 @@
         </view>
         <view class="my-list-inner">
             <view class="text">
-                <view class="title">{{item.nickname}}</view>
+                <view class="title">{{item.nickname}}
+                
+                （<block wx:if="{{item.agentheads==0}}"> 
+                <block wx:if="{{item.headsid==member.id}}">
+                直推下线
+                </block>
+                <block wx:elif="{{item.headsid!=member.id}}">
+                二级下线
+                </block>
+                 </block>
+                <block wx:elif="{{item.agentheads==2}}"> 二级队长 </block>） 
+  
+      
+                </view>
                 <view class="subtitle">注册时间：{{item.createtime}}</view>
             </view>
+            <button class="heads-button" wx:if="{{member.agentheads==1&&item.agentheads==0 &&item.headsid==member.id}}" bindtap="toAgentHeads" data-member-id="{{item.id}}">
+                指定成为二级队长
+                </button>
             <view class="nums">
                 <view class="num">+{{item.moneycount}}</view>
                 <view class="num-order">{{item.ordercount}}个订单</view>

@@ -22,8 +22,8 @@
         <view>订单编号：{{item.ordersn}}</view>
         <view>下单时间{{item.createtime}}</view>
     </view>
-    <view class="moneytotal">预计分红：
-    <text>+{{item.dividend_price}}</text>
+    <view class="moneytotal">订单金额：
+    <text>{{item.price}}</text>
     </view>
 </view>
 <view class="fui-loading" wx:if="{{loading}}">

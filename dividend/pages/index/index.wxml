@@ -44,6 +44,10 @@
                 <view class="member-cell-inner column">可提现分红(元)</view>
                 <view class="member-cell-remark noremark column">￥{{message.member.dividend_ok}}</view>
             </view>
+             <view class="member-cell">
+                <view class="member-cell-inner column">本月累计销售额(元)</view>
+                <view class="member-cell-remark noremark column">￥{{message.member.countprice}}</view>
+            </view>
         </view>
         <view class="member-group card">
             <navigator class="item" hoverClass="none" openType="navigate" url="/dividend/pages/log/index">

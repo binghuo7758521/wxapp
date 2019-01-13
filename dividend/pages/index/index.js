@@ -19,7 +19,7 @@ Page({
             }, 1e3)), e.setData({
                 message: t
             }), t.member || wx.redirectTo({
-                url: "/dividend/pages/register/index"
+               url: ""
             });
         });
     },
