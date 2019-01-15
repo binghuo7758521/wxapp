@@ -451,6 +451,13 @@ Page((a = {
     },
     onLoad: function(t) {
         var e = this;
+
+      ////王庆国2019-1-14添加
+      "" == o.getCache("userinfo") && wx.redirectTo({
+        url: "/pages/message/auth/index"
+      });
+      ////王庆国2019-1-14添加
+
         s.get("black", {}, function(t) {
             t.isblack && wx.showModal({
                 title: "无法访问",

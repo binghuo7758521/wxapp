@@ -99,7 +99,7 @@ Page({
                 fail(res){                  
                   wx.showModal({
                     title: '提示',
-                    content: '该订单已过期,再去首页看看吧',
+                    content: '再去首页看看吧',
                     showCancel:false,
                     success(res) {
                       if (res.confirm) {                        

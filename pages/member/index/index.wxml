@@ -150,15 +150,25 @@
         </view>
       </view>
     </view>
-    <view class="fui-cell-group fui-cell-click" wx:if="{{member.isheads}}">
-      <navigator class="fui-cell" hoverClass="none" openType="navigate" url="{{member.isheads?'/dividend/pages/index/index':'/dividend/pages/register/index'}}">
-        <view class="fui-cell-icon">
-          <text class="icox icox-coupons"></text>
-        </view>
-        <view class="fui-cell-text">{{member.isheads?'分红中心':'申请成为队长'}}</view>
-        <view class="fui-cell-remark"></view>
-      </navigator>
+
+<!--亿佰start -->
+<view wx:if="{{(member.agentheads == '1' || member.agentheads == '2')&& member.isheads == '1'&& member.headsstatus == '1'}}">
+        <view class="fui-cell-group fui-cell-click" wx:if="{{member.hasdividend}}">
+           <!-- <navigator class="fui-cell" hoverClass="none" openType="navigate" url="{{member.isheads?'/dividend/pages/index/index':'/dividend/pages/register/index'}}">-->
+          <navigator class="fui-cell" hoverClass="none" openType="navigate" url="{{'/dividend/pages/index/index'}}">
+                
+                <view class="fui-cell-icon">
+                    <text class="icox icox-coupons"></text>
+                </view>
+                <!--<view class="fui-cell-text">{{member.isheads?'分红中心':'申请成为队长'}}</view> -->
+                <view class="fui-cell-text">分红中心</view>
+                <view class="fui-cell-remark"></view>
+            </navigator>
+            </view>
     </view>
+
+<!--亿佰end -->
+
     <view class="fui-cell-group fui-cell-click" wx:if="{{member.hascoupon}}">
       <navigator class="fui-cell" hoverClass="none" openType="navigate" url="/pages/sale/coupon/index/index" wx:if="{{member.hascouponcenter}}">
         <view class="fui-cell-icon">

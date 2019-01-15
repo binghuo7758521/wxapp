@@ -36,7 +36,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 3,
+			"current": 4,
 			"list": [
 				{
 					"id": -1,
@@ -63,6 +63,12 @@
 					"pathName": "pages/index/index",
 					"query": "mid=2443",
 					"scene": "1008"
+				},
+				{
+					"id": -1,
+					"name": "二维码编译测试",
+					"pathName": "pages/commission/poster/index",
+					"scene": "1007"
 				}
 			]
 		}
