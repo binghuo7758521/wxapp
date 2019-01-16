@@ -89,7 +89,8 @@
             <view class="fui-cell-icon">
                 <text class="icox {{set.postercount>0?'icox-zhuyi':'icox-erweima1'}}" style="color: #feb312;"></text>
             </view>
-            <view class="fui-cell-text">{{set.postercount>0?'邀请您的好友':'推广二维码'}}</view>
+            <!--<view class="fui-cell-text">{{set.postercount>0?'邀请您的好友':'推广二维码'}}</view>-->
+            <view class="fui-cell-text">{{set.postercount>0?'我的推广二维码':'推广二维码'}}</view>
             <view class="fui-cell-remark" style="font-size: 20rpx;"></view>
         </view>
     </navigator>
