@@ -48,7 +48,7 @@ Page({
 
        if (e.code==1) {
          wx.showToast({
-           title: '已指定，需管理员后台审核' ,
+           title: '已指定' ,
             success: res => {
               a.setData({
                 page: 1,

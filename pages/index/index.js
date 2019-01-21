@@ -207,10 +207,10 @@ Page((e = {
     });
   },
   onShow: function() {
-    wx.removeStorageSync("historyimglist");
-    wx.removeStorageSync("allhistoryimglist");
-    wx.removeStorageSync("imgUrl");
-    wx.removeStorageSync("imgList");
+    //wx.removeStorageSync("historyimglist");
+    //wx.removeStorageSync("allhistoryimglist");
+    //wx.removeStorageSync("imgUrl");
+    //wx.removeStorageSync("imgList");
     console.log(1235);
     var t = this,
       a = wx.getSystemInfoSync(),

@@ -33,7 +33,7 @@ page {
   margin: 0 auto 100rpx;
 }
 .img_Box .img_num{
-  width: 50rpx;
+  width: 150rpx;
   height: 50rpx;
   background: #ff5555;
   position: absolute;

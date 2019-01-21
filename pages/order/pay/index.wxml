@@ -43,6 +43,10 @@
             </view>
             <view class="angle"></view>
         </view>
+
+          
+        
+
         <view bindtap="pay" class="fui-list" data-type="cash" wx:if="{{list.cash.success&&list.order.price!=0}}">
             <view class="fui-list-media">
                 <image class="round" src="/static/images/icon-white/hdfk.png"></image>
@@ -194,4 +198,12 @@
         <navigator class="btn btn-default" openType="redirect" url="/pages/order/detail/index?id={{successData.order.id}}">订单详情</navigator>
         <navigator class="btn btn-default" openType="switchTab" url="/pages/index/index">返回首页</navigator>
     </view>
+    <view  wx:if="{{overpercent!=0}}">
+    <progress   percent="{{overpercent}}" stroke-width="12" />
+        <view >
+            <view class="subtitle">正在上传照片，请勿退出该画面。</view>
+        </view>
+    </view>
+    
 </view>
+

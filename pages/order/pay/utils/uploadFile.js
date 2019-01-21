@@ -1,6 +1,6 @@
 const env = require('config.js'); //配置文件，在这文件里配置你的OSS keyId和KeySecret,timeout:87600;
 
-const base64 = require('base64.js');//Base64,hmac,sha1,crypto相关算法
+const base64 = require('base64.js'); //Base64,hmac,sha1,crypto相关算法
 require('hmac.js');
 require('sha1.js');
 const Crypto = require('crypto.js');
@@ -12,8 +12,8 @@ const Crypto = require('crypto.js');
  *@param - successc:成功回调
  *@param - failc:失败回调
  */
-const uploadFile = function (filePath, dir, successc, failc) {
- 
+const uploadFile = function(aa,filePath, dir, filenum, successc, failc) {
+
   if (!filePath || filePath.length < 9) {
     wx.showModal({
       title: '图片错误',
@@ -27,16 +27,16 @@ const uploadFile = function (filePath, dir, successc, failc) {
   //图片名字 可以自行定义，     这里是采用当前的时间戳 + 150内的随机数来给图片命名的
   const aliyunFileKey = dir + new Date().getTime() + Math.floor(Math.random() * 150) + '.jpg';
 
-  const aliyunServerURL = env.uploadImageUrl;//OSS地址，需要https
+  const aliyunServerURL = env.uploadImageUrl; //OSS地址，需要https
   const accessid = env.OSSAccessKeyId;
   const policyBase64 = getPolicyBase64();
-  const signature = getSignature(policyBase64);//获取签名
-  
-  wx.uploadFile({
-    
-    url: aliyunServerURL,//开发者服务器 url
-    filePath: filePath,//要上传文件资源的路径
-    name: 'file',//必须填file
+  const signature = getSignature(policyBase64); //获取签名
+
+  const uploadTask = wx.uploadFile({
+
+    url: aliyunServerURL, //开发者服务器 url
+    filePath: filePath, //要上传文件资源的路径
+    name: 'file', //必须填file
     formData: {
       'key': aliyunFileKey,
       'policy': policyBase64,
@@ -44,24 +44,61 @@ const uploadFile = function (filePath, dir, successc, failc) {
       'signature': signature,
       'success_action_status': '200',
     },
-    success: function (res) {
-       console.log(789);
-       if (res.statusCode != 200) {
+    success: function(res) {
+      console.log(789);
+      if (res.statusCode != 200) {
         failc(new Error('上传错误:' + JSON.stringify(res)))
         return;
-        }
-       successc(aliyunServerURL + aliyunFileKey);
-     },
-     
-    fail: function (err) {
+      }
+      successc(aliyunServerURL + aliyunFileKey);
+
+    },
+
+    fail: function(err) {
       err.wxaddinfo = aliyunServerURL;
       failc(err);
       console.log(345);
     },
-  })
+  });
+  uploadTask.onProgressUpdate((res) => { 
+
+    if (res.progress == 100) {
+      var ii = wx.getStorageSync("uploadingnum");
+      console.log('II:', ii);
+      wx.setStorageSync("uploadingnum", ii + 1);
+      aa.setData({
+        overpercent: ii/filenum*100,
+
+      });
+      console.log('overpercent:', ii/filenum*100);
+      console.log('aa.overpercent:', aa.data.overpercent);
+      if (filenum == ii + 1) {
+        console.log('上传完毕啊');
+        wx.removeStorageSync("historyimglist");
+        wx.removeStorageSync("allhistoryimglist");  
+        wx.removeStorageSync("imgList");       
+          wx.hideLoading();  
+        aa.setData({
+          overpercent:0,
+
+        });     
+         wx.showToast({
+          title: '上传成功',
+          icon: 'success',
+          duration: 5000
+         })
+      }
+    }
+
+
+
+
+
+
+  });
 }
 
-const getPolicyBase64 = function () {
+const getPolicyBase64 = function() {
   let date = new Date();
   date.setHours(date.getHours() + env.timeout);
   let srcT = date.toISOString();
@@ -76,7 +113,7 @@ const getPolicyBase64 = function () {
   return policyBase64;
 }
 
-const getSignature = function (policyBase64) {
+const getSignature = function(policyBase64) {
   const accesskey = env.AccessKeySecret;
 
   const bytes = Crypto.HMAC(Crypto.SHA1, policyBase64, accesskey, {

@@ -24,6 +24,7 @@ Page({
     isShow: "true",
     isupload: "",
     sussnum: 0,
+    allimgnum:0,
     btndisabled: false //防止上传按钮连续点击两次,点击按钮后，把按钮置为disabled  失败再置会enable
 
   },
@@ -132,8 +133,11 @@ Page({
     let num = carts[index].num;
     num = num + 1;
     carts[index].num = num;
+    let allnum=this.data.allimgnum;
+    allnum=allnum+1;
     this.setData({
-      imgList: carts
+      imgList: carts,
+      allimgnum:allnum
     });
 
   },
@@ -236,6 +240,17 @@ Page({
         }
       }
     });
+
+
+    var allnums = 0;
+    for (var a = 0; a < imgList.length; a++) {
+      allnums = allnums + imgList[a].num;
+    }
+    that.setData({
+      allimgnum: allnums
+    })
+
+    console.log("aaaa1111");
     console.log(that.data.imgList);
     /*for (let iii in that.data.imgList) {
       console.log("that.data.imgList：" + that.data.imgList[iii].src);
@@ -392,11 +407,10 @@ Page({
 
       wx.setStorageSync(imglength, imgList.length);
 
-      this.setData({
-        imgList: imgList
-      });
+      
 
       this.setData({
+        imgList: imgList,
         waitUploadNum: --that.data.waitUploadNum
       });
     }, 500)

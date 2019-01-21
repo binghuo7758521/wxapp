@@ -8,7 +8,7 @@
         <!--  <image class="img" src="{{ item.clipImg || item.src }}" bind:tap="goCropperImg" data-idx="{{ index }}" data-num="{{item.num}}" style='width:{{ width }}px; height:{{height}}px;' mode='aspectFill'></image> -->
 <image class="img" src="{{ item.clipImg || item.src }}"  data-idx="{{ index }}" data-num="{{item.num}}" style='width:{{ width }}px; height:{{height}}px;' mode='aspectFill'></image> 
 
-           <view class='img_num' wx:if="{{item.filesize<px*1024}}">低</view>
+           <view class='img_num' wx:if="{{item.filesize<px*1024}}">像素低</view>
         </view>
 
          <!-- 增加减少数量按钮 -->
@@ -32,7 +32,7 @@
   <view class='Ch_box'>
     <view class='Choose'>
       <view class="choose-img ch_x" bind:tap="onChooseImg">继续选图</view>
-      <button class='ch_x' type='primary' bindtap='choose'  disabled='{{btndisabled}}'>结算</button>
+      <button class='ch_x' type='primary' bindtap='choose'  disabled='{{btndisabled}}'>结算并上传照片</button>
     </view>
   </view>
   
