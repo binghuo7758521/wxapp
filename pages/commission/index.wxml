@@ -94,4 +94,14 @@
             <view class="fui-cell-remark" style="font-size: 20rpx;"></view>
         </view>
     </navigator>
+    <navigator class="fui-cell-group" url="/pages/commission/explain/index" >
+        <view class="fui-cell">
+            <view class="fui-cell-icon">
+                <text class="icox {{set.postercount>0?'icox-zhuyi':'icox-erweima1'}}" style="color: #feb312;"></text>
+            </view>
+          
+            <view class="fui-cell-text">分销规则</view>
+            <view class="fui-cell-remark" style="font-size: 20rpx;"></view>
+        </view>
+    </navigator>    
 </view>

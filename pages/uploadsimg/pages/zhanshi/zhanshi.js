@@ -147,9 +147,22 @@ Page({
     let carts = this.data.imgList;
     let num = carts[index].num;
     carts[index].num = val;
+
+    var allnums = 0;
+    for (var a = 0; a < carts.length; a++) {
+      allnums = allnums + carts[a].num;
+    } 
+
     this.setData({
-      imgList: carts
+      imgList: carts,
+      allimgnum: allnums
     });
+
+    
+
+
+
+
   },
   // 减少数量
   minusCount(e) {
@@ -161,9 +174,23 @@ Page({
     }
     num = num - 1;
     carts[index].num = num;
+    let allnum = this.data.allimgnum;
+    allnum = allnum - 1;
     this.setData({
-      imgList: carts
+      imgList: carts,
+      allimgnum: allnum
     });
+
+  },
+  //获得选择了多少张照片；
+  getselectednum: function(list){
+
+    var allnums = 0;
+    for (var a = 0; a < list.length; a++) {
+      allnums = allnums + list[a].num;
+    } 
+    //return allnums; 
+
 
   },
 
@@ -174,6 +201,15 @@ Page({
     if (cropperImg) {} else {}
     console.log(mm);
     console.log(55555);
+    
+    var allnums = 0;
+    for (var a = 0; a < mm.data.imgList.length; a++) {
+      allnums = allnums + mm.data.imgList[a].num;
+    } 
+
+    mm.setData({
+      allimgnum: allnums,
+    })
 
 
   },
@@ -187,8 +223,13 @@ Page({
     if (number == 1) {
       console.log('重买')
       console.log(allhistoryimglist)
+      var ii = wx.getStorageSync("uploadingnum");
+      if (ii > 0){
+
+      }else
+      {
       wx.setStorageSync("allhistoryimglist", allhistoryimglist);
-      wx.setStorageSync("gid", goodid);
+      wx.setStorageSync("gid", goodid);}
 
     }
 
@@ -211,8 +252,15 @@ Page({
     var imgs = this.data.imgList;
     var index = e.currentTarget.dataset.index;
     imgs.splice(index, 1);
+
+    var allnums = 0;
+    for (var a = 0; a < imgs.length; a++) {
+      allnums = allnums + imgs[a].num;
+    } 
+
     this.setData({
       imgList: imgs,
+      allimgnum: allnums,
 
     });
   },
@@ -238,17 +286,19 @@ Page({
           that.upload_file('', tempFiles[index].path, tempFiles[index].size);       
 
         }
+        var allnums = 0;
+        for (var a = 0; a < that.data.imgList.length; a++) {
+          allnums = allnums + that.data.imgList[a].num;
+        }
+        that.setData({
+          allimgnum: allnums
+        })
+
       }
     });
 
 
-    var allnums = 0;
-    for (var a = 0; a < imgList.length; a++) {
-      allnums = allnums + imgList[a].num;
-    }
-    that.setData({
-      allimgnum: allnums
-    })
+    
 
     console.log("aaaa1111");
     console.log(that.data.imgList);

@@ -73,13 +73,15 @@ const uploadFile = function(aa,filePath, dir, filenum, successc, failc) {
       console.log('overpercent:', ii/filenum*100);
       console.log('aa.overpercent:', aa.data.overpercent);
       if (filenum == ii + 1) {
-        console.log('上传完毕啊');
+        console.log('上传完毕啊、清除缓存');
         wx.removeStorageSync("historyimglist");
         wx.removeStorageSync("allhistoryimglist");  
         wx.removeStorageSync("imgList");       
           wx.hideLoading();  
         aa.setData({
           overpercent:0,
+          imglist:[],
+          imgList:[],
 
         });     
          wx.showToast({
