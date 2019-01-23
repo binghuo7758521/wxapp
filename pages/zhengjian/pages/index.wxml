@@ -1,0 +1,55 @@
+<view class='container'>
+  <form bindsubmit="formSubmit" >
+    <view class="section">
+      <view class="section_title">Zheng_api_from：</view>
+      <input name="Zheng_api_from" class='text_input' placeholder="please input here" value='{{config.Zheng_api_from}}'/>
+    </view>
+    <view class="section">
+      <view class="section_title">Zheng_save_to：</view>
+      <input name="Zheng_save_to" class='text_input' placeholder="please input here" value="{{config.Zheng_save_to}}"/>
+    </view>
+    <view class="section">
+      <view class="section_title">Zheng_osshost：</view>
+      <input name="Zheng_osshost" class='text_input' placeholder="please input here" value="{{config.Zheng_osshost}}"/>
+    </view>
+    <view class="section">
+      <view class="section_title">Zheng_ossdir：</view>
+      <input name="Zheng_ossdir" class='text_input' placeholder="please input here" value="{{config.Zheng_ossdir}}"/>
+    </view>
+    <view class="section">
+      <view class="section_title">Zheng_AccessKeySecret：</view>
+      <input name="Zheng_AccessKeySecret" class='text_input' placeholder="please input here" value="{{config.Zheng_AccessKeySecret}}"/>
+    </view>
+    <view class="section">
+      <view class="section_title">Zheng_OSSAccessKeyId：</view>
+      <input name="Zheng_OSSAccessKeyId" class='text_input' placeholder="please input here" value="{{config.Zheng_OSSAccessKeyId}}"/>
+    </view>
+    <view class="section">
+      <view class="section_title">Zheng_size：</view>
+      <input name="Zheng_size" class='text_input' placeholder="please input here" value="{{config.Zheng_size}}"/>
+    </view>
+    <view class="section">
+      <view class="section_title">Zheng_filename：</view>
+      <input name="Zheng_filename" class='text_input' placeholder="please input here" value="{{config.Zheng_filename}}"/>
+    </view>
+    <view class="section">
+      <view class="section_title">Zheng_FaceFreeApiKey：</view>
+      <input name="Zheng_FaceFreeApiKey" class='text_input' placeholder="please input here" value="{{config.Zheng_FaceFreeApiKey?config.Zheng_FaceFreeApiKey:'ywXnovZM0ezjIJoUh_pgoPNQzVN7lIxk'}}"/>
+    </view>
+    <view class="section">
+      <view class="section_title">Zheng_FaceFreeApiSecret：</view>
+      <input name="Zheng_FaceFreeApiSecret" class='text_input' placeholder="please input here" value="{{config.Zheng_FaceFreeApiSecret?config.Zheng_FaceFreeApiSecret:'CPuOiocN8YbKKScseQQjIZ8oELUURmSQ'}}"/>
+    </view>
+    <view class="section">
+      <view class="section_title">Zheng_FaceApiKey：</view>
+      <input name="Zheng_FaceApiKey" class='text_input' placeholder="please input here" value="{{config.Zheng_FaceApiKey?config.Zheng_FaceApiKey:'hTOlAYF8IxegfPFQl-UWgR-j7LpGDDmN'}}"/>
+    </view>
+    <view class="section">
+      <view class="section_title">Zheng_FaceApiSecret：</view>
+      <input name="Zheng_FaceApiSecret" class='text_input' placeholder="please input here" value="{{config.Zheng_FaceApiSecret?config.Zheng_FaceApiSecret:'0vynnhSuIdWcIcIDF4cePfU96xtZesJI'}}"/>
+    </view>
+    <view class='section'>
+      <button type='primary' form-type="submit">提交</button>
+    </view>
+  </form>
+</view>

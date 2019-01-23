@@ -215,5 +215,175 @@ App({
    // api: "https://xcxtest.ahjcg.com/app/ewei_shopv2_api.php?i=1",
    // approot: "https://xcxtest.ahjcg.com/addons/ewei_shopv2/",
     userInfo: null
-  }
+  },
+  speclist: [
+    {
+      "spec_id": 11,    //编号
+      "spec_title": "一寸", //尺寸名称
+      "photo_width": 23,  //相片宽度，单位mm
+      "photo_height": 35,  //相片高度，单位mm
+      "print_width": 89,  //相纸宽度，单位mm
+      "print_height": 127,  //相纸高度，单位mm
+      "print_num": 8,  //打印张数
+      "bg_color": [   // 背景可选颜色，chosen为1则为默认颜色
+        {
+          "title": "白",
+          "color": "#ffffff",
+          "chosen": 1
+        },
+        {
+          "title": "红",
+          "color": "#ff0000"
+        },
+        {
+          "title": "蓝",
+          "color": "#458fd0"
+        }
+      ]
+    },
+    {
+      "spec_id": 12,
+      "spec_title": "二寸",
+      "photo_width": 35,
+      "photo_height": 52,
+      "print_width": 89,
+      "print_height": 127,
+      "print_num": 4,
+      "bg_color": [
+        {
+          "title": "白",
+          "color": "#ffffff",
+          "chosen": 1
+        },
+        {
+          "title": "红",
+          "color": "#ff0000"
+        },
+        {
+          "title": "蓝",
+          "color": "#458fd0"
+        }
+      ]
+    },
+    {
+      "spec_id": 13,
+      "spec_title": "小二寸",
+      "photo_width": 33,
+      "photo_height": 48,
+      "print_width": 89,
+      "print_height": 127,
+      "print_num": 4,
+      "bg_color": [
+        {
+          "title": "白",
+          "color": "#ffffff",
+          "chosen": 1
+        },
+        {
+          "title": "红",
+          "color": "#ff0000"
+        },
+        {
+          "title": "蓝",
+          "color": "#458fd0"
+        }
+      ]
+    },
+    {
+      "spec_id": 15,
+      "spec_title": "小一寸",
+      "photo_width": 22,
+      "photo_height": 32,
+      "print_width": 89,
+      "print_height": 127,
+      "print_num": 8,
+      "bg_color": [
+        {
+          "title": "白",
+          "color": "#ffffff",
+          "chosen": 1
+        },
+        {
+          "title": "红",
+          "color": "#ff0000"
+        },
+        {
+          "title": "蓝",
+          "color": "#458fd0"
+        }
+      ]
+    },
+    {
+      "spec_id": 16,
+      "spec_title": "欧洲签",
+      "photo_width": 35,
+      "photo_height": 45,
+      "print_width": 89,
+      "print_height": 127,
+      "print_num": 4,
+      "bg_color": [
+        {
+          "title": "白",
+          "color": "#ffffff",
+          "chosen": 1
+        },
+        {
+          "title": "红",
+          "color": "#ff0000"
+        },
+        {
+          "title": "蓝",
+          "color": "#458fd0"
+        }
+      ]
+    },
+    {
+      "spec_id": 17,
+      "spec_title": "日签",
+      "photo_width": 45,
+      "photo_height": 45,
+      "print_width": 89,
+      "print_height": 127,
+      "print_num": 2,
+      "bg_color": [
+        {
+          "title": "白",
+          "color": "#ffffff"
+        },
+        {
+          "title": "红",
+          "color": "#ff0000"
+        },
+        {
+          "title": "蓝",
+          "color": "#458fd0",
+          "chosen": 1
+        }
+      ]
+    },
+    {
+      "spec_id": 18,
+      "spec_title": "美签",
+      "photo_width": 51,
+      "photo_height": 51,
+      "print_width": 89,
+      "print_height": 127,
+      "print_num": 2,
+      "bg_color": [
+        {
+          "title": "白",
+          "color": "#ffffff"
+        },
+        {
+          "title": "红",
+          "color": "#ff0000"
+        },
+        {
+          "title": "蓝",
+          "color": "#458fd0",
+          "chosen": 1
+        }
+      ]
+    },
+  ]
 });

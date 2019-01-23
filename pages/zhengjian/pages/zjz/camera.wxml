@@ -1,0 +1,22 @@
+<camera devicePosition="{{devicePosition}}" flash="off" style="width: 100%; height: 100vh;" wx:if="{{!isShoot}}">
+    <cover-view class="tip-container">
+        <cover-view class="tips">站在白墙前拍摄效果最佳哦~</cover-view>
+        <cover-view>
+            <cover-image class="line" src="/static/images/outline.png"></cover-image>
+        </cover-view>
+        <cover-view class="control-pannel">
+            <cover-view class="control-item">
+                <cover-image bindtap="chooseAlbumPhoto" class="control-item-img" src="/static/images/album.png"></cover-image>
+            </cover-view>
+            <cover-view class="control-item">
+                <cover-image bindtap="takePhoto" class="control-item-img" id="control-shoot" src="/static/images/shoot.png"></cover-image>
+            </cover-view>
+            <cover-view class="control-item">
+                <cover-image bindtap="reverseCamera" class="control-item-right" src="/static/images/convert.png"></cover-image>
+            </cover-view>
+        </cover-view>
+    </cover-view>
+</camera>
+<canvas canvasId="photo" style="position: fixed; left: -999px"></canvas>
+
+<canvas canvas-id="cut" style='position: fixed; left: -999px; width:{{spec.photo_width*11.811}}px; height: {{spec.photo_height*11.811}}px;'></canvas>

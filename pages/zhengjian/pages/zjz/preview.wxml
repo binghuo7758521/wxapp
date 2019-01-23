@@ -1,0 +1,30 @@
+<view style="width:100%;background:white">
+    <view class="imagePrintContainer">
+        <view class="spec-name">
+            <text>{{spec.spec_title}}</text>
+        </view>
+        <view class="image-dig">
+          <image bindtap="viewDigital" class="preview" mode="widthFix" src="{{photo_img}}"></image>
+          <image class='zjz-icon' mode='widthFix' src='/static/images/zjz_icon.png'></image>
+        </view>
+        <view class="image-print" hidden="{{!print_img}}">
+            <image class="preview" mode="widthFix" src="{{print_img}}"></image>
+        </view>
+    </view>
+    <view class="color-choose">
+        <view class="circle-box" wx:for="{{spec.bg_color}}" wx:key="index">
+            <button bindtap="chooseColor" class="{{item.color=='#ffffff'? (item.chosen?'chosenCircle-white':'circle-white'):(item.chosen?'chosenCircle':'circle')}}" data-index="{{index}}" style="background-color:{{item.color}}; {{item.chosen&&'box-shadow: 0 2px 8px 0 '+item.color+';'}}">
+                <text style="visibility:hidden">按钮</text>
+            </button>
+        </view>
+    </view>
+    <view>
+        <button bindtap="payPrintPhoto"  hidden="{{!print_img}}" class="blue-btn">保存</button>
+        <button bindtap="goBack">重新拍摄</button>
+    </view>
+</view>
+
+<canvas canvas-id="photo" style='position: fixed; left: -999px; width:{{spec.photo_width*11.811}}px; height: {{spec.photo_height*11.811}}px;'></canvas>
+
+<canvas canvas-id="print" style='position: fixed; left: -9999px; width:{{spec.print_height*11.811}}px; height: {{spec.print_width*11.811}}px;'></canvas>
+<canvas canvas-id="print2" style='position: fixed; left: -9999px; width:{{spec.print_width*11.811}}px; height: {{spec.print_height*11.811}}px;'></canvas>

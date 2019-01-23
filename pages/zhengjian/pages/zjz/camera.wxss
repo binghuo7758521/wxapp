@@ -1,0 +1,57 @@
+cover-image{
+   position: relative;
+}
+.line {
+ 
+ 
+    max-width: 100%;
+    max-height: 70.77vh;
+}
+
+.tips {
+    color: white;
+    background: #FCA435;
+    display: inline-block;
+    align-self: center;
+    margin-top: 20rpx;
+    font-size: 30rpx;
+    height: 52rpx;
+    line-height: 52rpx;
+    text-align: center;
+    width: 442rpx;
+    border-radius: 26rpx;
+}
+
+.tip-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    height: 100vh;
+}
+
+.control-pannel {
+    display: flex;
+    height: 200rpx;
+}
+
+.control-item {
+    width: 33.33%;
+    align-self: center;
+    display: flex;
+    justify-content: center;
+}
+
+.control-item-img {
+    width: 60rpx;
+    height: 48rpx;
+}
+
+.control-item-right {
+    width: 54rpx;
+    height: 54rpx;
+}
+
+#control-shoot {
+    width: 160rpx;
+    height: 160rpx;
+}

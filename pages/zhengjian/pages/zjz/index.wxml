@@ -1,0 +1,10 @@
+<view style="width:100%">
+  <view bindtap="{{onloading?'':'chooseSpec'}}" class="{{item.chosen?'spec-list-chosen':'spec-list'}}" data-index="{{index}}" mode="scaleToFill" wx:for="{{speclist}}" wx:key="index">
+    <view class='img-box'>
+      <image src="/static/images/spec.png" style="width:{{item.photo_width * 3}}rpx; height:{{item.photo_height * 3}}rpx;"></image>
+    </view>
+    <view class='spec-title'>{{item.spec_title}}</view>
+    <view class='spec-size'>{{item.photo_width}}mm × {{item.photo_height}}mm</view>
+  </view>
+  <image bindtap="{{onloading?'':'choosePhoto'}}" class="make" mode="widthFix" src="/static/images/make.png"></image>
+</view>

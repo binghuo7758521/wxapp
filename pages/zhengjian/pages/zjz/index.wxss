@@ -1,0 +1,42 @@
+/* pages/zjz/index.wxss */
+.spec-list {
+    width: 326rpx;
+    height: 290rpx;
+    margin-left: 32rpx;
+    margin-top: 32rpx;
+    display: inline-block;
+    box-shadow: 0 2px 14px 0 rgba(221,221,221,0.40);
+    border-radius: 10rpx;
+    text-align: center;
+}
+
+.spec-list-chosen {
+    width: 326rpx;
+    height: 290rpx;
+    margin-left: 32rpx;
+    margin-top: 32rpx;
+    display: inline-block;
+    box-shadow: 0 2px 14px 0 rgba(57,75,229,0.40);
+    border-radius: 10rpx;
+    text-align: center;
+    background: #394be5;
+    color: #fff;
+}
+.img-box{
+  height: 200rpx;
+  line-height: 200rpx;
+}
+.img-box image{
+  vertical-align: middle;
+}
+.spec-title{
+  font-size: 28rpx;
+}
+.spec-size{
+  font-size: 20rpx;
+}
+.make {
+    width: 622rpx;
+    height: 96rpx;
+    margin: 64rpx;
+}
