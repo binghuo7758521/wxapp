@@ -267,7 +267,7 @@ App({
     },
     {
       "spec_id": 13,
-      "spec_title": "小二寸",
+      "spec_title": "小二寸",
       "photo_width": 33,
       "photo_height": 48,
       "print_width": 89,
@@ -289,7 +289,7 @@ App({
         }
       ]
     },
-    {
+    /*{
       "spec_id": 15,
       "spec_title": "小一寸",
       "photo_width": 22,
@@ -312,7 +312,7 @@ App({
           "color": "#458fd0"
         }
       ]
-    },
+    },*/
     {
       "spec_id": 16,
       "spec_title": "欧洲签",

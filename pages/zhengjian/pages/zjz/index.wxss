@@ -3,7 +3,7 @@
     width: 326rpx;
     height: 290rpx;
     margin-left: 32rpx;
-    margin-top: 32rpx;
+    margin-top: 10rpx;
     display: inline-block;
     box-shadow: 0 2px 14px 0 rgba(221,221,221,0.40);
     border-radius: 10rpx;
@@ -14,7 +14,7 @@
     width: 326rpx;
     height: 290rpx;
     margin-left: 32rpx;
-    margin-top: 32rpx;
+    margin-top: 10rpx;
     display: inline-block;
     box-shadow: 0 2px 14px 0 rgba(57,75,229,0.40);
     border-radius: 10rpx;

@@ -1,4 +1,6 @@
 <!--pages/commission/explain/index.wxml-->
  
 
-<web-view src="https://mp.weixin.qq.com/s/Zd1COWpdoRbMdUxmaDdYqQ"></web-view>
+ 
+<view style='height:240px'> <image  style='height:240px;width:320px'       src="https://secai.ahjcg.com/addons/ewei_shopv2/static/images/commision/1.jpg"></image>  </view>
+<view style='height:240px'>  <image style='height:240px;width:320px'        src="https://secai.ahjcg.com/addons/ewei_shopv2/static/images/commision/2.jpg"></image>  </view>

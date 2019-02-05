@@ -624,13 +624,13 @@
             <view class="goods-con">{{goods.hint}}</view>
         </view>
         <view bindtap="selectPicker" class="goods-btn buybtn" data-buytype="buy" data-id="{{goods.id}}" data-tap="{{active}}" data-time="access_time" data-timeout="true" wx:if="{{goods.access_time}}">
-      确定
+      确定1
     </view>
         <view bindtap="selectPicker" class="goods-btn buybtn" data-buytype="buy" data-id="{{goods.id}}" data-tap="{{active}}" data-time="timeout" data-timeout="true" wx:if="{{goods.timeout}}">
-      确定
+      确定2
     </view>
         <view bindtap="selectPicker" class="goods-btn buybtn" data-buytype="buy" data-id="{{goods.id}}" data-tap="{{active}}" data-time="{{goods.access_time?access_time:''}}" data-timeout="true" wx:if="{{!goods.access_time&&!goods.timeout}}">
-      确定
+      确定3
     </view>
     </view>
 </view>
