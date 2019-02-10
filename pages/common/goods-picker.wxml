@@ -76,7 +76,7 @@
                     </view>
                 </view>
                 <include src="/pages/common/diyform.wxml"></include>
-                <view class="fui-cell-group nomargin" wx:if="{{goods.type!=9&&(!goods.seckillinfo||seckillinfo&&seckillinfo.status==1)}}">
+                <view class="fui-cell-group nomargin" wx:if="{{goods.type!=9&&(!goods.seckillinfo||seckillinfo&&seckillinfo.status==1)&&goods.isupload!=1}}">
                     <view class="fui-cell">
                         <view class="fui-cell-label">数量</view>
                         <view class="fui-cell-info"></view>
@@ -101,7 +101,7 @@
                 <a bindtap="buyNow" class="nav-item btn buybtn" href="">立刻购买</a>
             </block>
             
-              <a bindtap="{{canBuy==''&&buyType=='cart'?'getCart':''}}{{canBuy==''&&buyType=='buy'?'buyNow':''}}{{canBuy==''&&buyType=='select'?'select':''}}" class="nav-item btn confirmbtn {{canBuy!=''?'disabled':''}}" data-hasoption="{{goods.hasoption}}" data-id="{{goods.id}}" data-optionid="{{optionid}}" data-total="{{total}}" href="javascript:;" wx:if="{{pagepicker!='goodslist'&&pagepicker!='quickbuy'}}">{{canBuy==''?'确定01':'库存不足'}}</a>
+              <a bindtap="{{canBuy==''&&buyType=='cart'?'getCart':''}}{{canBuy==''&&buyType=='buy'?'uploadimg':''}}{{canBuy==''&&buyType=='select'?'select':''}}" class="nav-item btn confirmbtn {{canBuy!=''?'disabled':''}}" data-hasoption="{{goods.hasoption}}" data-id="{{goods.id}}" data-optionid="{{optionid}}" data-total="{{total}}" href="javascript:;" wx:if="{{pagepicker!='goodslist'&&pagepicker!='quickbuy'}}">{{canBuy==''?'确定01':'库存不足'}}</a>
             <!-- <navigator url='../../uploadsimg/pages/zhanshi/zhanshi' class="nav-item btn confirmbtn {{canBuy!=''?'disabled':''}}">
               确定
             </navigator> -->

@@ -2,7 +2,7 @@
 <view class="page navbar order" wx:if="{{show}}">
     <scroll-view class="fui-tab-scroll fixed" scrollX="true" style="overflow-x:scroll">
         <view bindtap="selected" class="item {{status==''?'active':''}}" data-type="">全部</view>
-        <view bindtap="selected" class="item {{status=='0'?'active':''}}" data-type="0">待付款</view>
+        <view bindtap="selected" class="item {{status=='0'?'active':''}}" data-type="0" wx:if="{{1==0}}">待付款</view> 
         <view bindtap="selected" class="item {{status=='1'?'active':''}}" data-type="1">待发货</view>
         <view bindtap="selected" class="item {{status=='2'?'active':''}}" data-type="2">待收货</view>
         <view bindtap="selected" class="item {{status=='3'?'active':''}}" data-type="3">已完成</view>
@@ -10,8 +10,9 @@
         <view bindtap="selected" class="item {{status=='5'?'active':''}}" data-type="5">回收站</view>
     </scroll-view>
     <view class="contain" wx:if="{{list.length!=0}}">
-        <view class="fui-list-group noclick" wx:for="{{list}}">
-            <navigator hoverClass="none" openType="navigate" url="/pages/order/detail/index?id={{item.id}}">
+        <view class="fui-list-group noclick" wx:for="{{list}}" >
+        
+            <navigator hoverClass="none" openType="navigate" url="/pages/order/detail/index?id={{item.id}}" wx:if="{{!item.canpay}}">
                 <view class="fui-list-group-title" style="color:#666;font-size:26rpx">
                     <view class="order-num">
                         <text class="cycle-tip" wx:if="{{item.iscycelbuy==1}}">周期购</text>
@@ -53,7 +54,7 @@
                     </text>
                 </view>
             </navigator>
-            <view class="fui-list list-padding" style="padding:0 24rpx" wx:if="{{status!=4}}">
+            <view class="fui-list list-padding" style="padding:0 24rpx" wx:if="{{status!=4}}" wx:if="{{!item.canpay}}">
                 <view class="fui-list-inner text-right" style="padding:10rpx 0">
                     <block wx:if="{{!item.canrestore}}">
                         <view class="btn btn-default btn-default-o" wx:if="{{item.cancancel}}">

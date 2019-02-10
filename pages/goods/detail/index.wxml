@@ -569,9 +569,10 @@
                 <view class="label">店铺</view>
             </navigator>
        
-            <view bindtap="selectPicker" class="nav-item btn buybtn" data-buytype="buy" data-id="{{goods.id}}" data-tap="{{active}}" wx:if="{{!goods.access_time&&!goods.timeout}}">立刻购买</view>
-            <view bindtap="selectPicker" class="nav-item btn buybtn" data-buytype="buy" data-id="{{goods.id}}" data-tap="{{active}}" data-time="access_time" data-timeout="false" wx:if="{{goods.access_time}}">立刻购买</view>
-            <view bindtap="selectPicker" class="nav-item btn buybtn" data-buytype="buy" data-id="{{goods.id}}" data-tap="{{active}}" data-time="timeout" data-timeout="false" wx:if="{{goods.timeout}}">立刻购买</view>
+            <view bindtap="selectPicker" class="nav-item btn buybtn" data-buytype="buy" data-id="{{goods.id}}" data-tap="{{active}}" wx:if="{{!goods.access_time&&!goods.timeout&&(goods.isupload!=1)}}">立刻购买1</view>
+            <view bindtap="selectPicker" class="nav-item btn buybtn" data-buytype="buy" data-id="{{goods.id}}" data-tap="{{active}}" wx:if="{{!goods.access_time&&!goods.timeout&&(goods.isupload==1)}}">上传照片</view>
+            <view bindtap="selectPicker" class="nav-item btn buybtn" data-buytype="buy" data-id="{{goods.id}}" data-tap="{{active}}" data-time="access_time" data-timeout="false" wx:if="{{goods.access_time}}">立刻购买2</view>
+            <view bindtap="selectPicker" class="nav-item btn buybtn" data-buytype="buy" data-id="{{goods.id}}" data-tap="{{active}}" data-time="timeout" data-timeout="false" wx:if="{{goods.timeout}}">立刻购买3</view>
         </view>
     </view>
     <view class="fui-toast {{FoxUIToast.show?'in':'out'}}">

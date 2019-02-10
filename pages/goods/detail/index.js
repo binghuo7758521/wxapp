@@ -13,6 +13,7 @@ Page((a = {
     data: (e = {
         diypages: {},
         usediypage: !1,
+        taonumbers:0,//2019-02-06 ivan wang 套餐数量
         specs: [],
         options: [],
         icons: o.requirejs("icons"),
@@ -177,7 +178,8 @@ Page((a = {
         }), s.get("goods/get_detail", {
             id: t.id
         }, function(t) {
-            console.log(t), t.error > 0 && (e.setData({
+
+           console.log("getdetail"), console.log(t), t.error > 0 && (e.setData({
                 show: !0,
                 showgoods: !1
             }), i.toast(e, t.message), setTimeout(function() {
@@ -192,7 +194,7 @@ Page((a = {
                         advHeight: a
                     });
                 }
-            }), e.setData({
+            }), e.setData({                
                 coupon: o,
                 coupon_l: o.length,
                 packagegoods: t.goods.packagegoods,
@@ -422,7 +424,85 @@ Page((a = {
             cycledate: !1
         });
     },
+  //2019-02-06 王庆国添加   在购买（buynow）之前上传照片  
+  uploadimg: function (t) {   
+     let that = this;
+    if (that.data.optionid==0) {
+       return
+       };
+
+    //获得套餐张数    
+    s.get("order/goodsoption", {
+      goodsoptionid: that.data.optionid
+    }, function (ee) {
+      console.log("goodsoptionr:",ee);
+      that.setData({
+        taonumbers: ee.taocannum,
+      });
+    });
+    console.log("get taonumber:");
+
+    wx.setStorageSync("goodsdetail", that);
+    wx.setStorageSync("buybutton", t); 
+    wx.setStorageSync("taonumbers", that.data.taonumbers); 
+
+
+
+
+
+     var historyimglist = wx.getStorageSync("historyimglist");
+     var allhistoryimglist = wx.getStorageSync("allhistoryimglist");
+     var gid = wx.getStorageSync("gid");
+    var other = wx.getStorageSync("other");
+    var taonum = that.data.taonumbers;
+
+    if (typeof (historyimglist) == "object" && gid == that.data.optionid && taonumbers == 1 && other == 333) {
+      console.log(789789);
+      wx.setStorageSync("imgUrl", historyimglist);
+      wx.removeStorageSync("historyimglist");
+      wx.navigateTo({
+        url: '../../uploadsimg/pages/zhanshi/zhanshi?num=' + that.options.total,
+      })
+    } else if (typeof (allhistoryimglist) == "object" && gid == that.data.optionid && taonumbers == 1) {
+      console.log(456456);
+      wx.setStorageSync("imgUrl", allhistoryimglist);
+      wx.removeStorageSync("allhistoryimglist");
+      wx.navigateTo({
+        url: '../../uploadsimg/pages/zhanshi/zhanshi?num=' + that.options.total,
+      })
+
+    } else {
+      console.log(123123);
+      wx.chooseImage({
+        count: 9,
+        sizeType: ['original'],
+        sourceType: ['album', 'camera'],
+        success(res) {
+          let tempFiles = res.tempFiles;
+          let imgUrl = [];
+          for (let index in tempFiles) {
+            imgUrl.push({
+              src: tempFiles[index].path,
+              num: 1,
+              filesize: tempFiles[index].size
+            })
+          };
+          wx.setStorageSync("imgUrl", imgUrl)
+          wx.navigateTo({
+            url: '../../uploadsimg/pages/zhanshi/zhanshi?num=' + that.options.total,
+          })
+        }
+      })
+    };
+
+
+    
+    console.log("uploadimg");
+
+   // that.buyNow(t);//继续购买流程
+  },
     buyNow: function(t) {
+      console.log("buyNow(t):",t);
         var e = this;
         c.buyNow(t, e, "goods_detail");
     },
@@ -512,6 +592,9 @@ Page((a = {
                 url: "/pages/message/auth/index"
             });
         });
+
+      
+
     },
     show_cycelbuydate: function() {
         var t = this, e = g.getCurrentDayString(this, t.data.showDate), a = [ "周日", "周一", "周二", "周三", "周四", "周五", "周六" ];

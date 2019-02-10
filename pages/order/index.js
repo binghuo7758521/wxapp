@@ -36,6 +36,8 @@ Page({
             }), e.list.length < e.pagesize && t.setData({
                 loaded: !0
             })) : a.toast(e.message, "loading");
+
+            
         }, this.data.show);
     },
     selected: function(t) {

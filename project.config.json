@@ -37,39 +37,25 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 4,
+			"current": 1,
 			"list": [
 				{
 					"id": -1,
-					"name": "测试关注公众号",
+					"name": "二维码编译测试",
 					"pathName": "pages/index/index",
 					"query": "",
-					"scene": "1011"
-				},
-				{
-					"id": 1,
-					"name": "测试更新",
-					"pathName": "pages/index/index",
-					"query": ""
-				},
-				{
-					"id": 2,
-					"name": "测试更新",
-					"pathName": "pages/goods/detail/index",
-					"query": "id=200"
-				},
-				{
-					"id": -1,
-					"name": "测试转发",
-					"pathName": "pages/index/index",
-					"query": "mid=2443",
-					"scene": "1008"
-				},
-				{
-					"id": -1,
-					"name": "二维码编译测试",
-					"pathName": "pages/commission/poster/index",
 					"scene": "1007"
+				},
+				{
+					"id": -1,
+					"name": "消息卡片",
+					"pathName": "pages/index/index",
+					"scene": "1044",
+					"shareInfo": {
+						"groupName": "测试模拟群0",
+						"shareName": "M1F_BQD6Wpz-cRjCud528xT9LrVtqk7PcGYQygoQngI@cr4dev",
+						"shareKey": "cxopipxAP4H74KgPy19uamB4r5Az1tve7CNlci_2Ip84VDGMQGw7Rb_zdHnl2yohvYLPsNWpEfu1SVdaAKLIkA~~"
+					}
 				}
 			]
 		}

@@ -418,7 +418,7 @@
         </view>
       </view>
 
-      <view class="btns" wx:if="{{isupload==1}}" bindtap='num' data-num="{{list.total}}">
+      <view class="btns" wx:if="{{isupload==99999}}" bindtap='num' data-num="{{list.total}}">
         <text bindtap="submitup" class="btn btn-danger {{submit&&'disabled'}}">选择照片</text>
       </view>
 

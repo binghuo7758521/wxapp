@@ -122,7 +122,7 @@ Page((e = {
      "" == i.getCache("userinfo") && wx.redirectTo({
       url: "/pages/message/auth/index"
     });
-
+   console.log("index index userinfo:",i.getCache("userinfo"));
    
 
     // if( t.id == undefined ){
@@ -135,7 +135,7 @@ Page((e = {
     //   //   }
     //   // });
     // }
-    console.log(555555);
+    
     s.get("black", {}, function(t) {
       t.isblack && wx.showModal({
         title: "无法访问",
@@ -147,10 +147,15 @@ Page((e = {
       });
     });
     var e = decodeURIComponent(t.scene);
+    console.log("page index index t:",t);
+    console.log("page index index t.scene:",t.scene);
+    console.log("page index index decodeURIComponent t.scene:",e);
     if (!t.id && e) {
       var n = s.str2Obj(e);
       t.id = n.id, n.mid && (t.mid = n.mid);
     }
+    console.log("t.id:",t.id);
+    console.log("t.mid:",t.mid);
     setTimeout(function() {
       a.setData({
         areas: i.getCache("cacheset").areas
@@ -220,7 +225,8 @@ Page((e = {
         var e = a.authSetting["scope.userInfo"];
         console.log(e), t.setData({
           limits: e
-        });
+        }),e || wx.redirectTo({
+                    url: "/pages/message/auth/index"});
       }
     });
     var s = e.shopname || "商城首页";
