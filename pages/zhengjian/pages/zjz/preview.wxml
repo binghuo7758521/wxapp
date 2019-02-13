@@ -7,8 +7,8 @@
           <image bindtap="viewDigital" class="preview" mode="widthFix" src="{{photo_img}}"></image>
           <image class='zjz-icon' mode='widthFix' src='/static/images/zjz_icon.png'></image>
         </view>
-        <view class="image-print" hidden="{{!print_img}}">
-            <image class="preview" mode="widthFix" src="{{print_img}}"></image>
+        <view wx:if="{{1==0}}" class="image-print" hidden="{{!print_img}}">
+           <!-- <image class="preview" mode="widthFix" src="{{print_img}}"></image>-->
         </view>
     </view>
     <view class="color-choose">
@@ -19,8 +19,10 @@
         </view>
     </view>
     <view>
-        <button bindtap="payPrintPhoto"  hidden="{{!print_img}}" class="blue-btn">保存</button>
+        <button bindtap="payPrintPhoto" wx:if="{{1==0}}"  hidden="{{!print_img}}" class="blue-btn">保存</button>
+        <button bindtap="gobuy" class="blue-btn">选择尺寸</button>
         <button bindtap="goBack">重新拍摄</button>
+        
     </view>
 </view>
 

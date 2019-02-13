@@ -400,7 +400,7 @@ Page({
                     submit: !1
                 })
                 , 0 == t.error ? wx.navigateTo({
-                    url: "/pages/order/pay/index?id=" + t.orderid
+                  url: "/pages/order/pay/index?id=" + t.orderid + "&goodslist=" + e.data.goodslist
                }) : a.alert(t.message);
             }, !0);
         }

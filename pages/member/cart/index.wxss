@@ -68,7 +68,6 @@ checkbox {
 .fui-list-inner {
     min-height: 170rpx;
     display: flex;
-    display: -webkit-box;
     display: -ms-flexbox;
     flex-direction: column;
     justify-content: space-between;

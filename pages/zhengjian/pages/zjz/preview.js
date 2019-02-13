@@ -1,6 +1,5 @@
 // pages/zjz/preview.js
-var app = getApp();
-
+var app = getApp(), a = (app.requirejs("jquery"), app.requirejs("core")), o = app.requirejs("foxui");
 const Base64 = require('../../aliyun/Base64.js');//Base64,hmac,sha1,crypto相关算法
 //参考这里https://github.com/peterhuang007/weixinFileToaliyun.git
 
@@ -13,6 +12,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    zjzimgurllist:[]
 
   },
 
@@ -26,11 +26,25 @@ Page({
     var speclist = app.speclist;
     var spec = {};
     var color = '#ffffff';
+
+    //未传参数specid，给他一个默认值；默认第一个尺寸的第一个颜色 219-02-12 王   
+      t = 11;
+      speclist[0].bg_color[0].chosen = 1;
+      console.log("t:", t);
+     
+     
+
+     
+   
+    console.log("speclist:",speclist);
     speclist.forEach(function (value, idx) {
+      console.log("value.spec_id:", value.spec_id);
+      console.log("t:",t);
       if (value.spec_id == t) {
         spec = value;
       }
     })
+    console.log("spec:", spec);
     spec.bg_color.forEach(function (value, idx) {
       if (value.chosen == 1) {
         color = value.color;
@@ -58,6 +72,8 @@ Page({
       spec: spec,
       color: color
     })
+
+
     this.create_photo();
   },
   getPolicyBase64:function () {
@@ -161,7 +177,7 @@ Page({
   create_photo: function(){
     wx.showLoading({
       title: '加载中……',
-    })
+    })     
     var that = this;
     var img = this.data.img;
     var ctx = wx.createCanvasContext("photo");
@@ -169,12 +185,13 @@ Page({
     var spec = this.data.spec;
     var photo_width = spec.photo_width * 11.811;
     var photo_height = spec.photo_height * 11.811;
-    console.log(color);
+    console.log("data.img:",img);
     ctx.rect(0, 0, photo_width, photo_height);
+
     // ctx.fillStyle(color);
     ctx.setFillStyle(color);
     ctx.fill();
-
+    console.log("11111 :");
     ctx.drawImage(img, 0, 0, photo_width, photo_height);
     ctx.draw(true, function () {
       wx.canvasToTempFilePath({
@@ -185,10 +202,12 @@ Page({
           that.setData({
             photo_img: res.tempFilePath
           })
+          console.log("66666 :", res.tempFilePath);
           that.create_print();
-          console.log(res.tempFilePath);
+          
         },
         fail: function (res) {
+          console.log("88888 :");
           console.log(res)
         }
       })
@@ -261,7 +280,7 @@ Page({
           that.setData({
             print_img: res.tempFilePath
           })
-          console.log(res.tempFilePath);
+          console.log("create_print;tempFilePath",res.tempFilePath);
         },
         fail: function (res) {
           console.log(res)
@@ -329,6 +348,8 @@ Page({
         quality: 1,
         success: function (res) {
           wx.hideLoading();
+          //在这里添加保存临时文件 
+
           that.setData({
             print_img: res.tempFilePath
           })
@@ -339,6 +360,92 @@ Page({
         }
       })
     });
+  },
+  gobuy: function(){
+    var t=this
+    console.log("data.img01:", this.data.img);
+    var speclist = app.speclist;
+    var spec={};
+    var zjzimgurllist=[];
+
+
+
+    /*
+     speclist.forEach(function(v,indexx){
+       spec=v;
+       t.data.spec = spec;
+       spec.bg_color.forEach(function (value, key) {
+        t.data.spec.bg_color=value; 
+         console.log("gobuy color list:", t.data.spec.bg_color);
+         t.create_photo(); 
+       })
+
+     })*/
+  
+     
+
+       
+    
+
+
+   
+
+
+
+
+
+    app.setCache("zjzimgupload", this.data.img);
+
+    var glist=[
+      { "gid":213,"optionid":[760,761,762]},
+      { "gid":214, "optionid": [763, 764, 765] },
+      { "gid":215, "optionid": [766, 767, 768] },
+      { "gid":217, "optionid": [772, 773, 774] },
+      { "gid":218, "optionid": [775, 776, 777] },
+      { "gid":219, "optionid": [778, 779, 780] }
+
+    ];
+    var isok=1;
+    for (var i = 0; i < glist.length; i++) {
+       var fgid=   glist[i].gid;
+      for (var ii = 0; ii < glist[i].optionid.length; ii++) {
+        var foptionid = glist[i].optionid[ii];
+        a.post("member/cart/add", {
+          id: fgid,
+          total: 1,
+          optionid: foptionid
+        }, function (t) {
+          if (0 == t.error) {            
+
+          } else  {
+            isok=0;
+          }
+        });
+       }
+       
+
+    }   
+    
+    if (isok==1) {
+      console.log("go to cart");
+      wx.navigateTo({
+        url: '/pages/member/cart/index',
+      })
+      wx.switchTab({
+        url: '/pages/member/cart/index'
+      })
+
+    }else{
+      wx.showToast({
+        title:"购买出现错误"
+
+      })
+
+    }
+
+
+
+
   },
   goBack: function(){
     wx.navigateBack({

@@ -35,7 +35,8 @@ Page({
     this.setData({
       speclist: speclist,
       specId: specId
-    })
+    });
+    
   },
 
   chooseSpec: function (e) {

@@ -24,6 +24,7 @@ Page({
                   canvasId: "photo",
                   success: function (t) {
                     var o = t.tempFilePath;
+                    
                     wx.getFileInfo({
                       filePath: o,
                       success: function (e) {
@@ -72,8 +73,10 @@ Page({
   },
   processPhoto: function () {
     var that = this;
-    var width = this.data.spec.photo_width * 11.811;
-    var height = this.data.spec.photo_height * 11.811;
+    var width = that.data.spec.photo_width * 11.811;
+    var height = that.data.spec.photo_height * 11.811;
+
+    console.log("that.data.spec:", that.data.spec);
     // 设置面部占整个照片比例
     if(width == height){
       var scale = 0.38;
@@ -92,6 +95,8 @@ Page({
       title: "制作中"
     });
     var img = this.data.src;
+    console.log("img:",img);
+    console.log("config:", config); 
     wx.uploadFile({
       url: "https://api-cn.faceplusplus.com/facepp/v3/detect",
       filePath: img,
@@ -113,6 +118,9 @@ Page({
           return;
         }
         var face = res.faces[0].landmark;
+        console.log("width:",width);
+        console.log("scale:", scale);
+        console.log("face:", face);
         var dpi = (face.contour_right1.x - face.contour_left1.x) / (width * scale);
         if (dpi < 0.5) {
           that.hide();
@@ -207,12 +215,13 @@ Page({
       encoding: 'binary',
       success(res) {
         that.hide();
+        console.log("img filepath:", filePath);
+        console.log("res:", res);
         wx.navigateTo({
           url: 'preview?img=' + filePath + '&specId=' + that.data.specId
         })
         // that.create_photo(filePath);
-        console.log(filePath);
-        console.log(res);
+        
       },
       fail(res) {
         
@@ -234,6 +243,7 @@ Page({
 
 
     var t = e.specId;
+    t=11;//2019-02-12  王 默认值
     //var config = wx.getStorageSync("zjz_config");
     var config={};
     config.Zheng_api_from=1;

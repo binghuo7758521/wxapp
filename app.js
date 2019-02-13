@@ -218,6 +218,7 @@ App({
   },
   speclist: [
     {
+      "gid":213,//对应商品id
       "spec_id": 11,    //编号
       "spec_title": "一寸", //尺寸名称
       "photo_width": 23,  //相片宽度，单位mm
@@ -227,21 +228,25 @@ App({
       "print_num": 8,  //打印张数
       "bg_color": [   // 背景可选颜色，chosen为1则为默认颜色
         {
+          "opid":760,
           "title": "白",
           "color": "#ffffff",
           "chosen": 1
         },
         {
+          "opid": 762,
           "title": "红",
           "color": "#ff0000"
         },
         {
+          "opid": 761,
           "title": "蓝",
           "color": "#458fd0"
         }
       ]
     },
     {
+      "gid": 215,//对应商品id
       "spec_id": 12,
       "spec_title": "二寸",
       "photo_width": 35,
@@ -251,21 +256,25 @@ App({
       "print_num": 4,
       "bg_color": [
         {
+          "opid": 766,
           "title": "白",
           "color": "#ffffff",
           "chosen": 1
         },
         {
+          "opid": 768,
           "title": "红",
           "color": "#ff0000"
         },
         {
+          "opid": 767,
           "title": "蓝",
           "color": "#458fd0"
         }
       ]
     },
     {
+      "gid": 214,//对应商品id
       "spec_id": 13,
       "spec_title": "小二寸",
       "photo_width": 33,
@@ -275,15 +284,18 @@ App({
       "print_num": 4,
       "bg_color": [
         {
+          "opid": 763,
           "title": "白",
           "color": "#ffffff",
           "chosen": 1
         },
         {
+          "opid": 765,
           "title": "红",
           "color": "#ff0000"
         },
         {
+          "opid": 764,
           "title": "蓝",
           "color": "#458fd0"
         }
@@ -314,6 +326,7 @@ App({
       ]
     },*/
     {
+      "gid": 218,//对应商品id
       "spec_id": 16,
       "spec_title": "欧洲签",
       "photo_width": 35,
@@ -323,21 +336,25 @@ App({
       "print_num": 4,
       "bg_color": [
         {
+          "opid": 775,
           "title": "白",
           "color": "#ffffff",
           "chosen": 1
         },
         {
+          "opid": 777,
           "title": "红",
           "color": "#ff0000"
         },
         {
+          "opid": 776,
           "title": "蓝",
           "color": "#458fd0"
         }
       ]
     },
     {
+      "gid": 217,//对应商品id
       "spec_id": 17,
       "spec_title": "日签",
       "photo_width": 45,
@@ -347,14 +364,17 @@ App({
       "print_num": 2,
       "bg_color": [
         {
+          "opid": 772,
           "title": "白",
           "color": "#ffffff"
         },
         {
+          "opid": 774,
           "title": "红",
           "color": "#ff0000"
         },
         {
+          "opid": 773,
           "title": "蓝",
           "color": "#458fd0",
           "chosen": 1
@@ -362,6 +382,7 @@ App({
       ]
     },
     {
+      "gid": 219,//对应商品id
       "spec_id": 18,
       "spec_title": "美签",
       "photo_width": 51,
@@ -371,14 +392,17 @@ App({
       "print_num": 2,
       "bg_color": [
         {
+          "opid": 778,
           "title": "白",
           "color": "#ffffff"
         },
         {
+          "opid": 780,
           "title": "红",
           "color": "#ff0000"
         },
         {
+          "opid": 779,
           "title": "蓝",
           "color": "#458fd0",
           "chosen": 1

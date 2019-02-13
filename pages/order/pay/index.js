@@ -57,15 +57,22 @@ Page({
     goodstitle: "",
     isupload: "",
     overpercent: 0,//上传进度
+    goodsnum:1,//购买的商品数量；如果大于1 来自购物车；上传证件照；    
+   //goodslist: {},
     imagelen: ""
   },
   onLoad: function(i) {
     var r = this;
+    console.log("onload i：",i);
+    var gslist=t.getCache("goodsinfo");
+    console.log("gslist：", gslist);
     r.setData({
-      options: i
+      options: i,
+      goodslist:gslist
     }), t.url(i);
-
+     
     var goodid = wx.getStorageSync('goodsid');
+     
     e.get("order/isupload", {
       goodsid: goodid
     }, function(a) {
@@ -186,6 +193,35 @@ Page({
 
     console.log("支付成功了111");
     var canupload = a.data.isupload;
+
+    //来自购物车；需要上传抠图结果
+    if  (a.options.goodslist.length>1){
+        
+       
+
+      var imgzjzurl = t.getCache("zjzimgupload");
+      var zjztitle="";
+      var gslist = t.getCache("goodsInfo");
+
+      console.log("goodsinfo cache",gslist);
+      console.log("goodsinfo cache", gslist.goodslist);
+      gslist.goodslist.forEach(function(v,idx){
+        zjztitle = zjztitle +v.title+v.optiontitle+v.total+"版_"; 
+
+      });
+
+      
+      
+
+      uploadImage(a, imgzjzurl, 'order/' + a.data.list.order.ordersn + zjztitle + '/' + '打印证件照的图片' + '/',1,
+      function(rr){
+        console.log("======上传成功图片地址为：", rr);
+        console.log("上传ok");
+
+      }
+      )
+
+    }   
 
     if (canupload == 1) {
       if (imagenum < imgList.length) {
