@@ -13,6 +13,7 @@ Page({
   onLoad: function ( opt ) {
     let t = this
     let { src, idx, num } = opt;
+    console.log("index index:opt", opt);
     this.setData({ originUrl: src, idx, num });
   },
   uploadTap() {
@@ -39,6 +40,7 @@ Page({
     img.src = e.detail.origin;
     img.clipImg = e.detail.url;
     img.num = e.detail.num;
+    img.img_isok=true;
     prevPage.setData({ [`imgList[${idx}]`]: img });
     wx.navigateBack({ delta: 1 })
   },

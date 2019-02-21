@@ -12,7 +12,9 @@ Page({
    * 页面的初始数据
    */
   data: {
-    zjzimgurllist:[]
+    zjzimgurllist:[],
+    canvasid:"photo",
+    canvasprintid:"canvasprint"
 
   },
 
@@ -55,9 +57,11 @@ Page({
       img: options.img,
       config: config,
       spec: spec,
-      color: color
+      color: color,
+      canvasid:"photo0",
+      canvasprintid: "canvasprint0"
     });
-    this.create_photo();
+    this.create_photo(0,0);
   },
   chooseColor: function(e){
     // console.log(e);
@@ -174,7 +178,7 @@ Page({
     }
   },
   // 生成证件照
-  create_photo: function(){
+  create_photo: function (photoid,printid){
     wx.showLoading({
       title: '加载中……',
     })     
@@ -186,16 +190,18 @@ Page({
     var photo_width = spec.photo_width * 11.811;
     var photo_height = spec.photo_height * 11.811;
     console.log("data.img:",img);
+    ctx.clearRect(0, 0, photo_width, photo_height);
     ctx.rect(0, 0, photo_width, photo_height);
 
     // ctx.fillStyle(color);
     ctx.setFillStyle(color);
     ctx.fill();
-    console.log("11111 :");
+    console.log("11111222 :");
     ctx.drawImage(img, 0, 0, photo_width, photo_height);
+    console.log("34343434 :");
     ctx.draw(true, function () {
       wx.canvasToTempFilePath({
-        canvasId: 'photo',
+        canvasId: 'photo' ,
         fileType: 'jpg',
         quality: 1,
         success: function (res) {
@@ -203,7 +209,7 @@ Page({
             photo_img: res.tempFilePath
           })
           console.log("66666 :", res.tempFilePath);
-          that.create_print();
+          that.create_print(printid);
           
         },
         fail: function (res) {
@@ -211,10 +217,11 @@ Page({
           console.log(res)
         }
       })
+      console.log("9999999 :");
     });
   },
   // 生成打印图片
-  create_print: function(){
+  create_print: function (printid){
     var that = this;
     var photo_img = this.data.photo_img;
     var spec = this.data.spec;
@@ -250,7 +257,7 @@ Page({
       this.create_print2();
       return;
     }
-    var ctx = wx.createCanvasContext("print");
+    var ctx = wx.createCanvasContext("print" );
 
     ctx.rect(0, 0, print_width, print_height);
     ctx.setFillStyle("#ffffff");
@@ -377,7 +384,7 @@ Page({
        spec.bg_color.forEach(function (value, key) {
         t.data.spec.bg_color=value; 
          console.log("gobuy color list:", t.data.spec.bg_color);
-         t.create_photo(); 
+         t.create_photo(index,key); 
        })
 
      })*/

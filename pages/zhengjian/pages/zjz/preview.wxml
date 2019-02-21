@@ -27,6 +27,23 @@
 </view>
 
 <canvas canvas-id="photo" style='position: fixed; left: -999px; width:{{spec.photo_width*11.811}}px; height: {{spec.photo_height*11.811}}px;'></canvas>
+<canvas canvas-id="photo0" style='position: fixed; left: -999px; width:{{spec.photo_width*11.811}}px; height: {{spec.photo_height*11.811}}px;'></canvas>
+<canvas canvas-id="photo1" style='position: fixed; left: -999px; width:{{spec.photo_width*11.811}}px; height: {{spec.photo_height*11.811}}px;'></canvas>
+<canvas canvas-id="photo2" style='position: fixed; left: -999px; width:{{spec.photo_width*11.811}}px; height: {{spec.photo_height*11.811}}px;'></canvas>
+<canvas canvas-id="photo3" style='position: fixed; left: -999px; width:{{spec.photo_width*11.811}}px; height: {{spec.photo_height*11.811}}px;'></canvas>
+
+
 
 <canvas canvas-id="print" style='position: fixed; left: -9999px; width:{{spec.print_height*11.811}}px; height: {{spec.print_width*11.811}}px;'></canvas>
+
 <canvas canvas-id="print2" style='position: fixed; left: -9999px; width:{{spec.print_width*11.811}}px; height: {{spec.print_height*11.811}}px;'></canvas>
+
+<canvas canvas-id="canvasprint0" style='position: fixed; left: -9999px; width:{{spec.print_height*11.811}}px; height: {{spec.print_width*11.811}}px;'></canvas>
+<canvas canvas-id="canvasprint1" style='position: fixed; left: -9999px; width:{{spec.print_height*11.811}}px; height: {{spec.print_width*11.811}}px;'></canvas>
+<canvas canvas-id="canvasprint2" style='position: fixed; left: -9999px; width:{{spec.print_height*11.811}}px; height: {{spec.print_width*11.811}}px;'></canvas>
+<canvas canvas-id="canvasprint3" style='position: fixed; left: -9999px; width:{{spec.print_height*11.811}}px; height: {{spec.print_width*11.811}}px;'></canvas>
+<canvas canvas-id="canvasprint4" style='position: fixed; left: -9999px; width:{{spec.print_height*11.811}}px; height: {{spec.print_width*11.811}}px;'></canvas>
+<canvas canvas-id="canvasprint5" style='position: fixed; left: -9999px; width:{{spec.print_height*11.811}}px; height: {{spec.print_width*11.811}}px;'></canvas>
+<canvas canvas-id="canvasprint6" style='position: fixed; left: -9999px; width:{{spec.print_height*11.811}}px; height: {{spec.print_width*11.811}}px;'></canvas>
+<canvas canvas-id="canvasprint7" style='position: fixed; left: -9999px; width:{{spec.print_height*11.811}}px; height: {{spec.print_width*11.811}}px;'></canvas>
+<canvas canvas-id="canvasprint8" style='position: fixed; left: -9999px; width:{{spec.print_height*11.811}}px; height: {{spec.print_width*11.811}}px;'></canvas>

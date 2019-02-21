@@ -58,13 +58,13 @@ Page({
     isupload: "",
     overpercent: 0,//上传进度
     goodsnum:1,//购买的商品数量；如果大于1 来自购物车；上传证件照；    
-   //goodslist: {},
+    goodslist: {},
     imagelen: ""
   },
   onLoad: function(i) {
     var r = this;
     console.log("onload i：",i);
-    var gslist=t.getCache("goodsinfo");
+    var gslist=t.getCache("goodsInfo");
     console.log("gslist：", gslist);
     r.setData({
       options: i,
@@ -77,7 +77,8 @@ Page({
       goodsid: goodid
     }, function(a) {
       r.setData({
-        isupload: a.isupload.isupload
+        isupload: a.isupload.isupload,
+        datas: a.datas    //服务器当前日期
       });
     });
 
@@ -173,11 +174,18 @@ Page({
 
     var imagenum = a.data.imagenum;
     var imglength = wx.getStorageSync("imglengths");
-    var optionname = wx.getStorageSync("optionname");
+    ///var optionname = wx.getStorageSync("optionname");
     var name = wx.getStorageSync("name");
-    var datas = wx.getStorageSync("datas");
-    var ordernums = wx.getStorageSync("ordernums");
-    var titles = wx.getStorageSync("titles");
+    //var datas = wx.getStorageSync("datas");
+    //var ordernums = wx.getStorageSync("ordernums");
+   // var titles = wx.getStorageSync("titles");
+    var ordernums = a.data.list.order.ordersn;
+    var titles = a.data.goodslist.goodslist[0].title;
+    var optionname = a.data.goodslist.goodslist[0].optiontitle;
+    var datas = a.data.datas;
+     
+
+
 
     if (imagenum < imgList.length) {
       if (imgList[imagenum].clipImg == undefined) {
@@ -195,25 +203,26 @@ Page({
     var canupload = a.data.isupload;
 
     //来自购物车；需要上传抠图结果
-    if  (a.options.goodslist.length>1){
-        
+    console.log(a.data.goodslist.goodslist.length);
+    if (a.data.goodslist.goodslist.length>1){
+      
        
 
       var imgzjzurl = t.getCache("zjzimgupload");
-      var zjztitle="";
+      var zjztitle="_";
       var gslist = t.getCache("goodsInfo");
 
       console.log("goodsinfo cache",gslist);
       console.log("goodsinfo cache", gslist.goodslist);
       gslist.goodslist.forEach(function(v,idx){
-        zjztitle = zjztitle +v.title+v.optiontitle+v.total+"版_"; 
+        zjztitle = zjztitle + v.title.substring(0, 2) + "（" + v.optiontitle.substring(0, 1)+")*"+v.total+"张_"; 
 
       });
 
       
       
 
-      uploadImage(a, imgzjzurl, 'order/' + a.data.list.order.ordersn + zjztitle + '/' + '打印证件照的图片' + '/',1,
+      uploadImage(a, imgzjzurl, 'order/' + datas+a.data.list.order.ordersn + zjztitle + '/' + '打印证件照的图片' + '/',1,
       function(rr){
         console.log("======上传成功图片地址为：", rr);
         console.log("上传ok");

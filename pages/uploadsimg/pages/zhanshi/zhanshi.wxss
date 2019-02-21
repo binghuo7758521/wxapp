@@ -41,12 +41,39 @@ page {
   top:-7px;
   color: #fff;
   text-align: center;
-  line-height: 50rpx;
-  
+  line-height: 50rpx;  
 }
+
+.img_Box .img_isok{
+  width: 150rpx;
+  height: 50rpx;
+  background: #ff5555;
+  position: absolute;
+  right: -7px;
+  bottom:-7px;
+  color: #fff;
+  text-align: center;
+  line-height: 50rpx;  
+}
+.img_Box .delete-btn2{
+  width: 50rpx;
+  height: 50rpx;
+  
+ 
+  position: absolute;
+  background:#fff;
+  left:-7px;
+  top:-7px;
+}
+.img_Box .delete-btn2 image{
+  width: 50rpx;
+  height: 50rpx;
+}
+
+
 .manum{
   width: 100%;
-  margin: 20rpx auto;
+  margin: 0rpx auto;
   display: flex;
   flex-direction: row;
 }

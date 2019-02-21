@@ -57,6 +57,7 @@ Component({
     },
     num: 1,
     boolean:true,
+    canmovedirection:"X",
     size: wx.getStorageSync('Size'),
     // imageWidth: 0,
     // imageHeight: 0
@@ -114,8 +115,11 @@ Component({
     //   });
     // },
     clip_img(){
+
       let innerAspectRadio = this.data.originImg.width / this.data.originImg.height;
-      if (this.data.originImg.height <= this.data.originImg.width) {
+      console.log("innerAspectRadio:",innerAspectRadio);
+      //if (this.data.originImg.height <= this.data.originImg.width) {
+      if (innerAspectRadio >= this.data.width / this.data.height) {
         this.setData({
           boolean: false,
           stv: {
@@ -140,38 +144,42 @@ Component({
           }
         })
       }
+      console.log("stv:",this.data.stv);
     },
     Liwhite(){
       let innerAspectRadio = this.data.originImg.width / this.data.originImg.height;
-      if (this.data.originImg.height <= this.data.originImg.width) {
+      //if (this.data.originImg.height <= this.data.originImg.width) {
+      if (innerAspectRadio <= this.data.width/this.data.height) {
         console.log(this);
         console.log(789456);
         this.setData({
           boolean: false,
           stv: {
-            offsetX: 0 - Math.abs((this.data.width - this.data.height * innerAspectRadio) / 2),
+            offsetX: 0 + Math.abs((this.data.width - this.data.height * innerAspectRadio) / 2),
             offsetY: 0,
-            zoom: false, //是否缩放状态
-            distance: 0,  //两指距离
-            scale: this.data.width / this.data.originImg.width,  //缩放倍数
-            rotate: 0
-          }
-        })
-      } else {
-        console.log();
-        console.log(9999999999);
-        this.setData({
-          boolean: false,
-          stv: {
-            offsetX: 0,
-            offsetY: 0 - Math.abs((this.data.height - this.data.width / innerAspectRadio) / 2),
             zoom: false, //是否缩放状态
             distance: 0,  //两指距离
             scale: this.data.height / this.data.originImg.height,  //缩放倍数
             rotate: 0
           }
         })
+      } else {
+        console.log(this);
+       
+         console.log("this.data.:",this.data);
+        this.setData({
+          boolean: false,
+          stv: {
+            offsetX: 0,
+            offsetY: 0 + Math.abs((this.data.height - this.data.width / innerAspectRadio) / 2),
+            zoom: false, //是否缩放状态
+            distance: 0,  //两指距离
+            scale: this.data.width / this.data.originImg.width,  //缩放倍数
+            rotate: 0
+          }
+        })
       }
+      console.log("stv:",this.data.stv);
     },
     Liwhite_x() {
       
@@ -291,7 +299,7 @@ Component({
       ctx.rotate(cropData.rotate * Math.PI / 180);
       ctx.translate(-movex, -movey);
       
-      ctx.drawImage(_this.data.originImg.url, (cropData.offsetX + x) * 2, (cropData.offsetY + y) * 2, _this.data.originImg.width * 2 * cropData.scale, _this.data.originImg.height * 2 * cropData.scale);
+      ctx.drawImage(_this.data.originImg.url, (cropData.offsetX ) * 2, (cropData.offsetY ) * 2, _this.data.originImg.width * 2 * cropData.scale, _this.data.originImg.height * 2 * cropData.scale);
       ctx.restore();
       ctx.draw(false, ()=> {
         wx.canvasToTempFilePath({
@@ -434,20 +442,40 @@ var touchMove = function (_this, e) {
     let { clientX, clientY } = e.touches[0];
     let offsetX = clientX - _this.startX;
     let offsetY = clientY - _this.startY;
- 
+    console.log("_this:",_this);
+    if (_this.data.width >= _this.data.originImg.width*_this.data.stv.scale){
+      offsetX=0;      
+      if ((_this.data.stv.offsetY+offsetY >0)||(_this.data.stv.offsetY < (0- _this.data.originImg.height*_this.data.stv.scale+_this.data.height-offsetY) )){
+        offsetY=0;
 
-    _this.startX = clientX;
-    _this.startY = clientY;
+      }
+    } 
+    if(_this.data.height >= _this.data.originImg.height*_this.data.stv.scale){
+      offsetY=0; 
+      console.log("jisuan:",0- _this.data.originImg.width*_this.data.stv.scale+_this.data.width+offsetX);
+      if ((_this.data.stv.offsetX+offsetX>0)||(_this.data.stv.offsetX < (0- _this.data.originImg.width*_this.data.stv.scale+_this.data.width-offsetX) )){
+        offsetX=0;
+         
+      }      
+    }
+   _this.startX = clientX;
+   _this.startY = clientY;
+   
+    
+    
     let { stv } = _this.data;
     stv.offsetX += offsetX;
     stv.offsetY += offsetY;
     stv.offsetLeftX = -stv.offsetX;
-    stv.offsetLeftY = -stv.offsetLeftY;
+    stv.offsetLeftY = -stv.offsetY;
+    console.log("stv:",stv);
+    
+      _this.setData({
+        stv: stv
+      
 
-    _this.setData({
-      stv: stv
-    });
-
+    })
+   
   } else if (e.touches.length === 2) {
     return;
     //计算旋转

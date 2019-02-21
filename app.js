@@ -4,9 +4,8 @@ App({
   onShow: function() {
     this.onLaunch();
   },
-  onLaunch: function() {
-
-
+  onLaunch: function(options) {
+    console.log("onlaunch:",options);
     const updateManager = wx.getUpdateManager()
     updateManager.onCheckForUpdate(function(res) {
       // 请求完新版本信息的回调

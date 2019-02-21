@@ -21,7 +21,7 @@
    /* transform: translateX(-50%); */
    overflow: hidden;
    background: #fff;
-   border: 10px solid rgb(95, 58, 2);
+   border: 1px solid rgb(95, 58, 2);
 }
 .cropper_num{
   width: 50%;

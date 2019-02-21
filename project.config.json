@@ -4,7 +4,7 @@
 		"ignore": []
 	},
 	"setting": {
-		"urlCheck": true,
+		"urlCheck": false,
 		"es6": true,
 		"postcss": true,
 		"minified": true,
@@ -47,15 +47,11 @@
 					"scene": "1007"
 				},
 				{
-					"id": -1,
+					"id": 1,
 					"name": "消息卡片",
 					"pathName": "pages/index/index",
-					"scene": "1044",
-					"shareInfo": {
-						"groupName": "测试模拟群0",
-						"shareName": "M1F_BQD6Wpz-cRjCud528xT9LrVtqk7PcGYQygoQngI@cr4dev",
-						"shareKey": "cxopipxAP4H74KgPy19uamB4r5Az1tve7CNlci_2Ip84VDGMQGw7Rb_zdHnl2yohvYLPsNWpEfu1SVdaAKLIkA~~"
-					}
+					"query": "mid=2596",
+					"scene": null
 				}
 			]
 		}

@@ -156,6 +156,15 @@ Page((e = {
     }
     console.log("t.id:",t.id);
     console.log("t.mid:",t.mid);
+    wx.setStorageSync("debug_mid", t.mid);//测试数据
+    wx.setStorageSync("debug_t", t);//测试数据
+     a.setData({
+       debug_mid: t.mid,
+       debug_t: t
+
+     })
+
+    
     setTimeout(function() {
       a.setData({
         areas: i.getCache("cacheset").areas

@@ -37,13 +37,64 @@ Page({
     var goodid = wx.getStorageSync('goodsid');
     let pages = wx.getStorageSync('imgUrl');
     var taocan= wx.getStorageSync("taonumbers");
+    var ptoption = wx.getStorageSync("photo_goodoption")
     wx.removeStorageSync("imgUrl");
     wx.removeStorageSync("imgList");
     t.setData({
       imgList: pages,
       btndisabled: false,
-      taocanshuliang:taocan
+      taocanshuliang: ptoption.taocannum,
+      px: ptoption.px,
+
     });
+    var size = ptoption.size;
+    var width = ptoption.width;
+    var height = ptoption.hight;
+    if (width > 5 && height > 5) {
+      var width = e.width * 0.5;
+      var height = e.hight * 0.5;
+    }
+
+    wx.getSystemInfo({
+      success(res) {
+        var winWidth = res.windowWidth;
+        var winHeight = res.windowHeight;
+
+        var imgwidth = 100 * width;
+        var imgheight = 100 * height;
+
+        if (imgwidth >= winWidth * 0.85 || imgheight >= winHeight * 0.7) {
+          var imgwidth = 60 * width;
+          var imgheight = 60 * height;
+
+          t.setData({
+            Width: imgwidth,
+            Height: imgheight,
+            size: size
+          })
+
+          wx.setStorageSync('Width', imgwidth)
+          wx.setStorageSync('Height', imgheight)
+          wx.setStorageSync('Size', size)
+        } else {
+
+          t.setData({
+            Width: imgwidth,
+            Height: imgheight,
+            size: size,
+          })
+          wx.setStorageSync('Width', imgwidth)
+          wx.setStorageSync('Height', imgheight)
+          wx.setStorageSync('Size', size)
+
+        }
+
+      }
+    })
+
+
+
+
 
 
      var allnums = 0;
@@ -52,16 +103,17 @@ Page({
     } 
 
     t.setData({
-      allimgnum: allnums,
+      allimgnum: allnums
     });
 
     console.log("allimgnum:",allnums);
 
 
 
+/*
     s.get("order/orderdata", "", function(e) {
 
-      console.log(e)
+      console.log("order/orderdata:return:",e)
       t.setData({
         username: e.nickname.nickname,
         orderdata: e.data,
@@ -120,7 +172,7 @@ Page({
 
 
 
-    });
+    });*/
 
     s.get("order/ordertotal", "", function(e) {
 

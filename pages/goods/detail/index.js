@@ -436,6 +436,7 @@ Page((a = {
       goodsoptionid: that.data.optionid
     }, function (ee) {
       console.log("goodsoptionr:",ee);
+      wx.setStorageSync("photo_goodoption", ee)
       that.setData({
         taonumbers: ee.taocannum,
       });
@@ -445,6 +446,8 @@ Page((a = {
     wx.setStorageSync("goodsdetail", that);
     wx.setStorageSync("buybutton", t); 
     wx.setStorageSync("taonumbers", that.data.taonumbers); 
+
+    
 
 
 

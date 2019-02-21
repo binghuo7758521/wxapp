@@ -5,7 +5,7 @@
       <view class='n_size'>当前尺寸:{{size}}英寸</view>
       <view class="img" style="width:{{ width }}px; height:{{height}}px;" catchtouchstart="touchstartCallback"  catchtouchmove="touchmoveCallback" catchtouchend="touchendCallback"  >
       <image style="transform: translate({{stv.offsetX}}px, {{stv.offsetY}}px) scale({{stv.scale}}) rotate({{ stv.rotate }}deg);width:{{originImg.width}}px; height: {{originImg.height}}px" src="{{ originImg.url }}" wx:if="{{boolean==true}}"></image>
-      <image style="transform: translate({{stv.offsetX}}px, {{stv.offsetY}}px) scale({{stv.scale}}) rotate({{ stv.rotate }}deg);width:{{originImg.width}}px; height: {{originImg.height}}px" src="{{ originImg.url }}" mode='aspectFit' wx:elif="{{boolean==false}}"></image>
+      <image style="transform: translate({{stv.offsetX}}px, {{stv.offsetY}}px) scale({{stv.scale}}) rotate({{ stv.rotate }}deg);transform-origin:top left;width:{{originImg.width}}px; height: {{originImg.height}}px" src="{{ originImg.url }}" mode='aspectFit' wx:elif="{{boolean==false}}"></image>
     </view>
   </view>
 
