@@ -14,6 +14,8 @@ Page({
   data: {
     zjzimgurllist:[],
     canvasid:"photo",
+    speclist:{},
+    sumnum:0,//选择的证件照总数量
     canvasprintid:"canvasprint"
 
   },
@@ -45,7 +47,12 @@ Page({
       if (value.spec_id == t) {
         spec = value;
       }
+      value.bg_color[0].num = 0;
+      value.bg_color[1].num = 0;
+      value.bg_color[2].num = 0;
+
     })
+
     console.log("spec:", spec);
     spec.bg_color.forEach(function (value, idx) {
       if (value.chosen == 1) {
@@ -56,6 +63,7 @@ Page({
       specId: t,
       img: options.img,
       config: config,
+      speclist:speclist,
       spec: spec,
       color: color,
       canvasid:"photo0",
@@ -403,7 +411,7 @@ Page({
 
     app.setCache("zjzimgupload", this.data.img);
 
-    var glist=[
+   /* var glist=[
       { "gid":213,"optionid":[760,761,762]},
       { "gid":214, "optionid": [763, 764, 765] },
       { "gid":215, "optionid": [766, 767, 768] },
@@ -412,6 +420,8 @@ Page({
       { "gid":219, "optionid": [778, 779, 780] }
 
     ];
+
+    
     var isok=1;
     for (var i = 0; i < glist.length; i++) {
        var fgid=   glist[i].gid;
@@ -429,9 +439,21 @@ Page({
           }
         });
        }
-       
+    } */
 
-    }   
+    var isok = 1;
+    a.post("member/cart/add", {
+      id: 202,
+      total: 7 
+    }, function (t) {
+      if (0 == t.error) {
+
+      } else {
+        isok = 0;
+      }
+    });
+
+
     
     if (isok==1) {
       console.log("go to cart");
@@ -458,5 +480,40 @@ Page({
     wx.navigateBack({
       delta: 1,
     })
+  },
+
+
+  // 减少数量
+  minusCount(e) {
+    const index = e.currentTarget.dataset.index;
+    let speclist = this.data.speclist;
+    if (e.currentTarget.id == "minus_w") {
+      (speclist[index].bg_color[0].num!=0 )&& (speclist[index].bg_color[0].num =  speclist[index].bg_color[0].num-1);
+    } else if (e.currentTarget.id == "minus_b") {
+      (speclist[index].bg_color[1].num != 0) &&  (speclist[index].bg_color[1].num =  speclist[index].bg_color[1].num-1);
+    } else if (e.currentTarget.id == "minus_h") {
+      (speclist[index].bg_color[2].num != 0) &&  (speclist[index].bg_color[2].num =  speclist[index].bg_color[2].num-1);
+    }
+
+    this.setData({
+      speclist: speclist
+    });
+  },
+
+  // 增加数量
+  addCount(e) {
+    const index = e.currentTarget.dataset.index;
+    let speclist = this.data.speclist;
+    if (e.currentTarget.id == "add_w") {
+      speclist[index].bg_color[0].num = 1 + speclist[index].bg_color[0].num;
+    } else if (e.currentTarget.id == "add_b") {
+      speclist[index].bg_color[1].num = 1 + speclist[index].bg_color[1].num;
+    } else if (e.currentTarget.id == "add_h") {
+      speclist[index].bg_color[2].num = 1 + speclist[index].bg_color[2].num;
+    }   
+    
+    this.setData({
+      speclist: speclist
+    });
   }
 })

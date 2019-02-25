@@ -123,3 +123,68 @@ button {
     width: 60%;
     margin-left: 20%;
 }
+
+.alllist1{
+    flex-direction:row;
+    display:flex;
+     
+    flex-wrap:wrap;
+}
+.spec-list {
+    width: 326rpx;
+    height: 290rpx;
+    margin-left: 32rpx;
+    margin-top: 10rpx;
+    display:flex;
+    box-shadow: 0 2px 14px 0 rgba(221,221,221,0.40);
+    border-radius: 10rpx;
+    text-align: left;
+    flex-direction:row;
+  
+}
+
+.spec-title{
+  font-size: 28rpx;
+  width: 80rpx;
+}
+
+.img-title-box{
+  width: 100rpx;
+ 
+}
+.color-box{
+  width: 50%;
+  text-align: center;
+ 
+
+}
+.color-box .blackcolor{
+  
+  display:flex;
+
+}
+.manum{
+  width: 240rpx;
+  margin: 0rpx auto;
+  display: flex;
+  flex-direction: row;
+}
+.manum text{
+  width: 20rpx;
+  display: block;
+  background: #fff;
+  height: 75rpx;
+  font-size: 36rpx;
+  text-align: center;
+  line-height: 75rpx;
+  
+ 
+}
+.manum .endnum{
+  width: 80prx;
+  height: 45rpx;
+  text-align: center;
+  background: #fff;
+  border-style: dotted;
+  border-width:1rpx; 
+}

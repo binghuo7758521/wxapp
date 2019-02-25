@@ -208,11 +208,11 @@ App({
 
 
      appid: "wx176d614a68387fbb",
-     api: "https://secai.ahjcg.com/app/ewei_shopv2_api.php?i=2",
+     api: "https://secai.ahjcg.com/app/ewei_shopv2_api.php?i=2",//生产服务器
      approot: "https://secai.ahjcg.com/addons/ewei_shopv2/",
-    //appid: "wxa954c9edf8a55134",
-   // api: "https://xcxtest.ahjcg.com/app/ewei_shopv2_api.php?i=1",
-   // approot: "https://xcxtest.ahjcg.com/addons/ewei_shopv2/",
+   // appid: "wx8bcf474e8412012d",
+   // api: "https://nzm.ahjcg.com/app/ewei_shopv2_api.php?i=2",//测试服务器
+    //approot: "https://nzm.ahjcg.com/addons/ewei_shopv2/",
     userInfo: null
   },
   speclist: [
@@ -230,17 +230,20 @@ App({
           "opid":760,
           "title": "白",
           "color": "#ffffff",
+          "num":0,
           "chosen": 1
         },
         {
           "opid": 762,
           "title": "红",
-          "color": "#ff0000"
+          "color": "#ff0000",
+          "num": 0
         },
         {
           "opid": 761,
           "title": "蓝",
-          "color": "#458fd0"
+          "color": "#458fd0",
+          "num": 0
         }
       ]
     },
@@ -258,17 +261,20 @@ App({
           "opid": 766,
           "title": "白",
           "color": "#ffffff",
+          "num": 0,
           "chosen": 1
         },
         {
           "opid": 768,
           "title": "红",
-          "color": "#ff0000"
+          "color": "#ff0000",
+          "num": 0
         },
         {
           "opid": 767,
           "title": "蓝",
-          "color": "#458fd0"
+          "color": "#458fd0",
+          "num": 0
         }
       ]
     },
@@ -286,17 +292,20 @@ App({
           "opid": 763,
           "title": "白",
           "color": "#ffffff",
+          "num": 0,
           "chosen": 1
         },
         {
           "opid": 765,
           "title": "红",
-          "color": "#ff0000"
+          "color": "#ff0000",
+          "num": 0
         },
         {
           "opid": 764,
           "title": "蓝",
-          "color": "#458fd0"
+          "color": "#458fd0",
+          "num": 0
         }
       ]
     },
@@ -338,17 +347,20 @@ App({
           "opid": 775,
           "title": "白",
           "color": "#ffffff",
+          "num": 0,
           "chosen": 1
         },
         {
           "opid": 777,
           "title": "红",
-          "color": "#ff0000"
+          "color": "#ff0000",
+          "num": 0
         },
         {
           "opid": 776,
           "title": "蓝",
-          "color": "#458fd0"
+          "color": "#458fd0",
+          "num": 0
         }
       ]
     },
@@ -365,18 +377,21 @@ App({
         {
           "opid": 772,
           "title": "白",
-          "color": "#ffffff"
+          "color": "#ffffff",
+          "num": 0
         },
         {
           "opid": 774,
           "title": "红",
-          "color": "#ff0000"
+          "color": "#ff0000",
+          "num": 0
         },
         {
           "opid": 773,
           "title": "蓝",
           "color": "#458fd0",
-          "chosen": 1
+          "chosen": 1,
+          "num": 0
         }
       ]
     },
@@ -393,18 +408,21 @@ App({
         {
           "opid": 778,
           "title": "白",
-          "color": "#ffffff"
+          "color": "#ffffff",
+          "num": 0
         },
         {
           "opid": 780,
           "title": "红",
-          "color": "#ff0000"
+          "color": "#ff0000",
+          "num": 0
         },
         {
           "opid": 779,
           "title": "蓝",
           "color": "#458fd0",
-          "chosen": 1
+          "chosen": 1,
+          "num": 0
         }
       ]
     },

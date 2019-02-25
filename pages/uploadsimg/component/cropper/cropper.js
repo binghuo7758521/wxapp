@@ -5,7 +5,7 @@ var twoPoint = {
   y1: 0,
   x2: 0,
   y2: 0
-  
+
 }
 
 Component({
@@ -13,9 +13,9 @@ Component({
    * 组件的属性列表
    */
   properties: {
-    
+
     ratio: {
-      
+
       type: Number,
       observer: function (newVal, oldVal) {
         let t = this
@@ -25,13 +25,13 @@ Component({
           size: wx.getStorageSync('Size'),
 
         })
-        
+
       }
     },
     url: {
       type: String,
-      observer ( newVal, oldVal ) {
-        this.initImg( newVal )
+      observer(newVal, oldVal) {
+        this.initImg(newVal)
       }
     },
     num: {
@@ -56,14 +56,14 @@ Component({
       rotate: 0                                     //旋转角度
     },
     num: 1,
-    boolean:true,
-    canmovedirection:"X",
+    boolean: true,
+    canmovedirection: "X",
     size: wx.getStorageSync('Size'),
     // imageWidth: 0,
     // imageHeight: 0
   },
- 
-  
+
+
   /**
    * 组件的方法列表
    */
@@ -75,7 +75,7 @@ Component({
         sizeType: ['original'], // 可以指定是原图还是压缩图，默认二者都有
         sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
         success(res) {
-          _this.initImg( res.tempFilePaths[0]);
+          _this.initImg(res.tempFilePaths[0]);
         }
       })
     },
@@ -98,7 +98,7 @@ Component({
     // btn_add() {
     //   let that = this;
     //   var imglength = wx.getStorageSync('imglength');
-   
+
     //   let num = that.data.num;
     //   s.get("order/ordertotal", "", function (e) {
     //     console.log(e)
@@ -114,87 +114,107 @@ Component({
     //     }
     //   });
     // },
-    clip_img(){
+    clip_img() {
 
+      var _this = this;
       let innerAspectRadio = this.data.originImg.width / this.data.originImg.height;
-      console.log("innerAspectRadio:",innerAspectRadio);
+      console.log("innerAspectRadio:", innerAspectRadio);
+      var rota = this.data.stv.rotate;
+      if (rota == 90) {
+        innerAspectRadio = 1 / innerAspectRadio;
+
+      }
+
       //if (this.data.originImg.height <= this.data.originImg.width) {
-      if (innerAspectRadio >= this.data.width / this.data.height) {
+      if (innerAspectRadio <= this.data.width / this.data.height) {
         this.setData({
           boolean: false,
           stv: {
-            offsetX: 0 - Math.abs((this.data.width - this.data.height * innerAspectRadio) / 2),
-            offsetY: 0,
+            offsetX: (rota == 0) ? (0) : (0 + _this.data.width),
+            offsetY: 0 - Math.abs((_this.data.height - _this.data.width / innerAspectRadio) / 2),
             zoom: false, //是否缩放状态
             distance: 0,  //两指距离
             scale: 1,  //缩放倍数
-            rotate: 0
+            rotate: rota
           }
         })
       } else {
         this.setData({
           boolean: false,
           stv: {
-            offsetX: 0,
-            offsetY: 0 - Math.abs((this.data.height - this.data.width / innerAspectRadio) / 2),
+            offsetX: (rota == 0) ? (0 - Math.abs((_this.data.width - _this.data.height * innerAspectRadio) / 2)) : (0 - Math.abs((_this.data.width - _this.data.height * innerAspectRadio) / 2) + _this.data.width / innerAspectRadio),
+            offsetY: 0,
             zoom: false, //是否缩放状态
             distance: 0,  //两指距离
             scale: 1,  //缩放倍数
-            rotate: 0
+            rotate: rota
           }
         })
       }
-      console.log("stv:",this.data.stv);
+
+
+console.log("stv",_this.data.stv);
     },
-    Liwhite(){
-      let innerAspectRadio = this.data.originImg.width / this.data.originImg.height;
+    Liwhite() {
+      let innerAspectRadio = 0;
+      var _this = this;
       //if (this.data.originImg.height <= this.data.originImg.width) {
-      if (innerAspectRadio <= this.data.width/this.data.height) {
+      var rota = this.data.stv.rotate;
+      if (rota === 90) {
+        innerAspectRadio = this.data.originImg.height / this.data.originImg.width;
+      } else {
+        innerAspectRadio = this.data.originImg.width / this.data.originImg.height;
+      }
+      console.log("xzjd:", rota);
+      console.log("innerAspectRadio:", innerAspectRadio);
+      if (innerAspectRadio <= this.data.width / this.data.height) {
         console.log(this);
         console.log(789456);
         this.setData({
           boolean: false,
           stv: {
-            offsetX: 0 + Math.abs((this.data.width - this.data.height * innerAspectRadio) / 2),
+            offsetX: (rota == 0) ? (Math.abs((this.data.width - this.data.height * innerAspectRadio) / 2)) : (0 + Math.abs((this.data.width - this.data.height * innerAspectRadio) / 2) + this.data.height * innerAspectRadio),
             offsetY: 0,
             zoom: false, //是否缩放状态
             distance: 0,  //两指距离
-            scale: this.data.height / this.data.originImg.height,  //缩放倍数
-            rotate: 0
+            scale: (rota == 0) ? (this.data.height / this.data.originImg.height) : (this.data.height / this.data.originImg.width),  //缩放倍数
+            rotate: rota
           }
         })
       } else {
         console.log(this);
-       
-         console.log("this.data.:",this.data);
+
+        console.log("this.data.:", this.data);
         this.setData({
           boolean: false,
           stv: {
-            offsetX: 0,
+            offsetX: (rota == 0) ? (0) : (this.data.width),
             offsetY: 0 + Math.abs((this.data.height - this.data.width / innerAspectRadio) / 2),
             zoom: false, //是否缩放状态
             distance: 0,  //两指距离
-            scale: this.data.width / this.data.originImg.width,  //缩放倍数
-            rotate: 0
+            scale: (rota == 0) ? (this.data.width / this.data.originImg.width) : (this.data.width / this.data.originImg.height),  //缩放倍数
+            rotate: rota
           }
         })
       }
-      console.log("stv:",this.data.stv);
+      console.log("stv:", this.data.stv);
     },
     Liwhite_x() {
-      
+
     },
     rotate() {
-      
+
       this.setData({
         'stv.rotate': this.data.stv.rotate % 90 == 0 ? this.data.stv.rotate = this.data.stv.rotate + 90 : this.data.stv.rotate = 0
       })
 
       console.log(this.data.stv.rotate)
-      let nb = this.data.stv.rotate/90;
+      let nb = this.data.stv.rotate / 90;
       console.log(nb)
-
-      if (nb%2 == 0){
+      console.log("this.data.stv", this.data.stv);
+      return;
+      console.log("aaa");
+      if (nb % 2 == 0) {
         console.log('nishi')
         let innerAspectRadio = this.data.originImg.width / this.data.originImg.height;
         if (this.data.originImg.height <= this.data.originImg.width) {
@@ -227,7 +247,7 @@ Component({
           })
         }
 
-      }else{
+      } else {
         console.log('nishi111')
         let innerAspectRadio = this.data.originImg.height / this.data.originImg.width;
         if (this.data.originImg.height <= this.data.originImg.width) {
@@ -238,11 +258,11 @@ Component({
             boolean: false,
             stv: {
               offsetX: 0 - Math.abs((this.data.width - this.data.height / innerAspectRadio) / 2),
-              offsetY: 0 ,
+              offsetY: 0,
               zoom: false, //是否缩放状态
               distance: 0,  //两指距离
               scale: this.data.height / this.data.originImg.width,  //缩放倍数
-              rotate: nb*90
+              rotate: nb * 90
             }
           })
         } else {
@@ -264,6 +284,7 @@ Component({
         }
 
       }
+
     },
     //五
     cropperImg() {
@@ -282,9 +303,11 @@ Component({
           })
         }
       })
-  
-      let ctx = wx.createCanvasContext('imgcrop',this);
+
+      let ctx = wx.createCanvasContext('imgcrop', this);
       let cropData = _this.data.stv;
+      let bili = _this.data.originImg.width / _this.data.originImg.height;
+      if (cropData.rotate == 90) { bili = 1 / bili }
       ctx.save();
       ctx.setFillStyle('#fff')
       ctx.fillRect(0, 0, _this.data.width * 2, _this.data.height * 2)
@@ -293,23 +316,48 @@ Component({
       let y = (_this.data.originImg.height - _this.data.originImg.height * cropData.scale) / 2;
 
       //画布中点坐标转移到图片中心
-      let movex = (cropData.offsetX + x) * 2 + _this.data.originImg.width * cropData.scale;
-      let movey = (cropData.offsetY + y) * 2 + _this.data.originImg.height * cropData.scale;
-      ctx.translate(movex, movey);
-      ctx.rotate(cropData.rotate * Math.PI / 180);
-      ctx.translate(-movex, -movey);
+      //let movex = (cropData.offsetX + x) * 2 + _this.data.originImg.width * cropData.scale;
+      //let movey = (cropData.offsetY + y) * 2 + _this.data.originImg.height * cropData.scale;
+      var movex=0;
+      var movey=0;
+      if (bili <= _this.data.width / _this.data.height){
+        movex = (cropData.offsetX  + x) * 2 + _this.data.originImg.height * cropData.scale ;
+        
+      }else{
+        movex = (cropData.offsetX + x) * 2 + _this.data.originImg.width * cropData.scale - _this.data.originImg.width*2;
+      }
       
-      ctx.drawImage(_this.data.originImg.url, (cropData.offsetX ) * 2, (cropData.offsetY ) * 2, _this.data.originImg.width * 2 * cropData.scale, _this.data.originImg.height * 2 * cropData.scale);
+       movey = (cropData.offsetY + y) * 2 + _this.data.originImg.height * cropData.scale;
+      ctx.translate(movey,movex );
+      
+      ctx.translate(-movey,-movex);
+      ctx.rotate(cropData.rotate * Math.PI / 180);
+
+
+
+
+      if(cropData.rotate == 0) {
+      ctx.drawImage(_this.data.originImg.url, (cropData.offsetX) * 2, (cropData.offsetY) * 2, _this.data.originImg.width * 2 * cropData.scale, _this.data.originImg.height * 2 * cropData.scale);
+      } else{
+        //if (bili <= _this.data.width / _this.data.height) {
+
+          ctx.drawImage(_this.data.originImg.url, (cropData.offsetY) * 2, (0-cropData.offsetX) * 2, _this.data.originImg.width * 2 * cropData.scale, _this.data.originImg.height * 2 * cropData.scale);
+       // }else{
+
+       // }
+      }
+
       ctx.restore();
-      ctx.draw(false, ()=> {
+      console.log("ctx:", ctx);
+      ctx.draw(false, () => {
         wx.canvasToTempFilePath({
           canvasId: 'imgcrop',
           // fileType: 'jpg',
           success(response) {
-            _this.triggerEvent("getCropperImg", { url: response.tempFilePath, num: _this.data.num ,origin: _this.data.originImg.url})
+              _this.triggerEvent("getCropperImg", { url: response.tempFilePath, num: _this.data.num, origin: _this.data.originImg.url })
             wx.hideLoading();
           },
-          fail( e ) {
+          fail(e) {
             wx.hideLoading();
             wx.showToast({
               title: '生成图片失败',
@@ -320,7 +368,7 @@ Component({
       });
     },
 
-    //四
+    //四 初始图片默认裁剪
     initImg(url) {
       let _this = this;
 
@@ -328,43 +376,57 @@ Component({
         src: url,
         success(resopne) {
           let innerAspectRadio = resopne.width / resopne.height;
+          var rota = 0;
+          if (resopne.width <= resopne.height) { rota = 0 } else {
+            rota = 90;
+            innerAspectRadio = 1 / innerAspectRadio;
+          }
+          console.log("innerAspectRadio", innerAspectRadio);
 
           if (innerAspectRadio < _this.data.width / _this.data.height) {
+            console.log("aa");
             _this.setData({
+              boolean: false,
               originImg: {
                 url: url,
-                width: _this.data.width,
-                height: _this.data.width / innerAspectRadio
+                width: (rota == 0) ? (_this.data.width) : (_this.data.width / innerAspectRadio),
+                height: (rota == 0) ? (_this.data.width / innerAspectRadio) : (_this.data.width)
               },
               stv: {
-                offsetX: 0,
+                offsetX: (rota == 0) ? (0) : (0 + _this.data.width),
                 offsetY: 0 - Math.abs((_this.data.height - _this.data.width / innerAspectRadio) / 2),
                 zoom: false, //是否缩放状态
                 distance: 0,  //两指距离
                 scale: 1,  //缩放倍数
-                rotate: 0
+                rotate: rota
               },
             })
           } else {
+            console.log("bb");
             _this.setData({
+              boolean: false,
               originImg: {
                 url: url,
-                height: _this.data.height,
-                width: _this.data.height * innerAspectRadio
+                height: (rota == 0) ? (_this.data.height) : (_this.data.width / innerAspectRadio),
+                width: (rota == 0) ? (_this.data.height * innerAspectRadio) : (_this.data.height)
               },
               stv: {
-                offsetX: 0 - Math.abs((_this.data.width - _this.data.height * innerAspectRadio) / 2),
+                offsetX: (rota == 0) ? (0 - Math.abs((_this.data.width - _this.data.height * innerAspectRadio) / 2)) : (0 - Math.abs((_this.data.width - _this.data.height * innerAspectRadio) / 2) + _this.data.width / innerAspectRadio),
                 offsetY: 0,
                 zoom: false, //是否缩放状态
                 distance: 0,  //两指距离
                 scale: 1,  //缩放倍数
-                rotate: 0
+                rotate: rota
               }
             })
           }
         }
       })
+      console.log("data:", this.data);
     },
+
+
+
     //事件处理函数
     touchstartCallback: function (e) {
       if (e.touches.length === 1) {
@@ -442,40 +504,40 @@ var touchMove = function (_this, e) {
     let { clientX, clientY } = e.touches[0];
     let offsetX = clientX - _this.startX;
     let offsetY = clientY - _this.startY;
-    console.log("_this:",_this);
-    if (_this.data.width >= _this.data.originImg.width*_this.data.stv.scale){
-      offsetX=0;      
-      if ((_this.data.stv.offsetY+offsetY >0)||(_this.data.stv.offsetY < (0- _this.data.originImg.height*_this.data.stv.scale+_this.data.height-offsetY) )){
-        offsetY=0;
+    console.log("_this:", _this);
+    if (_this.data.width >= _this.data.originImg.width * _this.data.stv.scale) {
+      offsetX = 0;
+      if ((_this.data.stv.offsetY + offsetY > 0) || (_this.data.stv.offsetY < (0 - _this.data.originImg.height * _this.data.stv.scale + _this.data.height - offsetY))) {
+        offsetY = 0;
 
       }
-    } 
-    if(_this.data.height >= _this.data.originImg.height*_this.data.stv.scale){
-      offsetY=0; 
-      console.log("jisuan:",0- _this.data.originImg.width*_this.data.stv.scale+_this.data.width+offsetX);
-      if ((_this.data.stv.offsetX+offsetX>0)||(_this.data.stv.offsetX < (0- _this.data.originImg.width*_this.data.stv.scale+_this.data.width-offsetX) )){
-        offsetX=0;
-         
-      }      
     }
-   _this.startX = clientX;
-   _this.startY = clientY;
-   
-    
-    
+    if (_this.data.height >= _this.data.originImg.height * _this.data.stv.scale) {
+      offsetY = 0;
+      console.log("jisuan:", 0 - _this.data.originImg.width * _this.data.stv.scale + _this.data.width + offsetX);
+      if ((_this.data.stv.offsetX + offsetX > 0) || (_this.data.stv.offsetX < (0 - _this.data.originImg.width * _this.data.stv.scale + _this.data.width - offsetX))) {
+        offsetX = 0;
+
+      }
+    }
+    _this.startX = clientX;
+    _this.startY = clientY;
+
+
+
     let { stv } = _this.data;
     stv.offsetX += offsetX;
     stv.offsetY += offsetY;
     stv.offsetLeftX = -stv.offsetX;
     stv.offsetLeftY = -stv.offsetY;
-    console.log("stv:",stv);
-    
-      _this.setData({
-        stv: stv
-      
+    console.log("stv:", stv);
+
+    _this.setData({
+      stv: stv
+
 
     })
-   
+
   } else if (e.touches.length === 2) {
     return;
     //计算旋转

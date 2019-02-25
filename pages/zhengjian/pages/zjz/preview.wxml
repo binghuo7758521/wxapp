@@ -1,29 +1,67 @@
 <view style="width:100%;background:white">
-    <view class="imagePrintContainer">
-        <view class="spec-name">
-            <text>{{spec.spec_title}}</text>
-        </view>
-        <view class="image-dig">
-          <image bindtap="viewDigital" class="preview" mode="widthFix" src="{{photo_img}}"></image>
-          <image class='zjz-icon' mode='widthFix' src='/static/images/zjz_icon.png'></image>
-        </view>
-        <view wx:if="{{1==0}}" class="image-print" hidden="{{!print_img}}">
-           <!-- <image class="preview" mode="widthFix" src="{{print_img}}"></image>-->
-        </view>
+  <view class="imagePrintContainer">
+    <view class="spec-name">
+      <text>{{spec.spec_title}}</text>
     </view>
-    <view class="color-choose">
-        <view class="circle-box" wx:for="{{spec.bg_color}}" wx:key="index">
-            <button bindtap="chooseColor" class="{{item.color=='#ffffff'? (item.chosen?'chosenCircle-white':'circle-white'):(item.chosen?'chosenCircle':'circle')}}" data-index="{{index}}" style="background-color:{{item.color}}; {{item.chosen&&'box-shadow: 0 2px 8px 0 '+item.color+';'}}">
-                <text style="visibility:hidden">按钮</text>
-            </button>
+    <view class="image-dig">
+      <image bindtap="viewDigital" class="preview" mode="widthFix" src="{{photo_img}}"></image>
+      <image class='zjz-icon' mode='widthFix' src='/static/images/zjz_icon.png'></image>
+    </view>
+    <view wx:if="{{1==0}}" class="image-print" hidden="{{!print_img}}">
+      <!-- <image class="preview" mode="widthFix" src="{{print_img}}"></image>-->
+    </view>
+  </view>
+  <view class="color-choose">
+    <view class="circle-box" wx:for="{{spec.bg_color}}" wx:key="index">
+      <button bindtap="chooseColor" class="{{item.color=='#ffffff'? (item.chosen?'chosenCircle-white':'circle-white'):(item.chosen?'chosenCircle':'circle')}}" data-index="{{index}}" style="background-color:{{item.color}}; {{item.chosen&&'box-shadow: 0 2px 8px 0 '+item.color+';'}}">
+        <text style="visibility:hidden">按钮</text>
+      </button>
+    </view>
+  </view>
+
+  <view class='alllist1'>
+    <view class="spec-list" data-index="{{index}}" mode="scaleToFill" wx:for="{{speclist}}" wx:key="index">
+      <view class='img-title-box'>
+        <view class='img-box'>
+          <image src="/static/images/spec.png" style="width:80rpx; height:100rpx;"></image>
         </view>
+        <view class='spec-title'>{{item.spec_title}} </view>
+      </view>
+      <view class='color-box'>
+        <view class='blackcolor'>
+          <view class='spec-title'>白</view>
+          <view class='manum'>
+            <text id="minus_w" bindtap="minusCount" data-index="{{index}}" class='minus'>-</text>
+            <input type="text" value="{{item.bg_color[0].num}}" class='endnum' data-index="{{index}}" bindinput='bind_num_w'></input>
+            <text id="add_w"  bindtap="addCount" data-index="{{index}}" class='add'>+</text>
+          </view>
+        </view>
+        <view class='blackcolor'>
+          <view class='spec-title'> 蓝</view>
+          <view class='manum'>
+            <text  id="minus_b" bindtap="minusCount" data-index="{{index}}" class='minus'>-</text>
+            <input type="text" value="{{item.bg_color[1].num}}" class='endnum' data-index="{{index}}" bindinput='bind_num_b'></input>
+            <text  id="add_b" bindtap="addCount" data-index="{{index}}" class='add'>+</text>
+          </view>
+        </view>
+        <view class='blackcolor'>
+          <view class='spec-title'> 红</view>
+          <view class='manum'>
+            <text  id="minus_h" bindtap="minusCount" data-index="{{index}}" class='minus'>-</text>
+            <input type="text" value="{{item.bg_color[2].num}}" class='endnum' data-index="{{index}}" bindinput='bind_num_r'></input>
+            <text  id="add_h" bindtap="addCount" data-index="{{index}}" class='add'>+</text>
+          </view>
+        </view>
+      </view>
     </view>
-    <view>
-        <button bindtap="payPrintPhoto" wx:if="{{1==0}}"  hidden="{{!print_img}}" class="blue-btn">保存</button>
-        <button bindtap="gobuy" class="blue-btn">选择尺寸</button>
-        <button bindtap="goBack">重新拍摄</button>
-        
-    </view>
+  </view>
+
+  <view>
+    <button bindtap="payPrintPhoto" wx:if="{{1==0}}" hidden="{{!print_img}}" class="blue-btn">保存</button>
+    <button bindtap="gobuy" class="blue-btn">选择尺寸</button>
+    <button bindtap="goBack">重新拍摄</button>
+
+  </view>
 </view>
 
 <canvas canvas-id="photo" style='position: fixed; left: -999px; width:{{spec.photo_width*11.811}}px; height: {{spec.photo_height*11.811}}px;'></canvas>

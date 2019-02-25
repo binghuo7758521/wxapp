@@ -45,8 +45,8 @@
 }
 .imgcrop {
   position: absolute;
-  left: -50000rpx;
-  top: -500000rpx; 
+  left: -2000rpx;
+  top: -2000rpx; 
   margin-bottom: 100px
 }
 .footer {
