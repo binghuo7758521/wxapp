@@ -142,7 +142,7 @@ Component({
         this.setData({
           boolean: false,
           stv: {
-            offsetX: (rota == 0) ? (0 - Math.abs((_this.data.width - _this.data.height * innerAspectRadio) / 2)) : (0 - Math.abs((_this.data.width - _this.data.height * innerAspectRadio) / 2) + _this.data.width / innerAspectRadio),
+            offsetX: (rota == 0) ? (0 - Math.abs((_this.data.width - _this.data.height * innerAspectRadio) / 2)) : (0 - Math.abs((_this.data.width - _this.data.height * innerAspectRadio) / 2) + _this.data.height * innerAspectRadio),
             offsetY: 0,
             zoom: false, //是否缩放状态
             distance: 0,  //两指距离
@@ -384,7 +384,7 @@ console.log("stv",_this.data.stv);
           console.log("innerAspectRadio", innerAspectRadio);
 
           if (innerAspectRadio < _this.data.width / _this.data.height) {
-            console.log("aa");
+            console.log("a自动旋转后图片比较瘦");
             _this.setData({
               boolean: false,
               originImg: {
@@ -402,16 +402,16 @@ console.log("stv",_this.data.stv);
               },
             })
           } else {
-            console.log("bb");
+            console.log("自动旋转后图片比较胖");
             _this.setData({
               boolean: false,
               originImg: {
                 url: url,
-                height: (rota == 0) ? (_this.data.height) : (_this.data.width / innerAspectRadio),
+                height: (rota == 0) ? (_this.data.height) : (_this.data.height* innerAspectRadio),
                 width: (rota == 0) ? (_this.data.height * innerAspectRadio) : (_this.data.height)
               },
               stv: {
-                offsetX: (rota == 0) ? (0 - Math.abs((_this.data.width - _this.data.height * innerAspectRadio) / 2)) : (0 - Math.abs((_this.data.width - _this.data.height * innerAspectRadio) / 2) + _this.data.width / innerAspectRadio),
+                offsetX: (rota == 0) ? (0 - Math.abs((_this.data.width - _this.data.height * innerAspectRadio) / 2)) : (0 - Math.abs((_this.data.width - _this.data.height * innerAspectRadio) / 2) + _this.data.height * innerAspectRadio),
                 offsetY: 0,
                 zoom: false, //是否缩放状态
                 distance: 0,  //两指距离
@@ -419,10 +419,11 @@ console.log("stv",_this.data.stv);
                 rotate: rota
               }
             })
+            console.log("data02:", _this.data);
           }
         }
       })
-      console.log("data:", this.data);
+     
     },
 
 
@@ -504,18 +505,22 @@ var touchMove = function (_this, e) {
     let { clientX, clientY } = e.touches[0];
     let offsetX = clientX - _this.startX;
     let offsetY = clientY - _this.startY;
-    console.log("_this:", _this);
-    if (_this.data.width >= _this.data.originImg.width * _this.data.stv.scale) {
-      offsetX = 0;
-      if ((_this.data.stv.offsetY + offsetY > 0) || (_this.data.stv.offsetY < (0 - _this.data.originImg.height * _this.data.stv.scale + _this.data.height - offsetY))) {
-        offsetY = 0;
+    let newimgwidth = (_this.data.stv.rotate == 0) ? (_this.data.originImg.width * _this.data.stv.scale) : (_this.data.originImg.height * _this.data.stv.scale);
+    let newimgheight = (_this.data.stv.rotate == 0) ? (_this.data.originImg.height * _this.data.stv.scale) : (_this.data.originImg.width * _this.data.stv.scale);
 
+
+    console.log("_this:", _this);
+    console.log("newimgwidth:newimgheight", newimgwidth ,newimgheight);
+    if (_this.data.width >= newimgwidth) {
+      offsetX = 0;
+      if ((_this.data.stv.offsetY + offsetY > 0) || (_this.data.stv.offsetY < (0 - newimgheight + _this.data.height - offsetY))) {
+        offsetY = 0;
       }
     }
-    if (_this.data.height >= _this.data.originImg.height * _this.data.stv.scale) {
+    if (_this.data.height >= newimgheight) {
       offsetY = 0;
-      console.log("jisuan:", 0 - _this.data.originImg.width * _this.data.stv.scale + _this.data.width + offsetX);
-      if ((_this.data.stv.offsetX + offsetX > 0) || (_this.data.stv.offsetX < (0 - _this.data.originImg.width * _this.data.stv.scale + _this.data.width - offsetX))) {
+      console.log("jisuan:", (_this.data.stv.rotate == 0) ? 0 : _this.data.originImg.height );
+      if ((_this.data.stv.offsetX + offsetX - ((_this.data.stv.rotate == 0) ? 0 : _this.data.originImg.height) > 0) || (_this.data.stv.offsetX - ((_this.data.stv.rotate == 0) ? 0 : _this.data.originImg.height) < (0 - newimgwidth + _this.data.width - offsetX ))) {
         offsetX = 0;
 
       }

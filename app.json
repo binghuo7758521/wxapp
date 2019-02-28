@@ -141,12 +141,7 @@
         "selectedIconPath": "static/images/tabbar/icon-2-active.png"
       },
       
-      {
-        "pagePath": "pages/zhengjian/pages/zjz/camera",
-        "text": "制作证件照",
-        "iconPath": "static/images/tabbar/icon-4.png",
-        "selectedIconPath": "static/images/tabbar/icon-4-active.png"
-      },
+    
       {
         "pagePath": "pages/commission/index",
         "text": "分销中心",
