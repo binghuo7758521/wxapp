@@ -406,6 +406,7 @@ Page((a = {
       }
       var s = "goodsdetail";
       c.selectpicker(t, e, s);
+      this.data.diyform.f_data.diyzhengjianzhaochicun = '1寸蓝底3张_2寸红底5张';
     } else e.setData({
       modelShow: !0
     });
@@ -599,7 +600,7 @@ Page((a = {
       });
     });
 
-
+    
 
   },
   show_cycelbuydate: function () {

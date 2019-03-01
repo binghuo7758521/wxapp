@@ -58,6 +58,7 @@ module.exports = {
             s.addCartquick(d, s.data.total);
         } else if (r && r.fields.length > 0) {
             var l = e.verify(s, r);
+            console.log("f_data:",r.f_data);
             if (!l) return;
             a.post("order/create/diyform", {
                 id: s.data.id,

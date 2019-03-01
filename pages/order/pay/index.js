@@ -204,20 +204,18 @@ Page({
 
     //来自购物车；需要上传抠图结果
     console.log(a.data.goodslist.goodslist.length);
-    if (a.data.goodslist.goodslist.length>1){
+    if (a.data.goodslist.goodslist[0].id==202){
       
        
 
       var imgzjzurl = t.getCache("zjzimgupload");
-      var zjztitle="_";
+      var zjztitle = t.getCache("zjzsel_title");
       var gslist = t.getCache("goodsInfo");
 
       console.log("goodsinfo cache",gslist);
       console.log("goodsinfo cache", gslist.goodslist);
-      gslist.goodslist.forEach(function(v,idx){
-        zjztitle = zjztitle + v.title.substring(0, 2) + "（" + v.optiontitle.substring(0, 1)+")*"+v.total+"张_"; 
-
-      });
+      
+       
 
       
       
