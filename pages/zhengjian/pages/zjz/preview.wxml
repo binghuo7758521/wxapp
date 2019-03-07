@@ -76,12 +76,3 @@
 
 <canvas canvas-id="print2" style='position: fixed; left: -9999px; width:{{spec.print_width*11.811}}px; height: {{spec.print_height*11.811}}px;'></canvas>
 
-<canvas canvas-id="canvasprint0" style='position: fixed; left: -9999px; width:{{spec.print_height*11.811}}px; height: {{spec.print_width*11.811}}px;'></canvas>
-<canvas canvas-id="canvasprint1" style='position: fixed; left: -9999px; width:{{spec.print_height*11.811}}px; height: {{spec.print_width*11.811}}px;'></canvas>
-<canvas canvas-id="canvasprint2" style='position: fixed; left: -9999px; width:{{spec.print_height*11.811}}px; height: {{spec.print_width*11.811}}px;'></canvas>
-<canvas canvas-id="canvasprint3" style='position: fixed; left: -9999px; width:{{spec.print_height*11.811}}px; height: {{spec.print_width*11.811}}px;'></canvas>
-<canvas canvas-id="canvasprint4" style='position: fixed; left: -9999px; width:{{spec.print_height*11.811}}px; height: {{spec.print_width*11.811}}px;'></canvas>
-<canvas canvas-id="canvasprint5" style='position: fixed; left: -9999px; width:{{spec.print_height*11.811}}px; height: {{spec.print_width*11.811}}px;'></canvas>
-<canvas canvas-id="canvasprint6" style='position: fixed; left: -9999px; width:{{spec.print_height*11.811}}px; height: {{spec.print_width*11.811}}px;'></canvas>
-<canvas canvas-id="canvasprint7" style='position: fixed; left: -9999px; width:{{spec.print_height*11.811}}px; height: {{spec.print_width*11.811}}px;'></canvas>
-<canvas canvas-id="canvasprint8" style='position: fixed; left: -9999px; width:{{spec.print_height*11.811}}px; height: {{spec.print_width*11.811}}px;'></canvas>

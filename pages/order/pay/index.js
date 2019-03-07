@@ -204,7 +204,8 @@ Page({
 
     //来自购物车；需要上传抠图结果
     console.log(a.data.goodslist.goodslist.length);
-    if (a.data.goodslist.goodslist[0].id==202){
+    //220 为证件照链接id
+    if (a.data.goodslist.goodslist[0].id==220){
       
        
 
