@@ -406,7 +406,7 @@ Page((a = {
       }
       var s = "goodsdetail";
       c.selectpicker(t, e, s);
-      this.data.diyform.f_data.diyzhengjianzhaochicun = '1寸蓝底3张_2寸红底5张';
+      //this.data.diyform.f_data.diyzhengjianzhaochicun = '1寸蓝底3张_2寸红底5张';
     } else e.setData({
       modelShow: !0
     });
@@ -444,12 +444,14 @@ Page((a = {
       that.setData({
         taonumbers: ee.taocannum,
       });
+      wx.setStorageSync("taonumbers", ee.taocannum);
+
     });
     console.log("get taonumber:");
 
     wx.setStorageSync("goodsdetail", that);
     wx.setStorageSync("buybutton", t);
-    wx.setStorageSync("taonumbers", that.data.taonumbers);
+    
 
 
 

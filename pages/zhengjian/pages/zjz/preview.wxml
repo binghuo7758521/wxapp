@@ -11,7 +11,7 @@
       <!-- <image class="preview" mode="widthFix" src="{{print_img}}"></image>-->
     </view>
   </view>
-  <view class="color-choose">
+  <view class="color-choose" hidden='true'>
     <view class="circle-box" wx:for="{{spec.bg_color}}" wx:key="index">
       <button bindtap="chooseColor" class="{{item.color=='#ffffff'? (item.chosen?'chosenCircle-white':'circle-white'):(item.chosen?'chosenCircle':'circle')}}" data-index="{{index}}" style="background-color:{{item.color}}; {{item.chosen&&'box-shadow: 0 2px 8px 0 '+item.color+';'}}">
         <text style="visibility:hidden">按钮</text>
@@ -37,21 +37,23 @@
           </view>
         </view>
         <view class='blackcolor'>
-          <view class='spec-title'> 蓝</view>
+          <view class='spec-title'> 红</view>
           <view class='manum'>
-            <text  id="minus_b" bindtap="minusCount" data-index="{{index}}" class='minus'>-</text>
-            <input type="text" value="{{item.bg_color[1].num}}" class='endnum' data-index="{{index}}" bindinput='bind_num_b'></input>
-            <text  id="add_b" bindtap="addCount" data-index="{{index}}" class='add'>+</text>
+            <text  id="minus_r" bindtap="minusCount" data-index="{{index}}" class='minus'>-</text>
+            <input type="text" value="{{item.bg_color[1].num}}" class='endnum' data-index="{{index}}" bindinput='bind_num_r'></input>
+            <text  id="add_r" bindtap="addCount" data-index="{{index}}" class='add'>+</text>
           </view>
         </view>
         <view class='blackcolor'>
-          <view class='spec-title'> 红</view>
+          <view class='spec-title'> 蓝</view>
           <view class='manum'>
-            <text  id="minus_h" bindtap="minusCount" data-index="{{index}}" class='minus'>-</text>
-            <input type="text" value="{{item.bg_color[2].num}}" class='endnum' data-index="{{index}}" bindinput='bind_num_r'></input>
-            <text  id="add_h" bindtap="addCount" data-index="{{index}}" class='add'>+</text>
+            <text  id="minus_b" bindtap="minusCount" data-index="{{index}}" class='minus'>-</text>
+            <input type="text" value="{{item.bg_color[2].num}}" class='endnum' data-index="{{index}}" bindinput='bind_num_b'></input>
+            <text  id="add_b" bindtap="addCount" data-index="{{index}}" class='add'>+</text>
           </view>
         </view>
+        
+
       </view>
     </view>
   </view>

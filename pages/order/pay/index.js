@@ -56,30 +56,31 @@ Page({
     orderid: "",
     goodstitle: "",
     isupload: "",
-    overpercent: 0,//上传进度
-    goodsnum:1,//购买的商品数量；如果大于1 来自购物车；上传证件照；    
+    overpercent: 0, //上传进度
+    goodsnum: 1, //购买的商品数量；如果大于1 来自购物车；上传证件照；    
     goodslist: {},
     imagelen: ""
   },
   onLoad: function(i) {
     var r = this;
-    console.log("onload i：",i);
-    var gslist=t.getCache("goodsInfo");
+    console.log("onload i：", i);
+    var gslist = t.getCache("goodsInfo");
     console.log("gslist：", gslist);
     r.setData({
       options: i,
-      goodslist:gslist
+      goodslist: gslist
     }), t.url(i);
-     
+
     var goodid = wx.getStorageSync('goodsid');
-     
+
     e.get("order/isupload", {
       goodsid: goodid
     }, function(a) {
       r.setData({
         isupload: a.isupload.isupload,
-        datas: a.datas    //服务器当前日期
+        datas: a.datas //服务器当前日期
       });
+      console.log("服务器当前日期datas：", a.datas);
     });
 
     var imgList = wx.getStorageSync("imgList");
@@ -154,7 +155,7 @@ Page({
           successData: t,
           order: t.order,
           ordervirtual: t.ordervirtual,
-          overpercent:1,
+          overpercent: 1,
           ordervirtualtype: e
         });
         wx.setStorageSync("uploadingnum", 0)
@@ -178,13 +179,13 @@ Page({
     var name = wx.getStorageSync("name");
     //var datas = wx.getStorageSync("datas");
     //var ordernums = wx.getStorageSync("ordernums");
-   // var titles = wx.getStorageSync("titles");
+    // var titles = wx.getStorageSync("titles");
     var ordernums = a.data.list.order.ordersn;
     var titles = a.data.goodslist.goodslist[0].title;
     var optionname = a.data.goodslist.goodslist[0].optiontitle;
     var datas = a.data.datas;
-     
 
+    
 
 
     if (imagenum < imgList.length) {
@@ -205,31 +206,50 @@ Page({
     //来自购物车；需要上传抠图结果
     console.log(a.data.goodslist.goodslist.length);
     //220 为证件照链接id
-    if (a.data.goodslist.goodslist[0].id==220){
-      
-       
+    if (a.data.goodslist.goodslist[0].id == 220) {
+
+
 
       var imgzjzurl = t.getCache("zjzimgupload");
+      var imgzjzurllist = t.getCache("zjzimgurllist");
       var zjztitle = t.getCache("zjzsel_title");
       var gslist = t.getCache("goodsInfo");
-
-      console.log("goodsinfo cache",gslist);
+      imgnum = imgzjzurllist.length;
+      console.log("goodsinfo cache", gslist);
       console.log("goodsinfo cache", gslist.goodslist);
+
+      wx.showLoading({
+        mask: true,
+        title: ' 努力上传中...',
+      });
+      //上传列表；zjzimgurllist；需要处理异步，原来的图片上传用的是递归；
       
-       
+      uploadImage(a, imgzjzurllist[imagenum].url, 'order/' + datas+ a.data.list.order.ordersn +'证件照'+ zjztitle + '/' + '打印' + imgzjzurllist[imagenum].num + '张的证件照' + '/', imgzjzurllist.length,
+          function(rr) {
+            console.log("上传图片地址为：", rr);
+             
+            if (imagenum == (imgzjzurllist.length-1)){
+              console.log("全部上传ok");
+            //  wx.hideLoading();
+            } else {
+              imagenum++;
+              a.setData({
+                imagenum: imagenum
+              })
+              a.imgupload();
+              
+
+            }
+
+          }
+        )
 
       
-      
 
-      uploadImage(a, imgzjzurl, 'order/' + datas+a.data.list.order.ordersn + zjztitle + '/' + '打印证件照的图片' + '/',1,
-      function(rr){
-        console.log("======上传成功图片地址为：", rr);
-        console.log("上传ok");
 
-      }
-      )
 
-    }   
+
+    }
 
     if (canupload == 1) {
       if (imagenum < imgList.length) {
@@ -239,7 +259,7 @@ Page({
           mask: true,
           title: ' 努力上传中...',
         });
-        uploadImage(a,imgsrc, 'order/' + datas + ordernums + optionname + titles + '/' + '打印 ' + imgnum + ' 张的图片' + '/',
+        uploadImage(a, imgsrc, 'order/' + datas + ordernums + optionname + titles + '/' + '打印 ' + imgnum + ' 张的图片' + '/',
           imgList.length,
           function(result) {
             console.log("======上传成功图片地址为：", result);

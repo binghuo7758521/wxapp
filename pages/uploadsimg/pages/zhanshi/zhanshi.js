@@ -416,11 +416,13 @@ Page({
     var goodid = wx.getStorageSync('goodsid');
     var taonumbers = wx.getStorageSync('taonumbers');
     var allnum = that.data.allimgnum;
-    //修改商品数量
+    
+    //修改商品数量   
+    if (taonumbers==1){
     var ee = wx.getStorageSync("goodsdetail");   
     ee.data.total = that.data.allimgnum;
     wx.setStorageSync("goodsdetail", ee);
-
+    }
 
     var nowTime = util.formatTime(new Date());
     var name = that.data.username;

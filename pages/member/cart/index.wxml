@@ -139,9 +139,9 @@
                             <view class="price">
                                 <text class="bigprice text-danger">¥{{val.marketprice}}</text>
                                 <view bindtap="number" class="fui-number small" data-id="{{val.id}}" data-max="{{val.totalmaxbuy}}" data-min="{{val.minbuy}}" data-optionid="{{val.optionid}}" data-value="{{val.total}}">
-                                    <view class="minus {{val.total<=1?'disabled':''}}" data-action="minus">-</view>
+                                    <view hidden='true' class="minus {{val.total<=1?'disabled':''}}" data-action="minus">-</view>
                                     <input disabled class="num shownum" name="" type="tel" value="{{val.total}}"></input>
-                                    <view class="plus {{val.total>=val.totalmaxbuy?'disabled':''}}" data-action="plus">+</view>
+                                    <view hidden='true'  class="plus {{val.total>=val.totalmaxbuy?'disabled':''}}" data-action="plus">+</view>
                                 </view>
                             </view>
                         </view>
