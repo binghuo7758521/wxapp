@@ -352,20 +352,27 @@ Page({
 
         for (let index in tempFiles) {
       
-          that.upload_file('', tempFiles[index].path, tempFiles[index].size);       
+          //that.upload_file('', tempFiles[index].path, tempFiles[index].size);
+          //
+          //       
+            imgList.push({
+            src: tempFiles[index].path,
+            num: 1,
+            filesize: tempFiles[index].size
+          });                            
 
         }
-        console.log("that.data.imgList.length:", that.data.imgList.length);
+       
         var allnums = 0;
         for (var a = 0; a < that.data.imgList.length; a++) {
           allnums = allnums + that.data.imgList[a].num;
-          console.log("that.data.imgList[].num:", that.data.imgList[a].num);
-          console.log("allnums:", allnums);
+          
         };
         wx.getStorageSync("");
         
         that.setData({
-          allimgnum: allnums
+          allimgnum: allnums,
+          imgList:imgList,
         })
 
       }
@@ -374,8 +381,6 @@ Page({
 
     
 
-    console.log("aaaa1111");
-    console.log(that.data.imgList);
     /*for (let iii in that.data.imgList) {
       console.log("that.data.imgList：" + that.data.imgList[iii].src);
       wx.getImageInfo({

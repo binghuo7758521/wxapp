@@ -1,6 +1,5 @@
 {
   "pages": [
-    
     "pages/index/index",
     "pages/custom/index",
     "pages/creditshop/detail/index",
@@ -110,8 +109,7 @@
     "pages/uploadsimg/pages/zhanshi/zhanshi",
     "pages/uploadsimg/component/cropper/cropper",
     "pages/commission/explain/index",
- 
-   "pages/zhengjian/pages/index",
+    "pages/zhengjian/pages/index",
     "pages/zhengjian/pages/zjz/index",
     "pages/zhengjian/pages/zjz/camera",
     "pages/zhengjian/pages/zjz/preview"
@@ -140,20 +138,18 @@
         "iconPath": "static/images/tabbar/icon-2.png",
         "selectedIconPath": "static/images/tabbar/icon-2-active.png"
       },
-        {
-          "pagePath": "pages/zhengjian/pages/zjz/camera",
-          "text": "制作证件照",
-          "iconPath": "static/images/tabbar/icon-4.png",
-          "selectedIconPath": "static/images/tabbar/icon-4-active.png"
-        },
-    
+      {
+        "pagePath": "pages/zhengjian/pages/zjz/camera",
+        "text": "制作证件照",
+        "iconPath": "static/images/tabbar/icon-4.png",
+        "selectedIconPath": "static/images/tabbar/icon-4-active.png"
+      },
       {
         "pagePath": "pages/commission/index",
         "text": "分销中心",
         "iconPath": "static/images/tabbar/icon-4.png",
         "selectedIconPath": "static/images/tabbar/icon-4-active.png"
       },
-      
       {
         "pagePath": "pages/member/index/index",
         "text": "会员中心",
@@ -162,5 +158,6 @@
       }
     ]
   },
-  "debug": false
+  "debug": false,
+  "sitemapLocation": "sitemap.json"
 }

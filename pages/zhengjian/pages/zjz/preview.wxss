@@ -132,7 +132,7 @@ button {
 }
 .spec-list {
     width: 326rpx;
-    height: 290rpx;
+    height: 210rpx;
     margin-left: 32rpx;
     margin-top: 10rpx;
     display:flex;
