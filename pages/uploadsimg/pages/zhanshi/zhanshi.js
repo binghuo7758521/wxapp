@@ -40,19 +40,21 @@ Page({
     var ptoption = wx.getStorageSync("photo_goodoption")
     wx.removeStorageSync("imgUrl");
     wx.removeStorageSync("imgList");
-    t.setData({
-      imgList: pages,
-      btndisabled: false,
-      taocanshuliang: ptoption.taocannum,
-      px: ptoption.px,
 
+
+
+    wx.onMemoryWarning(function (res) {
+      console.log('微信的内存警告测试点:'+res)
     });
+
+
+    
     var size = ptoption.size;
     var width = ptoption.width;
     var height = ptoption.hight;
     if (width > 5 && height > 5) {
-      var width = e.width * 0.5;
-      var height = e.hight * 0.5;
+      var width = width * 0.5;
+      var height = height * 0.5;
     }
 
     wx.getSystemInfo({
@@ -103,10 +105,14 @@ Page({
     } 
 
     t.setData({
+      imgList: pages,
+      btndisabled: false,
+      taocanshuliang: ptoption.taocannum,
+      px: ptoption.px,
       allimgnum: allnums
     });
 
-    console.log("allimgnum:",allnums);
+     
 
 
 
@@ -263,35 +269,14 @@ Page({
 
   },
 
-  onShow: function() {
-    let mm = this;
-    var goodid = wx.getStorageSync('goodsid');
-    let cropperImg = app.globalData.cropperImg;
-    if (cropperImg) {} else {}
-    console.log(mm);
-    console.log("zhanshi.js onshow");
-    
-    //var allnums = 0;
-   // for (var a = 0; a < mm.data.imgList.length; a++) {
-   //   allnums = allnums + mm.data.imgList[a].num;
-   // } 
 
-   // mm.setData({
-   //   allimgnum: allnums,
-    //})
-
-
-  },
   onUnload: function() {
     let mm = this;
-    var goodid = wx.getStorageSync('goodsid');
-    var number = mm.data.number;
-    var allhistoryimglist = mm.data.imgList;
-    console.log(mm)
-    console.log(number)
+    var goodid = wx.getStorageSync('goodsid')
+    var number = mm.data.number
+    var allhistoryimglist = mm.data.imgList
     if (number == 1) {
-      console.log('重买')
-      console.log(allhistoryimglist)
+      //重买
       var ii = wx.getStorageSync("uploadingnum");
       if (ii > 0){
 
@@ -339,74 +324,54 @@ Page({
   onChooseImg: function() {
     let that = this;
     var imgpx = that.data.px;
-    var isizeok = true;
+     var isizeok = true;
+    let {
+      imgList,
+      waitUploadNum
+    } = that.data;
+
+
+
+
     wx.chooseImage({
       count: 9,
       sizeType: ['original'],
       sourceType: ['album', 'camera'],
       success(res) {
         let tempFiles = res.tempFiles;
-        that.setData({
-          waitUploadNum: tempFiles.length
-        });
+        //that.setData({
+        //  waitUploadNum: tempFiles.length
+        //});
+        //优化移到356行
 
         for (let index in tempFiles) {
       
-          //that.upload_file('', tempFiles[index].path, tempFiles[index].size);
-          //
-          //       
-            imgList.push({
+          //that.upload_file('', tempFiles[index].path, tempFiles[index].size);   
+
+          imgList.push({
             src: tempFiles[index].path,
             num: 1,
             filesize: tempFiles[index].size
-          });                            
+          });  
 
-        }
-       
+
+        }      
+
+
         var allnums = 0;
         for (var a = 0; a < that.data.imgList.length; a++) {
-          allnums = allnums + that.data.imgList[a].num;
-          
+          allnums = allnums + that.data.imgList[a].num;        
         };
-        wx.getStorageSync("");
-        
+        //、wx.getStorageSync("");
+        wx.setStorageSync("imglength", that.data.imgList.length);
         that.setData({
           allimgnum: allnums,
           imgList:imgList,
+          waitUploadNum: tempFiles.length
         })
 
       }
-    });
-
-
-    
-
-    /*for (let iii in that.data.imgList) {
-      console.log("that.data.imgList：" + that.data.imgList[iii].src);
-      wx.getImageInfo({
-        src: that.data.imgList[iii].src,
-        success(res) {
-          var onewidth = res.width;
-          var oneheight = res.height;
-          var onesize = onewidth * oneheight;
-          console.log("照片像素" + onesize);
-          if (onesize < imgpx * 1024) {
-            console.log("照片像素低");
-            //this.data.imgList[ii].sizeok=false;
-          } else {
-            console.log("照片像素可以");
-            //this.data.imgList[ii].sizeok = true;
-          }
-        }
-      });
-    }*/
-
-
-
-    // let allnum = that.data.total;
-
-
-
+    })
   },
 
 
@@ -535,15 +500,25 @@ Page({
         filesize: ifilesize
       });
 
-      wx.setStorageSync("imglength", imgList.length);
+      //wx.setStorageSync("imglength", imgList.length);//移到外面 优化
 
       
-
+    /*移到外面 优化
       this.setData({
         imgList: imgList,
         waitUploadNum: --that.data.waitUploadNum
-      });
+      });*/
+    console.log(" 遍历函数结束");
     //}, 500)
 
+  },
+  onImageLoadOk:function(e){
+    let that = this;
+   console.log("加载完毕"+e.currentTarget.dataset.idx);
+    console.log(e.currentTarget);
+   // that.data.imgList[e.currentTarget.dataset.idx].ImageLoadOk=1;
+   // this.setData({
+    //  imgList:that.data.imgList
+    //});
   },
 })
